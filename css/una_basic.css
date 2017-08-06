@@ -1,0 +1,42 @@
+.una_basic .una_header::after {
+    background-color: #c4cbe7;
+    bottom: -5px;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.una_basic .una_header {
+    display: inline-block;
+    line-height: 1;
+    padding: 3px 3px 0;
+    position: relative;
+}
+.una_basic .una_timeline_box::before {
+    border: 2px solid #c4cbe7;
+    content: "";
+    height: calc(100% + 30px);
+    left: 28px;
+    position: absolute;
+    top: -20px;
+}
+.una_basic .una_timeline_box {
+    position: relative;
+}
+.una_basic .una_date {
+    border-top: 3px solid #c4cbe7;
+    margin: 20px 0 -30px 30px;
+    padding: 5px 0 0 15px;
+}
+.una_basic .una_item_timeline {
+    margin: 30px 0;
+    padding: 5px 0;
+    position: relative;
+    z-index: 2;
+}
+.una_basic .una_author {
+    border: 3px solid #c4cbe7;
+    box-sizing: content-box;
+}
+

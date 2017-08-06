@@ -1,0 +1,168 @@
+.una_one_user .una_timeline_box::before {
+    background-color: tan;
+    content: "";
+    height: calc(100% + 15px);
+    left: -5px;
+    position: absolute;
+    top: 0;
+    width: 6px;
+    z-index: 1;
+}
+.una_one_user .una_timeline_box {
+    margin: 0 0 0 10px;
+    position: relative;
+}
+.una_title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+}
+.una_one_user .una_header {
+    line-height: 1;
+    padding: 3px 0 0 25px;
+}
+.una_one_user #universe_visible {
+    background-color: navajowhite;
+    box-shadow: 1px 1px 1px 1px #a07f6d;
+}
+.una_one_user .una_date::before {
+    background-color: tan;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    z-index: 3;
+}
+.una_one_user .una_date {
+    background-color: navajowhite;
+    display: inline-block;
+    margin: 20px 0 0;
+    padding: 3px 10px 3px 20px;
+    position: relative;
+}
+.una_one_user .una_item_timeline::before {
+    background-color: white;
+    border: 5px solid tan;
+    border-radius: 50%;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 30px;
+    left: -22px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+    z-index: 2;
+}
+.una_one_user .una_item_timeline {
+    margin: 10px 0 10px 5px;
+    min-height: 30px;
+    padding: 5px 0 5px 15px;
+    position: relative;
+}
+.una_one_user .una_item_timeline::after {
+    color: grey;
+    font-family: fontawesome;
+    font-size: 14px;
+    left: -12px;
+    line-height: 14px;
+    position: absolute;
+    top: 8px;
+    z-index: 3;
+}
+.una_one_user .una_right {
+    padding: 0 3px;
+}
+.una_one_user .una_goto_comments > a span {
+    border-bottom: 1px dashed #ccc;
+}
+.una_one_user .una_goto_comments > a span:hover {
+    border-bottom-color: #555;
+}
+
+
+.una_one_user .una_change_status::after {
+    content: "\f0a1";
+    left: -14px;
+}
+.una_one_user .una_profile_update::after {
+    content: "\f013";
+    left: -12.5px;
+}
+.una_one_user .una_add_user_feed::after {
+    content: "\f00c";
+    left: -14px;
+}
+.una_one_user .una_del_user_feed::after {
+    content: "\f00d";
+}
+.una_one_user .una_logged_in_ulogin::after,
+.una_one_user .una_logged_in::after {
+    content: "\f090";
+}
+.una_one_user .una_logged_out::after {
+    content: "\f08b";
+}
+.una_one_user .una_add_comment::after {
+    content: "\f0e5";
+    left: -13px;
+}
+.una_one_user .una_delete_user::after {
+    content: "\f05e";
+    left: -13px;
+}
+.una_one_user .una_give_rating_post::after,
+.una_one_user .una_give_rating_products::after,
+.una_one_user .una_give_rating_comment::after,
+.una_one_user .una_give_rating_post-group::after,
+.una_one_user .una_give_rating_notes::after {
+    content: "\f21e";
+    left: -13.5px;
+    top: 9px;
+}
+.una_one_user .una_add_draft::after {
+    content: "\f040";
+}
+.una_one_user .una_delete_post::after {
+    content: "\f1f8";
+}
+.una_one_user .una_delete_post_fully::after {
+    content: "\f014";
+}
+.una_one_user .una_add_user_blacklist::after {
+    content: "\f023";
+    left: -11px;
+}
+.una_one_user .una_del_user_blacklist::after {
+    content: "\f09c";
+    left: -13px;
+}
+.una_one_user .una_add_post::after {
+    content: "\f067";
+}
+.una_one_user .una_pfm_del_topic::after {
+    content: "\f00d";
+}
+.una_one_user .una_pfm_add_topic::after {
+    content: "\f0eb";
+    left: -11px;
+}
+.una_one_user .una_user_out_group::after {
+    content: "\f235";
+    left: -14px;
+}
+.una_one_user .una_user_in_group::after {
+    content: "\f234";
+    left: -14px;
+}
+.una_one_user .una_delete_group::after {
+    content: "\f21b";
+}
+.una_one_user .una_create_group::after {
+    content: "\f0c0";
+    left: -14px;
+}
+
+

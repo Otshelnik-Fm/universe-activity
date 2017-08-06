@@ -1,0 +1,7 @@
+Name: Universe Activity;
+Version: 0.6;
+Support Core: 16.4.12;
+Description: Пишет и выводит пользовательскую активность. Это дополнение - ядро под всю вселенную активности;
+Author: Владимир Дружаев (Otshelnik-Fm);
+Author URI: http://across-ocean.otshelnik-fm.ru/;
+Add-on URI: https://codeseller.ru/products/universe-activity/;
