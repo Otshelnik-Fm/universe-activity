@@ -60,7 +60,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ссылка на топик формируется короткая - меньше запросов к бд
     * удалил тему с форума. Если тему удаляет не сам автор - то пишу чья тема была удалена
 
-------------------------------
+<hr style="border: 1px solid #ddd;">
 
 <h2>События и привилегии:</h2>
 
@@ -77,47 +77,166 @@
 
 <h4>Гость видит:</h4>
  
-add_comment (добавлен комментарий) 
-add_post (добавлена запись) 
-change_status (юзер сменил свой статус) 
-give_rating_comment (рейтинг за комментарий) 
-give_rating_notes (рейтинг за заметку) 
-give_rating_post (рейтинг за запись - тип post) 
-give_rating_post-group (рейтинг за запись в группе - тип post-group) 
-give_rating_products (рейтинг за товар - тип products) 
-add_user_feed (подписался на юзера) 
-create_group (создал группу) 
-user_in_group (юзер вступил в группу) 
-pfm_add_topic (создана новая тема на prime-forum) 
+<table>
+<thead>
+<tr>
+<th>slug</th>
+<th>действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add_comment</td>
+<td>добавлен комментарий</td>
+</tr>
+<tr>
+<td>add_post</td>
+<td>добавлена запись</td>
+</tr>
+<tr>
+<td>change_status</td>
+<td>юзер сменил свой статус</td>
+</tr>
+<tr>
+<td>give_rating_comment</td>
+<td>рейтинг за комментарий</td>
+</tr>
+<tr>
+<td>give_rating_notes</td>
+<td>рейтинг за заметку</td>
+</tr>
+<tr>
+<td>give_rating_post</td>
+<td>рейтинг за запись - тип post</td>
+</tr>
+<tr>
+<td>give_rating_post-group</td>
+<td>рейтинг за запись в группе - тип post-group</td>
+</tr>
+<tr>
+<td>give_rating_products</td>
+<td>рейтинг за товар - тип products</td>
+</tr>
+<tr>
+<td>add_user_feed</td>
+<td>подписался на юзера</td>
+</tr>
+<tr>
+<td>create_group</td>
+<td>создал группу</td>
+</tr>
+<tr>
+<td>user_in_group</td>
+<td>юзер вступил в группу</td>
+</tr>
+<tr>
+<td>pfm_add_topic</td>
+<td>создана новая тема на prime-forum</td>
+</tr></tbody></table>
 
 
 <h4>Залогиненый видит: те что выше, плюс:</h4>
 
-add_draft (добавил черновик) 
-confirm_register (подтвердил регистрацию) 
-register (зарегистрировался) 
-del_user_feed (отписался от юзера) 
-add_user_blacklist (добавил в черный список) 
-del_user_blacklist (удалил из черного списка) 
-user_out_group (вышел из группы) 
+<table>
+<thead>
+<tr>
+<th>slug</th>
+<th>действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add_draft</td>
+<td>добавил черновик</td>
+</tr>
+<tr>
+<td>confirm_register</td>
+<td>подтвердил регистрацию</td>
+</tr>
+<tr>
+<td>register</td>
+<td>зарегистрировался</td>
+</tr>
+<tr>
+<td>del_user_feed</td>
+<td>отписался от юзера</td>
+</tr>
+<tr>
+<td>add_user_blacklist</td>
+<td>добавил в черный список</td>
+</tr>
+<tr>
+<td>del_user_blacklist</td>
+<td>удалил из черного списка</td>
+</tr>
+<tr>
+<td>user_out_group</td>
+<td>вышел из группы</td>
+</tr></tbody></table>
 
 <h4>Автор видит: все что выше, плюс:</h4>
 
-logged_in (когда он вошел на сайт) 
-logged_in_ulogin (когда он вошел через u-login и через какую сеть) 
-logged_out (когда он вышел с сайта)  
+<table>
+<thead>
+<tr>
+<th>slug</th>
+<th>действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>logged_in</td>
+<td>когда он вошел на сайт</td>
+</tr>
+<tr>
+<td>logged_in_ulogin</td>
+<td>когда он вошел через плагин u-login и через какую сеть</td>
+</tr>
+<tr>
+<td>logged_out</td>
+<td>когда он вышел с сайта</td>
+</tr></tbody></table> 
 
 <h4>Админ видит: все что выше, плюс:</h4>
 
-delete_post (удалил запись - в корзину) 
-delete_post_fully (удалил запись навсегда. Если это автоочистка корзины - пишет "wp-cron") 
-delete_user (удалил юзера) 
-profile_update (обновил настройки профиля) 
-register_failed (неудачная регистрация) 
-delete_group (удалил группу) 
-pfm_del_topic (удалил тему с форума)
+<table>
+<thead>
+<tr>
+<th>slug</th>
+<th>действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>delete_post</td>
+<td>удалил запись - в корзину</td>
+</tr>
+<tr>
+<td>delete_post_fully</td>
+<td>удалил запись навсегда. Если это автоочистка корзины - пишет "wp-cron"</td>
+</tr>
+<tr>
+<td>delete_user</td>
+<td>удалил юзера</td>
+</tr>
+<tr>
+<td>profile_update</td>
+<td>обновил настройки профиля</td>
+</tr>
+<tr>
+<td>register_failed</td>
+<td>неудачная регистрация</td>
+</tr>
+<tr>
+<td>delete_group</td>
+<td>удалил группу</td>
+</tr>
+<tr>
+<td>pfm_del_topic</td>
+<td>удалил тему с форума</td>
+</tr></tbody></table>
 
-------------------------------
+<hr style="border: 1px solid #ddd;">
 
 <h2>Шорткод:</h2>
 Дополнение автоматически ничего нигде не выводит. За исключением поддержки дополнения <a href="https://codeseller.ru/products/user-info-tab/" target="_blank">User Info Tab</a> - но без постраничной навигации (там выводит последние 30 событий пользователя)  
@@ -151,7 +270,7 @@ pfm_del_topic (удалил тему с форума)
 4. Выведем все рейтинги и стилизуем базовым стилем:  
 <code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products"]</code>
 
-------------------------------
+<hr style="border: 1px solid #ddd;">
 
 <h2>Какие события включены в фильтр:</h2>
 <strong>"Публикации"</strong> - add_post  
