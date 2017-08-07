@@ -191,11 +191,11 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 ------------------------------
 
 ## Какие события включены в фильтр:  
-"Публикации" - add_post  
-"Комментарии" - add_comment  
-"Рейтинг" - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products  
-"Обновления" - change_status,profile_update,create_group,user_in_group,pfm_add_topic  
-"Подписки" - add_user_feed  
+**Публикации** - add_post  
+**Комментарии** - add_comment  
+**Рейтинг** - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products  
+**Обновления** - change_status,profile_update,create_group,user_in_group,pfm_add_topic  
+**Подписки** - add_user_feed  
 
 ------------------------------
 
@@ -208,6 +208,10 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 
 **Как вывести активность пользователя в его личном кабинете?**  
 - Читай пункт "Шорткод". Второй пример.  
+
+**Вывел фильтр - но я не вижу рейтинг и подписки**
+- Дополнения "Rating System (Система рейтинга)" и "Feed (Подписки)" должны быть у вас активны
+
 
 **Удалив это дополнение я потеряю данные о активности?**  
 - при удалении дополнения через менеджер дополнений - он за собой удалит свою таблицу, в которой он хранит пользовательскую активность.  
