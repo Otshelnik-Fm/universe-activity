@@ -1,5 +1,5 @@
 Name: Universe Activity;
-Version: 0.6;
+Version: 0.6.1;
 Support Core: 16.4.12;
 Description: Пишет и выводит пользовательскую активность. Это дополнение - ядро под всю вселенную активности;
 Author: Владимир Дружаев (Otshelnik-Fm);
