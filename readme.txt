@@ -77,59 +77,45 @@
 
 <h4>Гость видит:</h4>
  
-<table>
-<thead>
-<tr>
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid #e5e5e5;">
+<thead><tr>
 <th>slug</th>
 <th>действие</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
 <td>add_comment</td>
 <td>добавлен комментарий</td>
-</tr>
-<tr>
+</tr><tr>
 <td>add_post</td>
 <td>добавлена запись</td>
-</tr>
-<tr>
+</tr><tr>
 <td>change_status</td>
 <td>юзер сменил свой статус</td>
-</tr>
-<tr>
+</tr><tr>
 <td>give_rating_comment</td>
 <td>рейтинг за комментарий</td>
-</tr>
-<tr>
+</tr><tr>
 <td>give_rating_notes</td>
 <td>рейтинг за заметку</td>
-</tr>
-<tr>
+</tr><tr>
 <td>give_rating_post</td>
 <td>рейтинг за запись - тип post</td>
-</tr>
-<tr>
+</tr><tr>
 <td>give_rating_post-group</td>
 <td>рейтинг за запись в группе - тип post-group</td>
-</tr>
-<tr>
+</tr><tr>
 <td>give_rating_products</td>
 <td>рейтинг за товар - тип products</td>
-</tr>
-<tr>
+</tr><tr>
 <td>add_user_feed</td>
 <td>подписался на юзера</td>
-</tr>
-<tr>
+</tr><tr>
 <td>create_group</td>
 <td>создал группу</td>
-</tr>
-<tr>
+</tr><tr>
 <td>user_in_group</td>
 <td>юзер вступил в группу</td>
-</tr>
-<tr>
+</tr><tr>
 <td>pfm_add_topic</td>
 <td>создана новая тема на prime-forum</td>
 </tr></tbody></table>
@@ -137,101 +123,78 @@
 
 <h4>Залогиненый видит: те что выше, плюс:</h4>
 
-<table>
-<thead>
-<tr>
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid #e5e5e5;">
+<thead><tr>
 <th>slug</th>
 <th>действие</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
 <td>add_draft</td>
 <td>добавил черновик</td>
-</tr>
-<tr>
+</tr><tr>
 <td>confirm_register</td>
 <td>подтвердил регистрацию</td>
-</tr>
-<tr>
+</tr><tr>
 <td>register</td>
 <td>зарегистрировался</td>
-</tr>
-<tr>
+</tr><tr>
 <td>del_user_feed</td>
 <td>отписался от юзера</td>
-</tr>
-<tr>
+</tr><tr>
 <td>add_user_blacklist</td>
 <td>добавил в черный список</td>
-</tr>
-<tr>
+</tr><tr>
 <td>del_user_blacklist</td>
 <td>удалил из черного списка</td>
-</tr>
-<tr>
+</tr><tr>
 <td>user_out_group</td>
 <td>вышел из группы</td>
 </tr></tbody></table>
 
 <h4>Автор видит: все что выше, плюс:</h4>
 
-<table>
-<thead>
-<tr>
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid #e5e5e5;">
+<thead><tr>
 <th>slug</th>
 <th>действие</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
 <td>logged_in</td>
 <td>когда он вошел на сайт</td>
-</tr>
-<tr>
+</tr><tr>
 <td>logged_in_ulogin</td>
 <td>когда он вошел через плагин u-login и через какую сеть</td>
-</tr>
-<tr>
+</tr><tr>
 <td>logged_out</td>
 <td>когда он вышел с сайта</td>
 </tr></tbody></table> 
 
 <h4>Админ видит: все что выше, плюс:</h4>
 
-<table>
-<thead>
-<tr>
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid #e5e5e5;">
+<thead><tr>
 <th>slug</th>
 <th>действие</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
 <td>delete_post</td>
 <td>удалил запись - в корзину</td>
-</tr>
-<tr>
+</tr><tr>
 <td>delete_post_fully</td>
 <td>удалил запись навсегда. Если это автоочистка корзины - пишет "wp-cron"</td>
-</tr>
-<tr>
+</tr><tr>
 <td>delete_user</td>
 <td>удалил юзера</td>
-</tr>
-<tr>
+</tr><tr>
 <td>profile_update</td>
 <td>обновил настройки профиля</td>
-</tr>
-<tr>
+</tr><tr>
 <td>register_failed</td>
 <td>неудачная регистрация</td>
-</tr>
-<tr>
+</tr><tr>
 <td>delete_group</td>
 <td>удалил группу</td>
-</tr>
-<tr>
+</tr><tr>
 <td>pfm_del_topic</td>
 <td>удалил тему с форума</td>
 </tr></tbody></table>
@@ -247,10 +210,15 @@
 <h3>Дополнительные атрибуты шорткода:</h3>
 
 <strong>filter</strong> - показывать фильтр. Поставьте "1" чтобы выводить сверху фильтр по событиям (по умолчанию 0)  
+
 <strong>number</strong> - количество событий на странице (по умолчанию 30). Поставьте "-1" чтобы вывести все. Для постраничной навигации вам нужно дополнение <strong>Universe Activity Extended</strong>  
+
 <strong>include_actions</strong> - включить эти события. Через запятую (события -slug- на английском смотрите выше в "Событиях и привилегиях").  
+
 <strong>exclude_actions</strong> - исключить события (нельзя в атрибутах одновременно использовать include_actions и exclude_actions. Что-то одно)  
+
 <strong>include_users</strong> - включая юзеров. Через запятую (id юзеров - число). В личном кабинете в произвольной вкладке WP-Recall допустимо вписать <code>author_lk</code> и система подставит туда id автора кабинета.  
+
 <strong>class</strong> - css class главного блока (<a href="https://yadi.sk/i/f1OvpO_E3LmcZh" target="_blank">скриншот</a>). Например чтобы вы создали свой дизайн вывода. На основе этого атрибута уже подготовлено несколько значений:  
 (если не указан - то дизайн будет самый минималистичный)  
 <code>"una_zebra"</code> - простой зеброй  
@@ -273,11 +241,11 @@
 <hr style="border: 1px solid #ddd;">
 
 <h2>Какие события включены в фильтр:</h2>
-<strong>"Публикации"</strong> - add_post  
-<strong>"Комментарии"</strong> - add_comment  
-<strong>"Рейтинг"</strong> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products  
-<strong>"Обновления"</strong> - change_status,profile_update,create_group,user_in_group,pfm_add_topic  
-<strong>"Подписки"</strong> - add_user_feed  
+<code>"Публикации"</code> - add_post  
+<code>"Комментарии"</code> - add_comment  
+<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products  
+<code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic  
+<code>"Подписки"</code> - add_user_feed  
 
 
 
