@@ -94,8 +94,6 @@ add_filter( 'registration_errors', 'una_failed_registration', 10, 3);
 // выход с сайта
 function una_logout() {
     $args['action'] = 'logged_out';
-
-    $current_user = wp_get_current_user();
     $args['object_type'] = 'user';
 
     una_insert($args);

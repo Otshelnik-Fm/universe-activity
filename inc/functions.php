@@ -27,7 +27,7 @@ function una_register_type_callback(){
 
 // регистрируем шорткод
 function una_shortcodes($atts){
-    $shrt = new UNA_shortcode();
+    $shrt = new UNA_Shortcode();
     return '<div id="una_users" class="universe_userlist">'.$shrt->get_universe($atts).'</div>';
 }
 add_shortcode('otfm_universe','una_shortcodes');
@@ -56,6 +56,7 @@ function una_separate_time($date, $seconds = false){
 
 // отделим дату
 function una_separate_date($date){
+    $match = array();
     preg_match('/(\d{4}-\d{2}-\d{2}).(\d{2}:\d{2}:\d{2})/', $date, $match);
 
     return $match[1];
@@ -138,5 +139,73 @@ function una_separate_id_notes($post_name){
 }
 
 
+
+
+// доп стили для цвета от реколл кнопки
+function una_inline_css(){
+    if(!rcl_get_option('una_rcl_color')) return false;
+
+    $num = did_action('una_start_shortcode');
+    if($num === 0) return false; // на этой странице не используется этот шорткод
+
+    global $rcl_options;
+    $lca_hex = $rcl_options['primary-color'];
+    list($r, $g, $b) = sscanf($lca_hex, "#%02x%02x%02x");
+    $color = $r.','.$g.','.$b;
+
+        echo '<style>
+#universe_time #universe_visible{
+    background: #fff;
+    box-shadow: 0 0 25px 25px rgba('.$color.',0.4) inset;
+}
+.una_one_user .una_timeline .una_date::before,
+.una_timeline_blk.una_modern .una_date::after,
+.una_timeline_blk.una_modern .una_date::before,
+.una_timeline_blk.una_basic .una_header::after,
+.una_timeline_blk.una_modern .una_header::after,
+.una_one_user .una_timeline .una_timeline_box::before,
+.una_timeline_blk.una_modern .una_item_timeline::after,
+.una_timeline_blk.una_modern .una_item_timeline::before{
+    background-color: rgba('.$color.',0.8);
+}
+.una_timeline_blk.una_modern .una_date,
+.una_timeline_blk .una_timeline::before,
+.una_timeline_blk.una_basic .una_author,
+.una_timeline_blk.una_basic .una_timeline_box::before,
+.una_one_user .una_timeline .una_item_timeline::before{
+    border-color: rgba('.$color.',0.8);
+}
+.una_one_user .una_timeline .una_date{
+    background-color: rgba('.$color.',0.25);
+}
+.una_timeline_blk.una_basic .una_date{
+    border-top-color: rgba('.$color.',0.8);
+}
+.una_timeline_blk.una_modern .una_item_timeline {
+    background-color: #fff;
+    border-left-color: rgba('.$color.',0.8);
+    box-shadow: 0 0 100px 999px rgba('.$color.',0.2) inset;
+}
+</style>';
+}
+add_action('wp_footer','una_inline_css');
+
+
+
+
+// стили для админки настроек
+function una_admin_styles(){
+    $chr_page = get_current_screen();
+    if($chr_page->base != 'toplevel_page_manage-wprecall' ) return;
+
+$out = '<style>
+#options-universe-activity {
+    box-shadow: 5px 5px 10px #ccc;
+}
+</style>';
+
+    echo $out;
+}
+add_filter('admin_footer', 'una_admin_styles');
 
 

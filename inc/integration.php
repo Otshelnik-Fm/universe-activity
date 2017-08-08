@@ -24,7 +24,7 @@ function una_output_content_type(){
 
     rcl_enqueue_style('una_one_user_style',rcl_addon_url('css/una_one_user.css', __FILE__));
 
-    $shrt = new UNA_shortcode();
+    $shrt = new UNA_Shortcode();
     $action = $shrt->get_universe($attrs);
     if(!$action) $action = '<div class="una_data_not_found"></div>';
 

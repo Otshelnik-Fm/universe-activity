@@ -83,7 +83,7 @@ require_once('inc/fires.php');                  // хуки
 require_once('inc/callbacks.php');              // колбэки
 require_once('inc/functions.php');              // все функции
 require_once('inc/integration.php');            // интеграции
-//require_once('inc/addon-settings.php');         // настройки
+require_once('inc/addon-settings.php');         // настройки
 require_once('inc/class-una-query.php');        // класс регистрирущий нашу таблицу
 require_once('inc/class-una-shortcode.php');    // шорткод
 

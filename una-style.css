@@ -1,0 +1,119 @@
+.una_data_not_found {
+    background: #fce6db;
+    padding: 10px;
+    text-align: center;
+}
+.universe_userlist {
+    padding: 10px 5px;
+    position: relative;
+}
+#una_filters {
+    margin: 5px 0 10px;
+}
+#una_filters a {
+    display: inline-block;
+    margin: 0 3px 0 0;
+    padding: 8px 10px;
+}
+.una_header span:first-child {
+    padding: 0 3px 0 0;
+}
+#universe_visible:empty {
+    opacity: 0;
+    top: 0;
+}
+#universe_visible {
+    align-items: center;
+    background-color: #cad9e7;
+    color: #000;
+    display: flex;
+    font-size: 16px;
+    height: 40px;
+    justify-content: center;
+    margin: 0 0 0 -35px;
+    opacity: 1;
+    position: fixed;
+    top: 36px;
+    transition: all 0.3s ease-in 0s;
+    width: 150px;
+    z-index: 11;
+}
+.una_date {
+    border-top: 1px solid #e5e5e5;
+    font-size: 16px;
+    padding: 10px 0 0;
+}
+.una_item_timeline {
+    align-items: center;
+    display: flex;
+    line-height: normal;
+    margin: 15px 0;
+}
+.una_item_timeline .una_author {
+    background-color: #e5e5e5;
+    height: 32px;
+    min-width: 32px;
+    overflow: hidden;
+    width: 32px;
+}
+.una_author img {
+    border: none;
+    border-radius: 0;
+    float: none;
+    height: auto;
+    max-width: 100%;
+}
+.una_item_timeline .una_right {
+    display: flex;
+    padding: 0 8px;
+}
+.una_time {
+    align-self: center;
+    color: #777;
+    font-size: 11px;
+    padding: 0 8px 0 0;
+}
+.universe_userlist .una_author_name {
+    margin: 0 5px 0 0;
+}
+.universe_userlist .una_author_name::after {
+    content: ":";
+}
+.universe_userlist .una_action {
+    text-transform: lowercase;
+}
+.una_post_status {
+    color: #999;
+    font-size: 11px;
+    margin: 0 0 0 8px;
+}
+.una_timeline_blk .rcl-pager {
+    position: relative;
+}
+.una_goto_comments {
+    font-size: 12px;
+    line-height: 1;
+    padding: 0 0 0 43px;
+}
+.una_goto_comments .fa {
+    margin: 0 0 0 3px;
+}
+.una_change_status .una_author_name::after {
+    content: "";
+}
+.universe_userlist .una_author_name:empty {
+    display: none;
+}
+.una_user_status {
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    margin: 5px;
+    padding: 5px 10px;
+}
+.una_rating_plus {
+    color: #3ad11f;
+}
+.una_rating_minus {
+    color: #ff6262;
+}
+

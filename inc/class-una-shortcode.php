@@ -5,13 +5,14 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 // переписать
 
-class UNA_shortcode {
-   
+class UNA_Shortcode {
+
     function __construct() {
-        require_once('class-una-get-db.php');       // получение из базы
+        do_action('una_start_shortcode');       // маяк - шорткод в работе
+        require_once('class-una-get-db.php');   // получение из базы
         rcl_enqueue_style('una_style',rcl_addon_url('una-style.css', __FILE__));
     }
-    
+
     // главная ф-ция - принимает по атрибутам и погнали
     public function get_universe($atts){
         $attrs = shortcode_atts(
@@ -22,7 +23,7 @@ class UNA_shortcode {
                     'include_users' => '',      // включая юзеров
                     'exclude_users' => '',      // или исключая их
                     'class' => '',              // css class главного блока
-                    'mini_stat' => '',          // 
+                    'mini_stat' => '',          //
                     'use_name' => 1,            // в выводе нам нужна ава и имя
                     'filter' => 0,              // фильтр над блоком
                 ), $atts, 'otfm_universe');
@@ -98,7 +99,7 @@ class UNA_shortcode {
 
         $get_data = new UNA_Get_DB();
         $datas = $get_data->una_get_results($attrs);   // массив из БД
-        
+
         $type = una_register_type_callback();   // получим массив зарегистрированных экшенов и функций
         $out = '';
         $i = 1;
@@ -158,7 +159,7 @@ class UNA_shortcode {
 
     }
 
-    
+
     // кнопки фильтра
     private function una_filter(){
         $cur_url = $_SERVER['REQUEST_URI'];                                     // текущий урл
@@ -166,7 +167,7 @@ class UNA_shortcode {
             $cur_url = $_POST['tab_url'];
         }
 
-        $href_all = add_query_arg(array('una_filter'=>false), $cur_url);
+        $href_all = add_query_arg('una_filter', 'all', $cur_url);
         $href_ratings = add_query_arg('una_filter', 'ratings', $cur_url);
         $href_updates = add_query_arg('una_filter', 'updates', $cur_url);
         $href_comments = add_query_arg('una_filter', 'comments', $cur_url);
@@ -189,7 +190,7 @@ class UNA_shortcode {
         return $out;
     }
 
-    
+
     // по гет запросу передаем в шорткод параметры
     private function una_catch_get_attr($attrs){
         $una_filter = isset($_GET['una_filter']) ? $_GET['una_filter'] : '';
@@ -208,8 +209,8 @@ class UNA_shortcode {
         }
         return $attrs;
     }
-    
-    
+
+
     // подключим стили по переданному классу
     private function una_get_stylesheet_file($class){
         if($class === 'una_zebra'){
