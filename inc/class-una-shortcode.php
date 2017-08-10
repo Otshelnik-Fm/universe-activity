@@ -127,6 +127,10 @@ class UNA_Shortcode {
                     }
                 }
 
+                if(rcl_exist_addon('universe-activity-extended')){
+                    $out .= unae_dop_hook($i);
+                }
+
                 $out .= '<div class="una_item_timeline '.$una_even_class.' una_'.$data['action'].'" data-una_id="'.$data['id'].'">';
                     if($attrs['use_name']){
                         $out .= '<div class="una_author">';

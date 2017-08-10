@@ -202,6 +202,25 @@ $out = '<style>
 #options-universe-activity {
     box-shadow: 5px 5px 10px #ccc;
 }
+#options-universe-activity h3::before {
+    color: rgba(180, 0, 45, 0.7);
+    content: "\f468";
+    font: 24px/1 dashicons;
+    left: -10px;
+    margin: 0 5px 0 0;
+    position: absolute;
+    top: -2px;
+}
+#options-universe-activity h3 {
+    color: rgb(76, 140, 189);
+    padding: 0 0 0 20px;
+    position: relative;
+}
+#una_info {
+    background-color: #dff5d4;
+    border: 1px solid #c1eab7;
+    padding: 5px 12px;
+}
 </style>';
 
     echo $out;
@@ -209,3 +228,20 @@ $out = '<style>
 add_filter('admin_footer', 'una_admin_styles');
 
 
+// принудительный вызов - если шорткод закеширован
+function una_manual_start($class){
+    // Это принудительный вызов. Ведь если вызывают эту функцию значит все жестко закешировано
+    do_action('una_start_shortcode'); // маяк - шорткод в работе.
+
+    rcl_enqueue_style('una_style',rcl_addon_url('una-style.css', __FILE__));
+
+    if($class === 'una_zebra'){
+        rcl_enqueue_style('una_zebra_style',rcl_addon_url('css/una_zebra.css', __FILE__));
+    } else if ($class === 'una_basic'){
+        rcl_enqueue_style('una_basic_style',rcl_addon_url('css/una_basic.css', __FILE__));
+    } else if ($class === 'una_modern'){
+        rcl_enqueue_style('una_modern_style',rcl_addon_url('css/una_modern.css', __FILE__));
+    } else if ($class === 'author_lk'){
+        rcl_enqueue_style('una_modern_style',rcl_addon_url('css/una_one_user.css', __FILE__));
+    }
+}
