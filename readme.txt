@@ -319,8 +319,12 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+=2017-08-10=
+v0.8.1  
+* Устранил существующую ошибку
 
-=2017-08-09=
+
+=2017-08-10=
 v0.8  
 * работа над тесной интеграцией с <a href="https://codeseller.ru/products/universe-activity-extended/" target="_blank">Universe Activity Extended</a>
 * изменение страницы настроек дополнения  

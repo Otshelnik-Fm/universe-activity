@@ -107,19 +107,23 @@ add_filter('query_vars', 'una_add_query_vars');
 
 // ловим ссылку на комментарий, группу, форум - вида ваш-сайт/?una_comment_id=16 (16 - id комментария)
 function una_catch_type_vars_link(){
-    if(!empty( get_query_var('una_comment_id') )){
+    $una_comment = get_query_var('una_comment_id');
+    $una_group = get_query_var('una_group_url');
+    $una_prime_forum = get_query_var('una_prime_forum_url');
+
+    if(!empty( $una_comment )){
         $comment_link = get_comment_link( intval(get_query_var('una_comment_id')) );
 
         wp_redirect($comment_link);
         exit;
     }
-    else if(!empty( get_query_var('una_group_url') )){
+    else if(!empty( $una_group )){
         $group_link = rcl_get_group_permalink( intval(get_query_var('una_group_url')) );
 
         wp_redirect($group_link);
         exit;
     }
-    else if(!empty( get_query_var('una_prime_forum_url') )){
+    else if(!empty( $una_prime_forum )){
         $forum_link = pfm_get_topic_permalink( intval(get_query_var('una_prime_forum_url')) );
 
         wp_redirect($forum_link);
