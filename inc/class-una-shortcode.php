@@ -205,7 +205,7 @@ class UNA_Shortcode {
         } else if($get_filter == 'comments'){
             $attrs['include_actions'] = 'add_comment';
         } else if($get_filter == 'ratings'){
-            $attrs['include_actions'] = 'give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products';
+            $attrs['include_actions'] = 'give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post';
         } else if($get_filter == 'updates'){
             $attrs['include_actions'] = 'change_status,profile_update,create_group,user_in_group,pfm_add_topic';
         } else if($get_filter == 'subscriptions'){

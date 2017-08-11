@@ -176,6 +176,13 @@ function una_give_rating($data){
     if(in_array($data['rating_type'], $types)){
         $args['object_name'] = get_the_title($data['object_id']);
     }
+
+    if($data['rating_type'] == 'forum-post'){ // если рейтинг за комментарий на prime forum
+        $post = pfm_get_post($data['object_id']);
+        $topic = pfm_get_topic($post->topic_id);
+        $args['object_name'] = $topic->topic_name;
+    }
+    
     $args['object_type'] = $data['rating_type'];
 
     $args['user_id'] = $data['user_id'];                    // кто

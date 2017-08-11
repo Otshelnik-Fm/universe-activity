@@ -4,7 +4,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class UNA_Register_Type_Callback {
-   
+
     // массив зарегистрированных действий и привязанным к ним функций (которые и будут их вывод обрабатывать). callback.php
     public function get_type_callback(){
         $type = array(
@@ -50,6 +50,9 @@ class UNA_Register_Type_Callback {
                                 'callback'  => 'una_get_give_rating_post',
                             ),
             'give_rating_products' => array(
+                                'callback'  => 'una_get_give_rating_post',
+                            ),
+            'give_rating_forum-post' => array(                              // поставил рейтинг за prime forum
                                 'callback'  => 'una_get_give_rating_post',
                             ),
             'logged_in' => array(
@@ -117,6 +120,6 @@ class UNA_Register_Type_Callback {
 
         return $types;
     }
-   
+
 }
 

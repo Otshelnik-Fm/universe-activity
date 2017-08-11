@@ -100,6 +100,10 @@ function una_get_give_rating_post($data){
         $link = '<a href="/?una_comment_id='.$data['object_id'].'" title="Перейти к комментарию" rel="nofollow">'.$name.'</a>'; // get_comment_link TODO +5db
     } else if ($data['action'] == 'give_rating_products'){
         $type = 'товар';
+    } else if ($data['action'] == 'give_rating_forum-post'){ // если рейтинг за комментарий на prime forum
+        $type = 'комментарий на форуме';
+        $name = get_userdata($data['subject_id']);
+        $link = '<a href="/?una_prime_forum_topic_url='.$data['object_id'].'" title="Перейти к комментарию" rel="nofollow">'.$name->display_name.'</a>';
     }
 
     $out = '<span class="una_action">Проголосовал</span> '.$rating. ' за '.$type.': ';

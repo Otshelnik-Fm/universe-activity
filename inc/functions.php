@@ -97,10 +97,12 @@ function una_human_format($date){
 
 // добавим в массив новые переменные запроса
 function una_add_query_vars($vars){
-	$vars[] = 'una_comment_id';
+    $vars[] = 'una_comment_id';
     $vars[] = 'una_group_url';
     $vars[] = 'una_prime_forum_url';
-	return $vars;
+    $vars[] = 'una_prime_forum_topic_url';
+
+    return $vars;
 }
 add_filter('query_vars', 'una_add_query_vars');
 
@@ -110,23 +112,29 @@ function una_catch_type_vars_link(){
     $una_comment = get_query_var('una_comment_id');
     $una_group = get_query_var('una_group_url');
     $una_prime_forum = get_query_var('una_prime_forum_url');
+    $una_prime_forum_topic = get_query_var('una_prime_forum_topic_url');
 
     if(!empty( $una_comment )){
-        $comment_link = get_comment_link( intval(get_query_var('una_comment_id')) );
+        $comment_link = get_comment_link( intval($una_comment) );
 
         wp_redirect($comment_link);
         exit;
     }
     else if(!empty( $una_group )){
-        $group_link = rcl_get_group_permalink( intval(get_query_var('una_group_url')) );
+        $group_link = rcl_get_group_permalink( intval($una_group) );
 
         wp_redirect($group_link);
         exit;
     }
     else if(!empty( $una_prime_forum )){
-        $forum_link = pfm_get_topic_permalink( intval(get_query_var('una_prime_forum_url')) );
+        $forum_link = pfm_get_topic_permalink( intval($una_prime_forum) );
 
         wp_redirect($forum_link);
+        exit;
+    } else if(!empty( $una_prime_forum_topic )){
+        $topic_link = pfm_get_post_permalink( intval($una_prime_forum_topic) );
+
+        wp_redirect($topic_link);
         exit;
     }
 }

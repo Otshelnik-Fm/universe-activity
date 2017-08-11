@@ -93,6 +93,8 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
     * создал тему на Prime-Forum
         ссылка на топик формируется короткая - меньше запросов к бд
     * удалил тему с форума. Если тему удаляет не сам автор - то пишу чья тема была удалена
+    * рейтинг за комментарий на PrimeForum  
+        ссылка на комментарий форума формируется короткая - меньше запросов к бд  
 
 ------------------------------
 
@@ -119,6 +121,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | give_rating_comment | рейтинг за комментарий |
 | give_rating_notes | рейтинг за заметку |  
 | give_rating_post | рейтинг за запись - тип post |  
+| give_rating_forum-post | рейтинг за сообщение на Prime Forum |  
 | give_rating_post-group | рейтинг за запись в группе - тип post-group |  
 | give_rating_products | рейтинг за товар - тип products |  
 | add_user_feed | подписался на юзера |  
@@ -191,14 +194,14 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 `[otfm_universe class="una_basic" number="-1" include_actions="add_comment,give_rating_comment"]`  
 
 4. Выведем все рейтинги и стилизуем базовым стилем:  
-`[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products"]`  
+`[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post"]`  
 
 ------------------------------
 
 ## Какие события включены в фильтр:  
 **Публикации** - add_post  
 **Комментарии** - add_comment  
-**Рейтинг** - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products  
+**Рейтинг** - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post  
 **Обновления** - change_status,profile_update,create_group,user_in_group,pfm_add_topic  
 **Подписки** - add_user_feed  
 
@@ -280,6 +283,13 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 ------------------------------
 
 ## Changelog 
+**2017-08-11**  
+v0.9  
+- добавил поддержку рейтинга дополнения <a href="https://codeseller.ru/products/primeforum/" target="_blank">Prime Forum</a>  
+- короткая ссылка на запись (топик)  
+
+
+
 **2017-08-10**  
 v0.8.1  
 - Устранил существующую ошибку  

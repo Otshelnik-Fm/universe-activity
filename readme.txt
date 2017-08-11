@@ -59,6 +59,8 @@
     * создал тему на Prime-Forum
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ссылка на топик формируется короткая - меньше запросов к бд
     * удалил тему с форума. Если тему удаляет не сам автор - то пишу чья тема была удалена
+    * рейтинг за комментарий на PrimeForum
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ссылка на комментарий форума формируется короткая - меньше запросов к бд
 
 <hr style="border: 1px solid #ddd;">
 
@@ -97,10 +99,16 @@
 </tr><tr>
 <td>give_rating_notes</td>
 <td>рейтинг за заметку</td>
-</tr><tr>
+</tr>
+<tr>
 <td>give_rating_post</td>
 <td>рейтинг за запись - тип post</td>
-</tr><tr>
+</tr>
+<tr>
+<td>give_rating_forum-post</td>
+<td>рейтинг за сообщение на Prime Forum</td>
+</tr>
+<tr>
 <td>give_rating_post-group</td>
 <td>рейтинг за запись в группе - тип post-group</td>
 </tr><tr>
@@ -236,14 +244,14 @@
 <code>[otfm_universe class="una_basic" number="-1" include_actions="add_comment,give_rating_comment"]</code>
 
 4. Выведем все рейтинги и стилизуем базовым стилем:  
-<code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products"]</code>
+<code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post"]</code>
 
 <hr style="border: 1px solid #ddd;">
 
 <h2>Какие события включены в фильтр:</h2>
 <code>"Публикации"</code> - add_post  
 <code>"Комментарии"</code> - add_comment  
-<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products  
+<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post  
 <code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic  
 <code>"Подписки"</code> - add_user_feed  
 
@@ -319,6 +327,12 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+=2017-08-11=
+v0.9  
+* добавил поддержку рейтинга дополнения <a href="https://codeseller.ru/products/primeforum/" target="_blank">Prime Forum</a>
+* короткая ссылка на запись (топик)
+
+
 =2017-08-10=
 v0.8.1  
 * Устранил существующую ошибку
