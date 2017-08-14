@@ -357,7 +357,6 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
-
 =2017-08-15=
 v0.9  
 * работа с плагином WP-Recall верси 16.5.0! и выше  
@@ -373,7 +372,7 @@ v0.9
     событие видит автор и админ
     в этом случае удаляем событие загрузки аватарки - т.к. картинки нет, выводить нечего
     и если есть еще одно событие удаления аватарки - удалим его
-* обложки и автарки можно просматривать в лайтбоксе. Я работаю с дополнением <a href="https://codeseller.ru/products/magnific-popup-recall/" target="_blank">Magnific Popup Recall</a>
+* обложки и аватарки можно просматривать в лайтбоксе. Я работаю с дополнением <a href="https://codeseller.ru/products/magnific-popup-recall/" target="_blank">Magnific Popup Recall</a>
 
 
 =2017-08-10=
