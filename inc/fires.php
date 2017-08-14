@@ -182,7 +182,7 @@ function una_give_rating($data){
         $topic = pfm_get_topic($post->topic_id);
         $args['object_name'] = $topic->topic_name;
     }
-    
+
     $args['object_type'] = $data['rating_type'];
 
     $args['user_id'] = $data['user_id'];                    // кто
@@ -695,6 +695,95 @@ function una_user_del_topic($topic_id){
 }
 add_action('pfm_pre_delete_topic', 'una_user_del_topic');
 
+
+
+
+
+// создал тему на primeForum
+/* function una_user_add_topic_asgaros($curr_post){
+
+    $args['action'] = 'asgrs_add_topic';
+    $args['object_id'] = $curr_post;
+    $args['object_name'] = $argums['topic_name'];
+    $args['object_type'] = 'asgaros_forum';
+
+    una_insert($args);
+}
+add_action('asgarosforum_after_add_thread_submit', 'una_user_add_topic_asgaros'); */
+
+
+
+// добавил обложку
+function una_add_cover(){
+    global $wpdb, $user_ID;
+
+    $table = $wpdb->prefix.'otfm_universe_activity';
+    $cover = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM $table WHERE action = 'add_cover' AND object_type = 'user' AND user_id = %d", $user_ID));
+    if($cover){ // это значит что обложка уже зафиксирована системой
+
+        $wpdb->update($table, // обновим дату
+            array('act_date' => current_time('mysql')),
+            array('action' => 'add_cover', 'object_type' => 'user', 'user_id' => $user_ID)
+        );
+
+    } else {
+        $args['user_id'] = $user_ID;
+        $args['action'] = 'add_cover';
+        $args['object_type'] = 'user';
+
+        una_insert($args);
+    }
+
+}
+add_action('rcl_cover_upload', 'una_add_cover',10);
+
+
+
+// добавил аватарку
+function una_add_avatar(){
+    global $wpdb, $user_ID;
+
+   $table = $wpdb->prefix.'otfm_universe_activity';
+   $ava = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM $table WHERE action = 'add_avatar' AND object_type = 'user' AND user_id = %d", $user_ID));
+   if($ava){ // это значит что ава уже зафиксирована системой
+
+        $wpdb->update($table, // обновим дату
+            array('act_date' => current_time('mysql')),
+            array('action' => 'add_avatar', 'object_type' => 'user', 'user_id' => $user_ID)
+        );
+
+    } else {
+        $args['user_id'] = $user_ID;
+        $args['action'] = 'add_avatar';
+        $args['object_type'] = 'user';
+
+        una_insert($args);
+    }
+
+}
+add_action('rcl_avatar_upload', 'una_add_avatar',10);
+
+
+// удалил аватарку
+function una_del_avatar(){
+    global $wpdb, $user_ID;
+    $table = $wpdb->prefix.'otfm_universe_activity';
+    $id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $table WHERE action = 'add_avatar' AND object_type = 'user' AND user_id = %d ORDER BY act_date DESC", $user_ID));
+        if($id){ // есть строка
+            $wpdb->delete($table,
+                array('id' => $id) // удалим строку по id
+            );
+            $wpdb->delete($table,
+                array('action' => 'del_avatar','object_type' => 'user','user_id' => $user_ID) // удалим строку по id
+            );
+        }
+    $args['user_id'] = $user_ID;
+    $args['action'] = 'del_avatar';
+    $args['object_type'] = 'user';
+
+    una_insert($args);
+}
+add_action('rcl_delete_avatar', 'una_del_avatar',10);
 
 
 

@@ -55,7 +55,12 @@ function una_register_failed($data){
 
 // удаление юзера
 function una_get_delete_user($data){
-    $out = '<span class="una_action">Удалил пользователя</span> '.$data['object_name']. ' id=' . $data['subject_id'];
+    $mail = '';
+    if(!empty($data['other_info'])){
+        $mail = '<br/>Зарегистрирован на почту '.$data['other_info'];
+    }
+    $out = '<span class="una_action">Удалил пользователя</span> '.$data['object_name']. ' id=' . $data['subject_id'].$mail;
+
     return $out;
 }
 
@@ -362,6 +367,39 @@ function una_get_user_del_topic($data){
 }
 
 
+
+
+// поставил обложку
+function una_get_add_cover($data){
+    $user_name = get_the_author_meta('display_name', $data['user_id']);
+    $src = RCL_UPLOAD_URL.'covers/'.$data['user_id'].'.jpg';
+    $cover = '<a class="mpr_image una_cover" href="'.$src.'" title="Обложка пользователя: '.$user_name.'"><img style="max-height: 250px;display: block;" src="'.$src.'" alt=""></a>';
+
+    return '<span class="una_action">Установил обложку</span>'.$cover;
+}
+
+
+
+// поставил аватар
+function una_get_add_avatar($data){
+    $user_name = get_the_author_meta('display_name', $data['user_id']);
+    if($data['other_info'] == 'archive'){
+        $datename = date( 'Y-m-d--H-i-s', strtotime($data['act_date']) );
+        $src = RCL_UPLOAD_URL.'otfm-older-avatars/'.$data['user_id'].'/'.$datename.'-ava.jpg';
+    } else {
+        $src = RCL_UPLOAD_URL.'avatars/'.$data['user_id'].'.jpg';
+    }
+
+    $cover = '<a class="mpr_image una_avatar" href="'.$src.'" title="Аватарка пользователя: '.$user_name.'<br>Загружена: '.$data['act_date'].'"><img style="max-height: 250px;display: block;" src="'.$src.'" alt=""></a>';
+
+    return '<span class="una_action">Установил аватарку</span>'.$cover;
+}
+
+
+// удалил аватар
+function una_get_del_avatar($data){
+    return '<span class="una_action">Удалил аватарку</span>';
+}
 
 
 

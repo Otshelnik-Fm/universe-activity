@@ -113,6 +113,7 @@
     content: "\f05e";
     left: -13px;
 }
+.una_one_user .una_give_rating_forum-post::after,
 .una_one_user .una_give_rating_post::after,
 .una_one_user .una_give_rating_products::after,
 .una_one_user .una_give_rating_comment::after,
@@ -164,5 +165,9 @@
     content: "\f0c0";
     left: -14px;
 }
-
-
+.una_one_user .una_add_cover::after,
+.una_one_user .una_add_avatar::after {
+    content: "\f03e";
+    font-size: 13px;
+    left: -13.5px;
+}
