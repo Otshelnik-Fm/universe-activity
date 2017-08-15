@@ -249,7 +249,10 @@
 
 <strong>exclude_actions</strong> - исключить события (нельзя в атрибутах одновременно использовать include_actions и exclude_actions. Что-то одно)  
 
-<strong>include_users</strong> - включая юзеров. Через запятую (id юзеров - число). В личном кабинете в произвольной вкладке WP-Recall допустимо вписать <code>author_lk</code> и система подставит туда id автора кабинета.  
+<strong>include_users</strong> - включая юзеров. Через запятую (id юзеров - число). 
+В личном кабинете в произвольной вкладке WP-Recall допустимо вписать <code>author_lk</code> и система подставит туда id автора кабинета.  
+За пределами ЛК используйте <code>current</code> - система подставит туда id текущего авторизованного юзера. 
+
 
 <strong>class</strong> - css class главного блока (<a href="https://yadi.sk/i/f1OvpO_E3LmcZh" target="_blank">скриншот</a>). Например чтобы вы создали свой дизайн вывода. На основе этого атрибута уже подготовлено несколько значений:  
 (если не указан - то дизайн будет самый минималистичный)  
@@ -269,6 +272,9 @@
 
 4. Выведем все рейтинги и стилизуем базовым стилем:  
 <code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post"]</code>
+
+5. Выведем активность входа текущего пользователя:
+<code>[otfm_universe include_actions="logged_in" include_users="current"]</code>
 
 <hr style="border: 1px solid #ddd;">
 
@@ -357,6 +363,14 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+= 2017-08-16 =
+v0.10  
+* Исправлен баг: при попытке вывести одно лишь событие удаления пользователя (include_actions="delete_user") - для админа все работает, а с правами для других пользователей происходил игнор.
+* Добавлен новый параметр в атрибут шорткода: <code>include_users</code> принимает параметр <code>current</code> (получит id текущего авторизованного юзера)
+Пример: <code>[otfm_universe include_actions="logged_in" include_users="current"]</code> - выведет нам все входы текущего пользователя. Если не указать <code>include_users="current"</code> - то шорткод выдаст нам все входы всех пользователей
+Для ЛК был подобный параметр <code>author_lk</code>
+
+
 = 2017-08-15 =
 v0.9  
 * работа с плагином WP-Recall верси 16.5.0! и выше  

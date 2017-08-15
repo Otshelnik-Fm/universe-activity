@@ -4,16 +4,23 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class UNA_Get_DB {
-    
+
     // подготовим массив (чтоб потом подсчитать результаты и вывести их)
     public function una_get_db_data($args){
 
         $include = array();
         $access = $this->una_include_exclude($args); // или получим массив разрешено-запрещено для текущего юзера
 
-        if($args['include_actions']){ // если в атрибутах есть что включить или исключить
+        if($args['include_actions']){                                           // если в атрибутах есть что включить или исключить
             $include_non_priv = explode(",", $args['include_actions']);         // массив атрибута include - без учета прав юзера
-            $include = array_intersect($access['include'], $include_non_priv);  // учитываем права юзера на событие
+            $includes = array_intersect($access['include'], $include_non_priv); // учитываем права юзера на событие
+            $include = array_values($includes);                                 // переиндексируем
+
+            if(empty($include)){ // событий для текущего юзера нет - вернем "not_found" (это событие для него запрещено)
+                $include = array('result' => 'not_found');
+                return $include;
+            }
+
         } else { // или покажем всю ленту событий
             $include_non_ex = $access['include'];  // разрешенные текущему юзеру
             $deduct = explode(",", $args['exclude_actions']); // пришли в аргументе для исключения

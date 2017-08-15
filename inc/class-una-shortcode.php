@@ -28,12 +28,16 @@ class UNA_Shortcode {
                     'filter' => 0,              // фильтр над блоком
                 ), $atts, 'otfm_universe');
 
-        if($attrs['include_users'] === 'author_lk'){ // для вывода шорткодом в ЛК юзера
+        if($attrs['include_users'] === 'author_lk'){    // для вывода шорткодом в ЛК юзера
             global $user_LK;
             $attrs['include_users'] = $user_LK;
             $attrs['use_name'] = 0;
             $attrs['class'] = 'una_one_user';
             rcl_enqueue_style('una_one_user_style',rcl_addon_url('css/una_one_user.css', __FILE__));
+        }
+        if($attrs['include_users'] === 'current'){      // если нужен вывод статы текущего юзера, но не админа
+            global $user_ID;
+            $attrs['include_users'] = $user_ID;
         }
 
         $is_filter = '';
@@ -76,6 +80,12 @@ class UNA_Shortcode {
         $get_data = new UNA_Get_DB();
 
         $argum = $get_data->una_get_db_data($args);
+
+        // для текущего пользователя событий нет. Чтоб не дергать бд - вернем "0" и остановим
+        if(isset($argum['result']) && $argum['result'] === 'not_found'){
+            $count = 0;
+            return $count;
+        }
 
         $count = $una_db_query->count($argum);
 
