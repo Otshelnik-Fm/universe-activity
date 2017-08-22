@@ -113,6 +113,7 @@
     content: "\f05e";
     left: -13px;
 }
+.una_one_user .una_give_rating_forum-page::after,
 .una_one_user .una_give_rating_forum-post::after,
 .una_one_user .una_give_rating_post::after,
 .una_one_user .una_give_rating_products::after,
@@ -143,9 +144,12 @@
 .una_one_user .una_add_post::after {
     content: "\f067";
 }
+.una_one_user .una_del_avatar::after,
+.una_one_user .una_asgrs_del_topic::after,
 .una_one_user .una_pfm_del_topic::after {
     content: "\f00d";
 }
+.una_one_user .una_asgrs_add_topic::after,
 .una_one_user .una_pfm_add_topic::after {
     content: "\f0eb";
     left: -11px;

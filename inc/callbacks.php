@@ -109,6 +109,10 @@ function una_get_give_rating_post($data){
         $type = 'комментарий на форуме';
         $name = get_userdata($data['subject_id']);
         $link = '<a href="/?una_prime_forum_topic_url='.$data['object_id'].'" title="Перейти к комментарию" rel="nofollow">'.$name->display_name.'</a>';
+    } else if ($data['action'] == 'give_rating_forum-page'){ // если рейтинг за комментарий на Asgaros forum
+        $type = 'комментарий на форуме';
+        $name = get_userdata($data['subject_id']);
+        $link = '<a href="/?una_asgrs_forum_post_url='.$data['object_id'].'" title="Перейти к комментарию" rel="nofollow">'.$name->display_name.'</a>';
     }
 
     $out = '<span class="una_action">Проголосовал</span> '.$rating. ' за '.$type.': ';
@@ -405,6 +409,19 @@ function una_get_del_avatar($data){
 
 
 
+// создал тему на Asgaros Forum
+function una_get_user_add_topic_asgaros($data){
+    $del = '';
+    $link = '<a href="/?una_asgrs_forum_url='.$data['object_id'].'" title="Перейти" rel="nofollow">"'.$data['object_name'].'"</a>';
+    if($data['other_info'] == 'del'){ // если группа удалена - то пишется в нее del. А так колонка пустая
+        $link = '"'.$data['object_name'].'"';
+        $del = '<span class="una_post_status">(удалено)</span>';
+    }
+
+    $out = '<span class="una_action">Создал новую тему на форуме:</span> ' . $link . $del;
+
+    return $out;
+}
 
 
 

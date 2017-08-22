@@ -69,6 +69,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;событие видит автор и админ
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;в этом случае удаляем событие загрузки аватарки - т.к. картинки нет, выводить нечего
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;и если есть еще одно событие удаления аватарки - удалим его
+    * создал тему на Asgaros Forum
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ссылка на топик формируется короткая - меньше запросов к бд
+    * удалил тему с Asgaros Forum. Если тему удаляет не сам автор - то пишу чья тема была удалена
+    * рейтинг за комментарий на Asgaros Forum (дополнение Asgaros Forum + WP-Recall)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ссылка на комментарий форума формируется короткая - меньше запросов к бд
 
 
 <hr style="border: 1px solid #ddd;">
@@ -118,6 +123,10 @@
 <td>рейтинг за сообщение на Prime Forum</td>
 </tr>
 <tr>
+<td>give_rating_forum-page</td>
+<td>рейтинг за сообщение на Asgaros Forum (дополнение Asgaros Forum + WP-Recall)</td>
+</tr>
+<tr>
 <td>give_rating_post-group</td>
 <td>рейтинг за запись в группе - тип post-group</td>
 </tr><tr>
@@ -134,7 +143,7 @@
 <td>юзер вступил в группу</td>
 </tr><tr>
 <td>pfm_add_topic</td>
-<td>создана новая тема на prime-forum</td>
+<td>создана новая тема на Prime Forum</td>
 </tr>
 <tr>
 <td>add_cover</td>
@@ -143,6 +152,10 @@
 <tr>
 <td>add_avatar</td>
 <td>юзер добавил (сменил) аватарку (локальная аватарка. не граватар)</td>
+</tr>
+<tr>
+<td>asgrs_add_topic</td>
+<td>создана новая тема на Asgaros Forum</td>
 </tr>
 </tbody></table>
 
@@ -228,8 +241,13 @@
 <td>удалил группу</td>
 </tr><tr>
 <td>pfm_del_topic</td>
-<td>удалил тему с форума</td>
-</tr></tbody></table>
+<td>удалил тему с форума (Prime Forum)</td>
+</tr>
+<tr>
+<td>asgrs_del_topic</td>
+<td>удалил тему с форума (Asgaros Forum)</td>
+</tr>
+</tbody></table>
 
 <hr style="border: 1px solid #ddd;">
 
@@ -271,7 +289,7 @@
 <code>[otfm_universe class="una_basic" number="-1" include_actions="add_comment,give_rating_comment"]</code>
 
 4. Выведем все рейтинги и стилизуем базовым стилем:  
-<code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post"]</code>
+<code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post,give_rating_forum-page"]</code>
 
 5. Выведем активность входа текущего пользователя:
 <code>[otfm_universe include_actions="logged_in" include_users="current"]</code>
@@ -281,8 +299,8 @@
 <h2>Какие события включены в фильтр:</h2>
 <code>"Публикации"</code> - add_post  
 <code>"Комментарии"</code> - add_comment  
-<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post  
-<code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic,add_cover,add_avatar  
+<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post   
+<code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar  
 <code>"Подписки"</code> - add_user_feed  
 
 
@@ -363,6 +381,17 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+= 2017-08-22 =
+v0.11  
+* Добавлена иконка дополнения
+* Поддержка плагина Asgaros Forum (не ниже версии 1.5.9)
+- Ловим событие создания новой темы на форуме
+- Ловим события удаления темы форума
+* Рейтинг за сообщение на Asgaros Forum (дополнение <a href="https://codeseller.ru/products/asgaros-forum-wp-recall/" target="_blank">Asgaros Forum + WP-Recall</a>)
+- ссылка на комментарий форума формируется короткая - меньше запросов к бд
+* Добавлен вывод 30-ти последних событий в админке на странице консоли WP-Recall
+
+
 = 2017-08-16 =
 v0.10  
 * Исправлен баг: при попытке вывести одно лишь событие удаления пользователя (include_actions="delete_user") - для админа все работает, а с правами для других пользователей происходил игнор.

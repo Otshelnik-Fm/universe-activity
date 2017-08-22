@@ -28,6 +28,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 - Возможность влияния на привилегии к событиям (простой функцией переназначить событие - показать или скрыть его) 
 - Интеграция с дополнением [User Info Tab](https://codeseller.ru/products/user-info-tab/) - но без постраничной навигации. Последние 30 событий пользователя. Ограничения снимаются дополнением [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/)  
 - В админке настройка позволяющая задать цвета от настройки цвета WP-Recall  
+- Интеграция с Asgaros Forum (создал топик, удалил, поставил рейтинг за сообщение)  
 
 ------------------------------
 
@@ -103,6 +104,11 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
         событие видит автор и админ  
         в этом случае удаляем событие загрузки аватарки - т.к. картинки нет, выводить нечего  
         и если есть еще одно событие удаления аватарки - удалим его  
+    * создал тему на Asgaros Forum  
+        ссылка на топик формируется короткая - меньше запросов к бд  
+    * удалил тему с Asgaros Forum. Если тему удаляет не сам автор - то пишу чья тема была удалена  
+    * рейтинг за комментарий на Asgaros Forum (дополнение Asgaros Forum + WP-Recall)  
+        ссылка на комментарий форума формируется короткая - меньше запросов к бд  
 
 ------------------------------
 
@@ -130,14 +136,16 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | give_rating_notes | рейтинг за заметку |  
 | give_rating_post | рейтинг за запись - тип post |  
 | give_rating_forum-post | рейтинг за сообщение на Prime Forum |  
+| give_rating_forum-page | рейтинг за сообщение на Asgaros Forum (дополнение Asgaros Forum + WP-Recall) |  
 | give_rating_post-group | рейтинг за запись в группе - тип post-group |  
 | give_rating_products | рейтинг за товар - тип products |  
 | add_user_feed | подписался на юзера |  
 | create_group | создал группу |  
 | user_in_group | юзер вступил в группу |  
-| pfm_add_topic | создана новая тема на prime-forum |  
+| pfm_add_topic | создана новая тема на Prime Forum |  
 | add_cover | юзер добавил обложку в своём ЛК |  
 | add_avatar | юзер добавил (сменил) аватарку (локальная аватарка. не граватар) |  
+| asgrs_add_topic | создана новая тема на Asgaros Forum |  
 
 
 #### Залогиненый видит: те что выше, плюс:  
@@ -171,7 +179,8 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | profile_update | обновил настройки профиля |  
 | register_failed | неудачная регистрация |  
 | delete_group | удалил группу |  
-| pfm_del_topic | удалил тему с форума |  
+| pfm_del_topic | удалил тему с форума (Prime Forum) |  
+| asgrs_del_topic | удалил тему с форума (Asgaros Forum) |  
 
 ------------------------------
 
@@ -209,7 +218,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 `[otfm_universe class="una_basic" number="-1" include_actions="add_comment,give_rating_comment"]`  
 
 4. Выведем все рейтинги и стилизуем базовым стилем:  
-`[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post"]`  
+`[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post,give_rating_forum-page"]`  
 
 5. Выведем активность входа текущего пользователя:  
 `[otfm_universe include_actions="logged_in" include_users="current"]`  
@@ -220,8 +229,8 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 ## Какие события включены в фильтр:  
 **Публикации** - add_post  
 **Комментарии** - add_comment  
-**Рейтинг** - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post  
-**Обновления** - change_status,profile_update,create_group,user_in_group,pfm_add_topic,add_cover,add_avatar  
+**Рейтинг** - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post    
+**Обновления** - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar   
 **Подписки** - add_user_feed  
 
 ------------------------------
@@ -306,6 +315,17 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 ------------------------------
 
 ## Changelog 
+**2017-08-22**  
+v0.11  
+- Добавлена иконка дополнения  
+- Поддержка плагина Asgaros Forum (не ниже версии 1.5.9)  
+    Ловим событие создания новой темы на форуме  
+    Ловим события удаления темы форума  
+- Рейтинг за сообщение на Asgaros Forum (дополнение [Asgaros Forum + WP-Recall](https://codeseller.ru/products/asgaros-forum-wp-recall/))  
+    ссылка на комментарий форума формируется короткая - меньше запросов к бд  
+- Добавлен вывод 30-ти последних событий в админке на странице консоли WP-Recall  
+
+
 
 **2017-08-16**  
 v0.10  

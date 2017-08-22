@@ -55,6 +55,9 @@ class UNA_Register_Type_Callback {
             'give_rating_forum-post' => array(                              // поставил рейтинг за prime forum
                                 'callback'  => 'una_get_give_rating_post',
                             ),
+            'give_rating_forum-page' => array(                              // поставил рейтинг за Asgaros forum
+                                'callback'  => 'una_get_give_rating_post',
+                            ),
             'logged_in' => array(
                             'callback'  => 'una_get_logged_in_out',
                             'access'    => 'author',
@@ -115,9 +118,6 @@ class UNA_Register_Type_Callback {
                                 'callback'  => 'una_get_user_del_topic',
                                 'access'    => 'admin',
                             ),
-/*             'asgrs_add_topic' => array(
-                                'callback'  => 'una_get_user_add_topic_asgaros',
-                            ), */
             'add_cover' => array(
                                 'callback'  => 'una_get_add_cover',
                             ),
@@ -127,6 +127,13 @@ class UNA_Register_Type_Callback {
             'del_avatar' => array(
                                 'callback'  => 'una_get_del_avatar',
                                 'access'    => 'author',
+                            ),
+            'asgrs_add_topic' => array(
+                                'callback'  => 'una_get_user_add_topic_asgaros',
+                            ),
+            'asgrs_del_topic' => array(
+                                'callback'  => 'una_get_user_del_topic',
+                                'access'    => 'admin',
                             ),
         );
         $types = apply_filters('una_register_type', $type); // чтобы можно было зарегистрировать тип и коллбэк функцию

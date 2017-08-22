@@ -129,4 +129,6 @@
 .una_rating_minus {
     color: #ff6262;
 }
-
+.una_admin_dashboard .una_item_timeline {
+    overflow: hidden;
+}

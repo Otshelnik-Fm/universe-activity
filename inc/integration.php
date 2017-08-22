@@ -17,6 +17,7 @@ function una_output_content_type(){
                 'class' => 'una_one_user',
             );
 
+    $out = '';
     $user = get_userdata($user_LK);
     if($user){
         $out = '<div class="una_title">Журнал действий '.$user->get('display_name').':</div>';
@@ -33,4 +34,25 @@ function una_output_content_type(){
 add_action('uit_footer', 'una_output_content_type');
 
 
+
+// админка. WP-Recall dashboard
+function una_add_custom_metabox($screen){
+    add_meta_box( 'rcl-custom-metabox', 'Последняя активность', 'una_custom_metabox', $screen->id, 'normal' );
+}
+add_action('rcl_add_dashboard_metabox', 'una_add_custom_metabox');
+
+function una_custom_metabox(){
+    $attrs = array(
+                'number' => 30,
+                'no_pagination' => 1,
+            );
+
+    wp_enqueue_style('una_style',rcl_addon_url('una-style.css', __FILE__));
+
+    $shrt = new UNA_Shortcode();
+    $action = $shrt->get_universe($attrs);
+    if(!$action) $action = '<div class="una_data_not_found"></div>';
+
+    echo '<div id="una_users" class="universe_userlist una_admin_dashboard">'.$action.'</div>';
+}
 

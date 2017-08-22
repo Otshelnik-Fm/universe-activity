@@ -26,6 +26,7 @@ class UNA_Shortcode {
                     'mini_stat' => '',          //
                     'use_name' => 1,            // в выводе нам нужна ава и имя
                     'filter' => 0,              // фильтр над блоком
+                    'no_pagination' => '',      // отключить пагинацию
                 ), $atts, 'otfm_universe');
 
         if($attrs['include_users'] === 'author_lk'){    // для вывода шорткодом в ЛК юзера
@@ -98,7 +99,7 @@ class UNA_Shortcode {
         global $una_Date;
 
         $navi = '';
-        if($attrs['number'] > 0){
+        if($attrs['number'] > 0 && !$attrs['no_pagination']){ // подключаем пагинацию 
             if(rcl_exist_addon('universe-activity-extended')){
                 $paging = una_extend_paging($attrs, $count);
                 $attrs['offset'] = $paging['offset'];
@@ -137,7 +138,7 @@ class UNA_Shortcode {
                     }
                 }
 
-                if(rcl_exist_addon('universe-activity-extended')){
+                if(rcl_exist_addon('universe-activity-extended') && !is_admin()){
                     $out .= unae_dop_hook($i);
                 }
 
@@ -215,9 +216,9 @@ class UNA_Shortcode {
         } else if($get_filter == 'comments'){
             $attrs['include_actions'] = 'add_comment';
         } else if($get_filter == 'ratings'){
-            $attrs['include_actions'] = 'give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post';
+            $attrs['include_actions'] = 'give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post';
         } else if($get_filter == 'updates'){
-            $attrs['include_actions'] = 'change_status,profile_update,create_group,user_in_group,pfm_add_topic,add_cover,add_avatar';
+            $attrs['include_actions'] = 'change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar';
         } else if($get_filter == 'subscriptions'){
             $attrs['include_actions'] = 'add_user_feed';
         }

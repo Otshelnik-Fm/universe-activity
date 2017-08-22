@@ -182,6 +182,11 @@ function una_give_rating($data){
         $topic = pfm_get_topic($post->topic_id);
         $args['object_name'] = $topic->topic_name;
     }
+    else if($data['rating_type'] == 'forum-page'){ // если рейтинг за комментарий на Asgaros forum
+        global $wpdb;
+        $topic_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM ".$wpdb->prefix."forum_posts AS fp LEFT JOIN ".$wpdb->prefix."forum_topics AS ft ON(fp.parent_id = ft.id) WHERE fp.id = %d ORDER BY date ASC", $data['object_id']));
+        $args['object_name'] = $topic_name;
+    }
 
     $args['object_type'] = $data['rating_type'];
 
@@ -699,20 +704,6 @@ add_action('pfm_pre_delete_topic', 'una_user_del_topic');
 
 
 
-// создал тему на primeForum
-/* function una_user_add_topic_asgaros($curr_post){
-
-    $args['action'] = 'asgrs_add_topic';
-    $args['object_id'] = $curr_post;
-    $args['object_name'] = $argums['topic_name'];
-    $args['object_type'] = 'asgaros_forum';
-
-    una_insert($args);
-}
-add_action('asgarosforum_after_add_thread_submit', 'una_user_add_topic_asgaros'); */
-
-
-
 // добавил обложку
 function una_add_cover(){
     global $wpdb, $user_ID;
@@ -784,6 +775,65 @@ function una_del_avatar(){
     una_insert($args);
 }
 add_action('rcl_delete_avatar', 'una_del_avatar',10);
+
+
+
+
+// создал тему на Asgaros Forum
+function una_user_add_topic_asgaros($asf_post, $asf_topic){
+    global $asgarosforum;
+    $myTopic = $asgarosforum->getTopic($asf_topic);
+
+    $args['action'] = 'asgrs_add_topic';
+    $args['object_id'] = $asf_topic;
+    $args['object_name'] = $myTopic->name;
+    $args['object_type'] = 'asgaros_forum';
+
+    una_insert($args);
+}
+add_action('asgarosforum_after_add_thread_submit', 'una_user_add_topic_asgaros', 10, 2);
+
+
+
+
+
+// удалил тему на Asgaros Forum
+function una_user_del_topic_asgaros($topic_id){
+    global $wpdb, $user_ID;
+
+    $table = $wpdb->prefix.'otfm_universe_activity';
+    $topic_name = $wpdb->get_var($wpdb->prepare("SELECT object_name FROM $table WHERE action = 'asgrs_add_topic' AND object_type = 'asgaros_forum' AND object_id = %d", $topic_id));
+    if($topic_name){ // это значит создание топика было зафиксированно системой
+        $args['object_name'] = $topic_name;
+        // и поставим маркер что топик был удален:
+        $wpdb->update($table, // обновим строку
+            array('other_info' => 'del'),
+            array('action' => 'asgrs_add_topic', 'object_type' => 'asgaros_forum', 'object_id' => $topic_id)
+        );
+    } else { // если топик не найден в системе - запрашиваю из форума его название
+        global $asgarosforum;
+        $myTopic = $asgarosforum->getTopic($topic_id);
+        $args['object_name'] = $myTopic->name;
+    }
+
+
+    // а теперь создадим запись что топик выпилили
+    $topic_user_id = $wpdb->get_var($wpdb->prepare("SELECT author_id FROM ".$wpdb->prefix."forum_posts WHERE parent_id = %d ORDER BY date ASC", $topic_id));
+
+    if($topic_user_id != $user_ID){ // если удаляет топик не его автор
+        $userdata = get_userdata($topic_user_id);
+        $args['subject_id'] = $topic_user_id;
+        $args['other_info'] = $userdata->display_name;
+    }
+
+    $args['action'] = 'asgrs_del_topic';
+    $args['object_id'] = $topic_id;
+    $args['object_type'] = 'prime_forum';
+
+    una_insert($args);
+}
+add_action('asgarosforum_before_delete_topic', 'una_user_del_topic_asgaros');
+
 
 
 
