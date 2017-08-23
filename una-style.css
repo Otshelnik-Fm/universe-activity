@@ -132,3 +132,8 @@
 .una_admin_dashboard .una_item_timeline {
     overflow: hidden;
 }
+.una_admin_dashboard .una_header {
+    font-size: 15px;
+    float: right;
+    margin: -20px 0 0;
+}

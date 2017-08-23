@@ -199,7 +199,7 @@ function una_get_add_comment($data){
         $link_author = '"'.$other['sbj_nm'].'"';
 
         if($data['subject_id'] > 0){ // и ответ зарегистрированному юзеру
-            $link_author = '<a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">"'.$other['sbj_nm'].'"</a>';
+            $link_author = '<a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">"'.$other['sbj_nm'].'"</a>';
         }
 
         $out = '<span class="una_action">' . $do . $whom . '</span>' . $link_author . $type_fin . $gp_info;
@@ -268,7 +268,7 @@ function una_get_delete_post($data){
         if($data['action'] === 'delete_post_fully'){
             $what = 'WP-Cron удалил ';
         }
-        $link_author = '<span class="una_post_status una_post_author">- автор: <a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['other_info'].'</a></span>';
+        $link_author = '<span class="una_post_status una_post_author">- автор: <a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['other_info'].'</a></span>';
     }
 
     $out = '<span class="una_action">'.$what.$type.':</span> ';
@@ -281,14 +281,14 @@ function una_get_delete_post($data){
 
 // Подписка на юзера
 function una_get_add_user_feed($data){
-    $link_author = '<a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
+    $link_author = '<a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
     $out = '<span class="una_action">Подписался на пользователя</span> '.$link_author;
     return $out;
 }
 
 // Отписка на юзера
 function una_get_del_user_feed($data){
-    $link_author = '<a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
+    $link_author = '<a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
     $out = '<span class="una_action">Отписался от пользователя</span> '.$link_author;
     return $out;
 }
@@ -298,14 +298,14 @@ function una_get_del_user_feed($data){
 
 // Добавил в черный список
 function una_get_add_user_blacklist($data){
-    $link_author = '<a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
+    $link_author = '<a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
     $out = '<span class="una_action">Добавил пользователя</span> '.$link_author.' в черный список';
     return $out;
 }
 
 // Удалил из черного списка
 function una_get_del_user_blacklist($data){
-    $link_author = '<a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
+    $link_author = '<a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['object_name'].'</a>';
     $out = '<span class="una_action">Убрал пользователя</span> '.$link_author.' из черного списка';
     return $out;
 }
@@ -362,7 +362,7 @@ function una_get_user_del_topic($data){
     $link_author = '';
 
     if($data['subject_id']){
-        $link_author = '<span class="una_post_status una_post_author">- автор: <a href="/?author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['other_info'].'</a></span>';
+        $link_author = '<span class="una_post_status una_post_author">- автор: <a href="/?una_author='.$data['subject_id'].'" title="Перейти" rel="nofollow">'.$data['other_info'].'</a></span>';
     }
 
     $out = '<span class="una_action">Удалил тему:</span> "'.$data['object_name'].'" с форума'.$link_author;

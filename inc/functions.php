@@ -95,14 +95,15 @@ function una_human_format($date){
 }
 
 
-// добавим в массив новые переменные запроса
+// регистрируем новые переменные запроса
 function una_add_query_vars($vars){
-    $vars[] = 'una_comment_id';
-    $vars[] = 'una_group_url';
-    $vars[] = 'una_prime_forum_url';
-    $vars[] = 'una_prime_forum_topic_url';
-    $vars[] = 'una_asgrs_forum_url';
-    $vars[] = 'una_asgrs_forum_post_url';
+    $vars[] = 'una_comment_id';             // ссылка на комментарий
+    $vars[] = 'una_group_url';              // на группу
+    $vars[] = 'una_prime_forum_url';        // на тему на Prime Forum
+    $vars[] = 'una_prime_forum_topic_url';  // на сообщение на Prime Forum
+    $vars[] = 'una_asgrs_forum_url';        // на тему на Asgaros Forum
+    $vars[] = 'una_asgrs_forum_post_url';   // на сообщение на Asgaros Forum
+    $vars[] = 'una_author';                 // на кабинет автора
 
     return $vars;
 }
@@ -117,6 +118,7 @@ function una_catch_type_vars_link(){
     $una_prime_forum_topic = get_query_var('una_prime_forum_topic_url');
     $una_asgrs_forum_topic = get_query_var('una_asgrs_forum_url');
     $una_asgrs_forum_post_id = get_query_var('una_asgrs_forum_post_url');
+    $una_author = get_query_var('una_author');
 
 
     if(!empty( $una_comment )){
@@ -136,12 +138,14 @@ function una_catch_type_vars_link(){
 
         wp_redirect($forum_link);
         exit;
-    } else if(!empty( $una_prime_forum_topic )){
+    }
+    else if(!empty( $una_prime_forum_topic )){
         $topic_link = pfm_get_post_permalink( intval($una_prime_forum_topic) );
 
         wp_redirect($topic_link);
         exit;
-    } else if(!empty( $una_asgrs_forum_topic )){
+    }
+    else if(!empty( $una_asgrs_forum_topic )){
         global $asgarosforum;
 
         $val = intval($una_asgrs_forum_topic);
@@ -150,7 +154,8 @@ function una_catch_type_vars_link(){
 
         wp_redirect($topic_link);
         exit;
-    } else if(!empty( $una_asgrs_forum_post_id )){
+    }
+    else if(!empty( $una_asgrs_forum_post_id )){
         global $asgarosforum,$wpdb;
 
         $as_postid = intval($una_asgrs_forum_post_id);
@@ -160,6 +165,13 @@ function una_catch_type_vars_link(){
         $topic_link = htmlspecialchars_decode($link);
 
         wp_redirect($topic_link);
+        exit;
+    }
+    else if(!empty( $una_author )){
+        $author_id = intval( $una_author );
+        $author_link = get_author_posts_url($author_id);
+
+        wp_redirect($author_link);
         exit;
     }
 }

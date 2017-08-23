@@ -99,7 +99,7 @@ class UNA_Shortcode {
         global $una_Date;
 
         $navi = '';
-        if($attrs['number'] > 0 && !$attrs['no_pagination']){ // подключаем пагинацию 
+        if($attrs['number'] > 0 && !$attrs['no_pagination']){ // подключаем пагинацию
             if(rcl_exist_addon('universe-activity-extended')){
                 $paging = una_extend_paging($attrs, $count);
                 $attrs['offset'] = $paging['offset'];
@@ -131,15 +131,18 @@ class UNA_Shortcode {
 
                 if($attrs['use_name']){ // в выводе нам нужна ава и имя
                     if($data['user_id'] > 0){
-                        $author = '<a href="/?author='.$data['user_id'].'" title="Перейти в кабинет" rel="nofollow">'.get_avatar($data['user_id'], 32).'</a>';
+                        $author = '<a href="/?una_author='.$data['user_id'].'" title="Перейти в кабинет" rel="nofollow">'.get_avatar($data['user_id'], 32).'</a>';
                         $user_name = get_the_author_meta('display_name', $data['user_id']);
                     } else if ($data['user_id'] == 0) {
                         $user_name = 'Гость';
                     }
                 }
 
-                if(rcl_exist_addon('universe-activity-extended') && !is_admin()){
-                    $out .= unae_dop_hook($i);
+                if( rcl_exist_addon('universe-activity-extended') ){
+                    global $current_screen;
+                    if ( !isset($current_screen) ){ // мы не в админке (это не ajax вызов)
+                        $out .= unae_dop_hook($i);
+                    }
                 }
 
                 $out .= '<div class="una_item_timeline '.$una_even_class.' una_'.$data['action'].'" data-una_id="'.$data['id'].'">';
