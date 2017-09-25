@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 // переписать
 
 class UNA_Insert_DB {
-    
+
     // функция вставляет строку в БД (в fires.php)
     public function insert_db($argum){
         // предустановим некоторые аргументы
@@ -36,7 +36,7 @@ class UNA_Insert_DB {
         if ( $this->una_check_duplicate($args) ) return false;
 
         global $wpdb;
-        
+
         // всё ок, вставляем
         $wpdb->insert(
             $wpdb->prefix . "otfm_universe_activity",
@@ -85,18 +85,17 @@ class UNA_Insert_DB {
 
         $duplicate = $wpdb->get_row(
             $wpdb->prepare(
-                'SELECT `id` FROM %1$s
-                    WHERE `user_id` = \'%2$s\'
-                        AND `action` = \'%3$s\'
-                        AND `act_date` = \'%4$s\'
-                        AND `object_id` = \'%5$s\'
-                        AND `object_name` = \'%6$s\'
-                        AND `object_type` = \'%7$s\'
-                        AND `subject_id` = \'%8$s\'
-                        AND `other_info` = \'%9$s\'
-                        AND `user_ip` = \'%10$s\'
-                ;',
-                $wpdb->prefix . "otfm_universe_activity",
+                "SELECT `id` FROM ".$wpdb->prefix."otfm_universe_activity
+                    WHERE `user_id` = '%d'
+                        AND `action` = '%s'
+                        AND `act_date` = '%s'
+                        AND `object_id` = '%d'
+                        AND `object_name` = '%s'
+                        AND `object_type` = '%s'
+                        AND `subject_id` = '%d'
+                        AND `other_info` = '%s'
+                        AND `user_ip` = '%s'
+                ;",
                 $args['user_id'],
                 $args['action'],
                 $args['act_date'],
@@ -108,10 +107,11 @@ class UNA_Insert_DB {
                 $args['user_ip']
             )
         );
+        
         return $duplicate;
     }
-    
-    
+
+
 }
 
 
