@@ -77,7 +77,7 @@ function una_failed_registration($errors, $sanitized_user_login, $user_email){
     if($errors->errors['email_exists']){    // мейл такой уже есть
         $reason .= 'email';
     }
-    if(!$reason) return false; // даже при регистрации есть объект $errors, но пустой
+    if(!$reason) return $errors; // даже при регистрации есть объект $errors, но пустой или другая причина ошибки (капчи и прочие 3-и плагины)
 
     $args['object_name'] = $sanitized_user_login.','.$user_email;
     $args['action'] = 'register_failed';
