@@ -61,6 +61,7 @@
     display: flex;
     line-height: normal;
     margin: 15px 0;
+    position: relative;
 }
 .una_item_timeline .una_author {
     background-color: #e5e5e5;
@@ -79,6 +80,7 @@
 .una_item_timeline .una_right {
     display: flex;
     padding: 0 8px;
+    width: 100%;
 }
 .una_time {
     align-self: center;

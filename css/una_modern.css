@@ -91,6 +91,7 @@
 }
 .una_modern .una_right {
     flex-direction: column;
+    width: 100%;
 }
 .una_modern .una_time {
     align-self: flex-start;

@@ -214,7 +214,7 @@ function una_get_add_comment($data){
 // добавил запись
 function una_get_add_post($data){
     $post_name = '"'.$data['object_name'].'"';
-    $link = '<a href="/?p='.$data['object_id'].'" title="Перейти" rel="nofollow">'.$post_name.'</a>';
+    $link = '<a class="una_p_link" href="/?p='.$data['object_id'].'" title="Перейти" rel="nofollow">'.$post_name.'</a>';
 
     $status = get_post_status($data['object_id']);
     if(!$status) $link = $post_name.'<span class="una_post_status">(удалено)</span>'; // удалено

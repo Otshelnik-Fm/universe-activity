@@ -145,7 +145,15 @@ class UNA_Shortcode {
                     }
                 }
 
-                $out .= '<div class="una_item_timeline '.$una_even_class.' una_'.$data['action'].'" data-una_id="'.$data['id'].'">';
+                $attr_val = array('modal_class' => '', 'data_attr' => '',);
+                if( rcl_exist_addon('universe-activity-modal') && $data['action'] == 'add_post' ){  // интересуют только записи
+                    $status = get_post_status($data['object_id']);
+                    if($status == 'publish'){                                                       // и опубликованные
+                        $attr_val = unam_set_modal_attr($data);
+                    }
+                }
+
+                $out .= '<div class="una_item_timeline '.$una_even_class.' una_'.$data['action'].' '.$attr_val['modal_class'].' una_id_'.$data['id'].'" data-unam_data="'.$attr_val['data_attr'].'">';
                     if($attrs['use_name']){
                         $out .= '<div class="una_author">';
                             $out .= $author;
