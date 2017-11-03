@@ -6,6 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 // переписать
 
 class UNA_Shortcode {
+    public $una_Date;
 
     function __construct() {
         do_action('una_start_shortcode');       // маяк - шорткод в работе
@@ -23,7 +24,7 @@ class UNA_Shortcode {
                     'include_users' => '',      // включая юзеров
                     'exclude_users' => '',      // или исключая их
                     'class' => '',              // css class главного блока
-                    'mini_stat' => '',          //
+                    'events_count' => 1,        // показать счетчик событий
                     'use_name' => 1,            // в выводе нам нужна ава и имя
                     'filter' => 0,              // фильтр над блоком
                     'no_pagination' => '',      // отключить пагинацию
@@ -61,10 +62,7 @@ class UNA_Shortcode {
 
         $out = '<div id="universe_time" class="una_timeline_blk '.$class.'" data-una_total_items="'.$count.'" data-una_param="'.$encode.'">';
             $out .= $is_filter;
-            $out .= '<div id="una_head" class="una_header">';
-                $out .= '<span>Событий:</span>';
-                $out .= '<span>'.$count.'</span>';
-            $out .= '</div>';
+            $out .= $this->get_count_events($attrs, $count);   // счетчик событий - если разрешен
             if(rcl_exist_addon('universe-activity-extended')){
                 $out .= '<div id="universe_visible"></div>';
             }
@@ -95,37 +93,45 @@ class UNA_Shortcode {
 
 
     // получим данные для вывода
-    public function una_get_data($attrs, $count){
-        global $una_Date;
+    public function una_get_data($attrs, $count){               // внутри дохера напичкано. Потом перепишу
+        global $current_screen;
 
         $navi = '';
-        if($attrs['number'] > 0 && !$attrs['no_pagination']){ // подключаем пагинацию
+        if($attrs['number'] > 0 && empty($attrs['no_pagination']) ){   // подключаем пагинацию
             if(rcl_exist_addon('universe-activity-extended')){
                 $paging = una_extend_paging($attrs, $count);
                 $attrs['offset'] = $paging['offset'];
                 $navi = $paging['navi'];
             }
-
         }
 
         $get_data = new UNA_Get_DB();
-        $datas = $get_data->una_get_results($attrs);   // массив из БД
+        $data_results = $get_data->una_get_results($attrs);         // массив из БД
 
-        $type = una_register_type_callback();   // получим массив зарегистрированных экшенов и функций
+        $datas = apply_filters('una_get_data_db',$data_results);    // фильтр массива полученных данных. Можно применять для дополнения массива своими данными
+
+        $type = una_register_type_callback();                       // получим массив зарегистрированных экшенов и функций
         $out = '';
         $i = 1;
+
         foreach ($datas as $data){
-            if( array_key_exists($data['action'], $type)){      // проверим что зарегистрирован экшен
-                if(empty($type[$data['action']])) continue;     // если action-у не назначена функция - пропускаем
+            if( array_key_exists($data['action'], $type)){          // проверим что зарегистрирован экшен
+                if(empty($type[$data['action']])) continue;         // если action-у не назначена функция - пропускаем
+
+                if( rcl_exist_addon('universe-activity-comments') ){ // покажем спам комментарии и на утверждении только админу
+                    if($data['action'] == 'add_comment' && !current_user_can('manage_options')){
+                        if($data['comment_approved'] != 1) continue; // в массиве доступны новые данные
+                    }
+                }
 
                 $author = '';
                 $user_name = '';
                 $una_even_class = '';
-                if($i%2 == 0) $una_even_class = 'una_even'; // каждый четный имеет класс
+                if($i%2 == 0) $una_even_class = 'una_even';     // каждый четный имеет класс
 
                 $t_date = una_separate_date($data['act_date']); // выведем одно число за сутки как заголовок
-                if($una_Date != $t_date){
-                    $una_Date = una_separate_date($data['act_date']);
+                if($this->una_Date != $t_date){
+                    $this->una_Date = una_separate_date($data['act_date']);
                     $out .= '<div class="una_date">' . una_human_days($data['act_date']) . '</div>';
                 }
 
@@ -139,7 +145,6 @@ class UNA_Shortcode {
                 }
 
                 if( rcl_exist_addon('universe-activity-extended') ){
-                    global $current_screen;
                     if ( !isset($current_screen) ){ // мы не в админке (это не ajax вызов)
                         $out .= unae_dop_hook($i);
                     }
@@ -147,11 +152,14 @@ class UNA_Shortcode {
 
                 $attr_val = array('modal_class' => '', 'data_attr' => '',);
                 if( rcl_exist_addon('universe-activity-modal') && $data['action'] == 'add_post' ){  // интересуют только записи
-                    $status = get_post_status($data['object_id']);
-                    if($status == 'publish'){                                                       // и опубликованные
-                        $attr_val = unam_set_modal_attr($data);
+                    if ( !isset($current_screen) ){                                                 // мы не в админке (это не ajax вызов)
+                        $status = get_post_status($data['object_id']);
+                        if($status == 'publish'){                                                   // и опубликованные
+                            $attr_val = unam_set_modal_attr($data);
+                        }
                     }
                 }
+
 
                 $out .= '<div class="una_item_timeline '.$una_even_class.' una_'.$data['action'].' '.$attr_val['modal_class'].' una_id_'.$data['id'].'" data-unam_data="'.$attr_val['data_attr'].'">';
                     if($attrs['use_name']){
@@ -248,6 +256,19 @@ class UNA_Shortcode {
         }
     }
 
-}
 
+    // подключим счетчик событий
+    private function get_count_events($attrs, $count){
+        if($attrs['events_count'] == 0) return false;
+
+        $out = '<div id="una_head" class="una_header">';
+            $out .= '<span>Событий:</span>';
+            $out .= '<span>'.$count.'</span>';
+        $out .= '</div>';
+
+        return $out;
+    }
+
+
+}
 

@@ -46,6 +46,9 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 ## Список дочерних дополнений к нему:
 
 - [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/)  
+- [Universe Activity Modal](https://codeseller.ru/products/universe-activity-modal/)
+- [Universe Activity HeatMap](https://codeseller.ru/products/universe-activity-heatmap/)
+- [Universe Activity Comments](https://codeseller.ru/products/universe-activity-comments/)
 - ...  
 
 ------------------------------
@@ -200,6 +203,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 В личном кабинете в произвольной вкладке WP-Recall допустимо вписать `author_lk` и система подставит туда id автора кабинета.  
 За пределами ЛК используйте `current` - система подставит туда id текущего авторизованного юзера.  
 
+**events_count** - верхний счетчик показывающий кол-во событий (по умолчанию значение "1" - показывать). `events_count="0"` - отключит его  
 
 **class** - css class главного блока [скриншот](https://yadi.sk/i/f1OvpO_E3LmcZh). Например чтобы вы создали свой дизайн вывода. На основе этого атрибута уже подготовлено несколько значений:  
 (если не указан - то дизайн будет самый минималистичный)  
@@ -315,9 +319,21 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 ------------------------------
 
 ## Changelog  
+**2017-11-03**  
+v0.16  
+- Добавил служебную информацию - версию бд системы.  
+- Добавлен новый параметр в шорткод `events_count` - указав его значение 0 - отключим счетчик событий. По умолчанию "1" - включен.  
+- Добавлен фильтр `una_get_data_db` - фильтр массива полученных на страницу данных. Можно применять для дополнения массива своими данными  
+- Очистка передаваемых include, exclude аргументов шорткода от возможных пробелов.  
+- Статус комментариев выделил цветом. "На утверждении" - оранжевый, "Спам" - красный  
+- Поддержка дополнения Universe Activity Comments  
+
+
+
+
 **2017-10-28**  
 v0.15  
-- Поддержка дополнения Universe Activity Modal  
+- Поддержка дополнения [Universe Activity Modal](https://codeseller.ru/products/universe-activity-modal/)  
 
 
 

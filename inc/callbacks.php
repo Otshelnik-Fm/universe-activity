@@ -191,7 +191,7 @@ function una_get_add_comment($data){
             $go_to .= '</a>';
         $go_to .= '</div>';
     } else {
-        if( !empty($status) ) $go_to = ' <span class="una_post_status">('.$status.')</span>';
+        if( !empty($status) ) $go_to = ' <span class="una_post_status una_st_'.$other['st'].'">('.$status.')</span>';
     }
     if( isset($other['par']) && $other['par'] && isset($other['sbj_nm']) && $other['sbj_nm'] ){ // если это ответ и не самому себе
         $do = 'Ответил ';

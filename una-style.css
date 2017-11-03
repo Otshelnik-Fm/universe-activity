@@ -102,6 +102,12 @@
     font-size: 11px;
     margin: 0 0 0 8px;
 }
+.una_post_status.una_st_spam {  /*spam comment*/
+    color: red;
+}
+.una_post_status.una_st_0 {     /*pending comment*/
+    color: #e19201;
+}
 .una_timeline_blk .rcl-pager {
     position: relative;
 }
@@ -138,4 +144,10 @@
     font-size: 15px;
     float: right;
     margin: -20px 0 0;
+}
+/* una comment */
+.unac_comm_content {
+    border-left: 3px solid #ddd;
+    padding: 0 10px;
+    margin: 5px 0;
 }

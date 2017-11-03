@@ -11,10 +11,11 @@ class UNA_Get_DB {
         $include = array();
         $access = $this->una_include_exclude($args); // или получим массив разрешено-запрещено для текущего юзера
 
-        if($args['include_actions']){                                           // если в атрибутах есть что включить или исключить
-            $include_non_priv = explode(",", $args['include_actions']);         // массив атрибута include - без учета прав юзера
-            $includes = array_intersect($access['include'], $include_non_priv); // учитываем права юзера на событие
-            $include = array_values($includes);                                 // переиндексируем
+        if($args['include_actions']){                                               // если в атрибутах есть что включить или исключить
+            $include_non_priv = explode(",", $args['include_actions']);             // массив атрибута include - без учета прав юзера
+            $include_non_priv_cl = array_map('trim',$include_non_priv);             // удалим из значений массива пробелы если есть
+            $includes = array_intersect($access['include'], $include_non_priv_cl);  // учитываем права юзера на событие
+            $include = array_values($includes);                                     // переиндексируем
 
             if(empty($include)){ // событий для текущего юзера нет - вернем "not_found" (это событие для него запрещено)
                 $include = array('result' => 'not_found');
@@ -22,9 +23,10 @@ class UNA_Get_DB {
             }
 
         } else { // или покажем всю ленту событий
-            $include_non_ex = $access['include'];  // разрешенные текущему юзеру
-            $deduct = explode(",", $args['exclude_actions']); // пришли в аргументе для исключения
-            $include = array_values(array_diff($include_non_ex, $deduct)); // вычтем их из массива и переиндексируем его
+            $include_non_ex = $access['include'];                               // разрешенные текущему юзеру
+            $deduct = explode(",", $args['exclude_actions']);                   // пришли в аргументе для исключения
+            $deduct_cl = array_map('trim',$deduct);                             // удалим из значений массива пробелы если есть
+            $include = array_values(array_diff($include_non_ex, $deduct_cl));   // вычтем их из массива и переиндексируем его
         }
 
         $argum = array(
@@ -58,7 +60,7 @@ class UNA_Get_DB {
                     'fields' => array(
                         'display_name'
                     ),
-                )
+                ),
             );
 
         $result = $una_db_query->get_results($argum);
@@ -96,8 +98,8 @@ class UNA_Get_DB {
     */
     // в зависимости от роли юзера - его привелегии к просмотру
     private function una_current_user_privilege($args){
-        global $user_ID;
         $priv = array();
+        global $user_ID;
 
          // авторизован и выборка по нему - значит это автор. Ну и админу можно
         if( (!empty($args['include_users']) && $args['include_users'] == $user_ID) || current_user_can('manage_options') ){

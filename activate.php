@@ -1,5 +1,9 @@
 <?php
 
+$una_db_version = '1.0.0';
+update_option('universe_activity_db_ver', $una_db_version, false);
+
+
 global $wpdb;
 
 $wpdb->hide_errors();
@@ -16,7 +20,7 @@ if ( $wpdb->has_cap( 'collation' ) ) {
 }
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-    
+
 $una_tables = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "otfm_universe_activity` (
                 `id` bigint(20) unsigned NOT NULL auto_increment,
                 `user_id` bigint(20) NOT NULL default '0',
