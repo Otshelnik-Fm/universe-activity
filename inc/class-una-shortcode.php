@@ -54,7 +54,7 @@ class UNA_Shortcode {
             return $is_filter.'<div class="una_data_not_found"><span>Активности нет</span></div>';
         }
 
-        $class = sanitize_key($attrs['class']);
+        $class = sanitize_text_field($attrs['class']);
 
         $this->una_get_stylesheet_file($class); // подключим стили по переданному классу
 
