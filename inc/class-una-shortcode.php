@@ -153,7 +153,7 @@ class UNA_Shortcode {
                 $attr_val = array('modal_class' => '', 'data_attr' => '',);
                 if( rcl_exist_addon('universe-activity-modal') && $data['action'] == 'add_post' ){  // интересуют только записи
                     if ( !isset($current_screen) ){                                                 // мы не в админке (это не ajax вызов)
-                        $status = get_post_status($data['object_id']);
+                        $status = $data['post_status'];
                         if($status == 'publish'){                                                   // и опубликованные
                             $attr_val = unam_set_modal_attr($data);
                         }

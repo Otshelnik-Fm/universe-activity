@@ -42,7 +42,8 @@ class UNA_Get_DB {
     // получим результаты
     public function una_get_results($args){
         $una_db_query = new UNA_Activity_Query();
-        $users_db_query = new UNA_Users_Query();
+        $users_db_query = new UNA_Users_Query(); // таблица юзеров из class-una-query.php
+        $posts_db_query = new UNA_Posts_Query(); // таблица записей
 
         $argum = $this->una_get_db_data($args);
 
@@ -59,6 +60,15 @@ class UNA_Get_DB {
                     'on_user_id' => 'ID',
                     'fields' => array(
                         'display_name'
+                    ),
+                ),
+                array(
+                    'join' => 'LEFT',
+                    'table' => $posts_db_query->query['table'],
+                    'on_object_id' => 'ID',
+                    'action' => 'add_post',
+                    'fields' => array(
+                        'post_status'
                     ),
                 ),
             );

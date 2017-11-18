@@ -216,7 +216,7 @@ function una_get_add_post($data){
     $post_name = '"'.$data['object_name'].'"';
     $link = '<a class="una_p_link" href="/?p='.$data['object_id'].'" title="Перейти" rel="nofollow">'.$post_name.'</a>';
 
-    $status = get_post_status($data['object_id']);
+    $status = $data['post_status'];
     if(!$status) $link = $post_name.'<span class="una_post_status">(удалено)</span>'; // удалено
     else if($status === 'trash'){
          $link = $post_name.'<span class="una_post_status">(удалено в корзину)</span>';

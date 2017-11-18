@@ -4,10 +4,10 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 class UNA_Activity_Query extends Rcl_Query {
-    
-    function __construct() { 
+
+    function __construct() {
         global $wpdb;
-        
+
         $table = array(
             'name' => $wpdb->base_prefix ."otfm_universe_activity",
             'as' => 'activity',
@@ -24,17 +24,17 @@ class UNA_Activity_Query extends Rcl_Query {
                 'user_ip'
             )
         );
-        
+
         parent::__construct($table);
     }
 }
 
-
+// таблица юзеров
 class UNA_Users_Query extends Rcl_Query {
-    
-    function __construct() { 
+
+    function __construct() {
         global $wpdb;
-        
+
         $table = array(
             'name' => $wpdb->base_prefix ."users",
             'as' => 'users',
@@ -43,7 +43,27 @@ class UNA_Users_Query extends Rcl_Query {
                 'display_name'
             )
         );
-        
+
+        parent::__construct($table);
+    }
+}
+
+
+// таблица записей
+class UNA_Posts_Query extends Rcl_Query {
+
+    function __construct() {
+        global $wpdb;
+
+        $table = array(
+            'name' => $wpdb->base_prefix ."posts",
+            'as' => 'posts',
+            'cols' => array(
+                'ID',
+                'post_status'
+            )
+        );
+
         parent::__construct($table);
     }
 }

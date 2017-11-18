@@ -382,6 +382,11 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+= 2017-11-18 =
+v0.18  
+* Оптимизировал доп по запросам к БД
+
+
 = 2017-11-09 =
 v0.17  
 * Возможность в атрибуте шорткода class передавать несколько классов
