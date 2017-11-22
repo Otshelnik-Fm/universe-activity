@@ -321,54 +321,13 @@ function una_post_status($new_status, $old_status, $post){
     if($new_status == 'auto-draft'
         || ($old_status ==  'new' && $new_status == 'inherit')
        ) return false;
-    //if($old_status == 'auto-draft' && $new_status == 'draft') return false;     // автосохранение первой записи в админке
+    //if($old_status == 'auto-draft' && $new_status == 'draft') return false;   // автосохранение первой записи в админке
     if($old_status == 'draft' && $new_status == 'draft') return false;          // гонять из черновика в черновик не дадим
-    if(wp_is_post_revision($post->ID)) return false;                           // ревизии не нужны
-    if($post->post_type === 'nav_menu_item') return false;                     // меню нам нафиг не надо
-    if($post->post_type === 'customize_changeset') return false;               // а это кастомайзер - нам нафиг не надо
+    if(wp_is_post_revision($post->ID)) return false;                            // ревизии не нужны
+    if($post->post_type === 'nav_menu_item') return false;                      // меню нам нафиг не надо
+    if($post->post_type === 'customize_changeset') return false;                // а это кастомайзер - нам нафиг не надо
+    if($post->post_type === 'oembed_cache') return false;                       // кеш оэмбеда - если в теле линк на ютуб например
 
-/*     if($old_status == 'new' && $new_status == 'publish'
-        || ($old_status == 'draft' && $new_status == 'publish')
-        || ($old_status == 'new' && $new_status == 'pending')
-       ){ // опубликовал новую запись. Link
-        $args['action'] = 'add_post';
-        if($new_status == 'pending'){
-            $args['other_info'] = 'pending';
-        }
-    }
-    else if($old_status == 'pending' && $new_status == 'publish'){ // модератор одобрил запись
-        global $wpdb;
-        $table = $wpdb->prefix.'otfm_universe_activity';
-        $res = $wpdb->update($table,
-                    array('other_info' => ''),
-                    array('object_id' => $post->ID, 'other_info' => 'pending') // только ту запись что была в pending
-                );
-        if( isset($res) ){ // ответ 0 строк или > 0
-            return true; // все прошло хорошо - обновили данные. Остановим скрипт
-        }
-    }
-    else if($old_status == 'publish' && $new_status == 'pending'){ // запись вновь на модерации
-        global $wpdb;
-        $table = $wpdb->prefix.'otfm_universe_activity';
-        $res = $wpdb->update($table,
-                    array('other_info' => 'pending'), // добавим флаг pending
-                    array('user_id' => $post->post_author, 'object_id' => $post->ID, 'action' => 'add_post')
-                );
-        if( isset($res) ){ // ответ 0 строк или > 0
-            return true; // все прошло хорошо - обновили данные. Остановим скрипт
-        }
-    }
-    else if($old_status == 'draft' && $new_status == 'pending'){ // запись из черновика на модерации
-        global $wpdb;
-        $table = $wpdb->prefix.'otfm_universe_activity';
-        $res = $wpdb->update($table,
-                    array('other_info' => 'pending', 'action' => 'add_post'), // добавим флаг pending и сменим на add_post
-                    array('user_id' => $post->post_author, 'object_id' => $post->ID, 'action' => 'add_draft')
-                );
-        if( isset($res) ){ // ответ 0 строк или > 0
-            return true; // все прошло хорошо - обновили данные. Остановим скрипт
-        }
-    } */
     $post_author = $post->post_author;
 
     if($old_status == 'new' || $old_status == 'auto-draft' && $new_status == 'draft'){ // опубликовал новую запись
