@@ -245,7 +245,7 @@ add_action('wp_footer','una_inline_css');
 // стили для админки настроек
 function una_admin_styles(){
     $chr_page = get_current_screen();
-    if($chr_page->base != 'wp-recall-4_page_rcl-options' ) return;
+    if($chr_page->parent_base != 'manage-wprecall' ) return;
 
 $out = '<style>
 #options-universe-activity {
