@@ -382,6 +382,12 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+= 2017-11-23 =
+v0.20  
+* Подправил стили для админки
+* Немного рекламы своих допов к Universe Activity в блоке настроек допа
+
+
 = 2017-11-22 =
 v0.19  
 * Убрал фиксацию бесполезного ВП типа записей "oembed_cache". Она создавалась если контент записи содержал oEmbed

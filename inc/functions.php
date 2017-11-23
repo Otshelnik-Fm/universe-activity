@@ -245,7 +245,7 @@ add_action('wp_footer','una_inline_css');
 // стили для админки настроек
 function una_admin_styles(){
     $chr_page = get_current_screen();
-    if($chr_page->base != 'toplevel_page_manage-wprecall' ) return;
+    if($chr_page->base != 'wp-recall-4_page_rcl-options' ) return;
 
 $out = '<style>
 #options-universe-activity {
@@ -268,6 +268,7 @@ $out = '<style>
 #una_info {
     background-color: #dff5d4;
     border: 1px solid #c1eab7;
+    margin: 5px 0;
     padding: 5px 12px;
 }
 </style>';

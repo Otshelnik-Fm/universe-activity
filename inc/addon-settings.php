@@ -34,6 +34,13 @@ function una_settings($options){
     }
 // END Настройки для Universe Activity Extended
 
+    if(!rcl_exist_addon('universe-activity-modal')){
+        $my_adv .= '<div id="una_info">Вы можете расширить базовые возможности "Universe Activity" <br/>установив дополнение <a href="https://codeseller.ru/products/universe-activity-modal/" title="Перейти к описанию" target="_blank">"Universe Activity Modal"</a></div>';
+    }
+    if(!rcl_exist_addon('universe-activity-comments')){
+        $my_adv .= '<div id="una_info">Вы можете расширить базовые возможности "Universe Activity" <br/>установив дополнение <a href="https://codeseller.ru/products/universe-activity-comments/" title="Перейти к описанию" target="_blank">"Universe Activity Comments"</a></div>';
+    }
+
     $options .= $opt->options(
         'Настройки Universe Activity',array(
         $opt->option_block(
