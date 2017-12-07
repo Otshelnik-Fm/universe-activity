@@ -8,12 +8,12 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 
 ## Demo:
 
-На [этой странице](http://across-ocean.otshelnik-fm.ru/top-secret-addons/) и там же примеры 
+На [этой странице](http://across-ocean.otshelnik-fm.ru/top-secret-addons/) и там же примеры  
 
-В [личном кабинете](https://otshelnik-fm.ru/author/otshelnik-fm/) - под дополнением "User Info Tab" 
-На [живом сайте](https://otshelnik-fm.ru/)
+В [личном кабинете](https://otshelnik-fm.ru/author/otshelnik-fm/) - под дополнением "User Info Tab"  
+На [живом сайте](https://otshelnik-fm.ru/)  
 
-Большой скрин: что видит [админ](http://across-ocean.otshelnik-fm.ru/wp-content/uploads/2017/07/snapshot.jpg) 
+Большой скрин: что видит [админ](http://across-ocean.otshelnik-fm.ru/wp-content/uploads/2017/07/snapshot.jpg)  
 
 ------------------------------
 
