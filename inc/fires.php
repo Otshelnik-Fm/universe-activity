@@ -327,6 +327,7 @@ function una_post_status($new_status, $old_status, $post){
     if($post->post_type === 'nav_menu_item') return false;                      // меню нам нафиг не надо
     if($post->post_type === 'customize_changeset') return false;                // а это кастомайзер - нам нафиг не надо
     if($post->post_type === 'oembed_cache') return false;                       // кеш оэмбеда - если в теле линк на ютуб например
+    if($post->post_type === 'custom_css') return false;                         // кастомные стили
 
     $post_author = $post->post_author;
 

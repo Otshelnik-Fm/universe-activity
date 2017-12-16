@@ -382,6 +382,11 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+= 2017-12-16 =
+v0.21   
+* Тип записи custom_css не учитывается в активности (это кастомные стили что ввели в новой версии ВП)
+
+
 = 2017-11-23 =
 v0.20.1  
 * Подправил еще стили для админки
@@ -545,4 +550,4 @@ v0.007
 * При возникновении проблемы, создайте соотвествующую тему на <a href="https://codeseller.ru/forum/product-15611/" target="_blank">форуме поддержки</a> товара
 * Если вам нужна доработка под ваши нужды - вы можете обратиться ко мне в <a href="https://codeseller.ru/author/otshelnik-fm/?tab=chat" target="_blank">ЛС</a> с техзаданием на платную доработку.
 
-Полный список моих работ опубликован <a href="http://across-ocean.otshelnik-fm.ru/" target="_blank">на моем демо-сайте</a> и в каталоге магазина <a href="https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products" target="_blank">CodeSeller.ru</a>
+Полный список моих работ опубликован <a href="https://otshelnik-fm.ru/all-my-addons-for-wp-recall/" target="_blank">моём сайте</a> и в каталоге магазина <a href="https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products" target="_blank">CodeSeller.ru</a>

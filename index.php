@@ -2,7 +2,7 @@
 /*
 
 ╔═╗╔╦╗╔═╗╔╦╗
-║ ║ ║ ╠╣ ║║║ http://otshelnik-fm.ru
+║ ║ ║ ╠╣ ║║║ https://otshelnik-fm.ru
 ╚═╝ ╩ ╚  ╩ ╩
 
 
