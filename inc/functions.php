@@ -101,8 +101,6 @@ function una_add_query_vars($vars){
     $vars[] = 'una_group_url';              // на группу
     $vars[] = 'una_prime_forum_url';        // на тему на Prime Forum
     $vars[] = 'una_prime_forum_topic_url';  // на сообщение на Prime Forum
-    $vars[] = 'una_asgrs_forum_url';        // на тему на Asgaros Forum
-    $vars[] = 'una_asgrs_forum_post_url';   // на сообщение на Asgaros Forum
     $vars[] = 'una_author';                 // на кабинет автора
 
     return $vars;
@@ -116,8 +114,6 @@ function una_catch_type_vars_link(){
     $una_group = get_query_var('una_group_url');
     $una_prime_forum = get_query_var('una_prime_forum_url');
     $una_prime_forum_topic = get_query_var('una_prime_forum_topic_url');
-    $una_asgrs_forum_topic = get_query_var('una_asgrs_forum_url');
-    $una_asgrs_forum_post_id = get_query_var('una_asgrs_forum_post_url');
     $una_author = get_query_var('una_author');
 
 
@@ -141,28 +137,6 @@ function una_catch_type_vars_link(){
     }
     else if(!empty( $una_prime_forum_topic )){
         $topic_link = pfm_get_post_permalink( intval($una_prime_forum_topic) );
-
-        wp_redirect($topic_link);
-        exit;
-    }
-    else if(!empty( $una_asgrs_forum_topic )){
-        global $asgarosforum;
-
-        $val = intval($una_asgrs_forum_topic);
-        $link = $asgarosforum->get_postlink($val,false);
-        $topic_link = htmlspecialchars_decode($link);
-
-        wp_redirect($topic_link);
-        exit;
-    }
-    else if(!empty( $una_asgrs_forum_post_id )){
-        global $asgarosforum,$wpdb;
-
-        $as_postid = intval($una_asgrs_forum_post_id);
-        $topic_id = $wpdb->get_var($wpdb->prepare("SELECT fp.parent_id FROM ".$wpdb->prefix."forum_posts AS fp LEFT JOIN ".$wpdb->prefix."forum_topics AS ft ON(fp.parent_id = ft.id) WHERE fp.id = %d ORDER BY date ASC", $as_postid));
-
-        $link = $asgarosforum->get_postlink($topic_id,$as_postid);
-        $topic_link = htmlspecialchars_decode($link);
 
         wp_redirect($topic_link);
         exit;

@@ -78,14 +78,21 @@ TODO:
 
 
 // подключим файлы
-require_once('inc/fires.php');                  // хуки
-require_once('inc/callbacks.php');              // колбэки
-require_once('inc/functions.php');              // все функции
-require_once('inc/integration.php');            // интеграции
-require_once('inc/addon-settings.php');         // настройки
-require_once('inc/class-una-query.php');        // класс регистрирущий нашу таблицу
-require_once('inc/class-una-shortcode.php');    // шорткод
+require_once 'inc/fires.php';                   // хуки
+require_once 'inc/callbacks.php';               // колбэки
+require_once 'inc/functions.php';               // все функции
+require_once 'inc/integration.php';             // интеграции
+require_once 'inc/addon-settings.php';          // настройки
+require_once 'inc/class-una-query.php';         // класс регистрирущий нашу таблицу
+require_once 'inc/class-una-shortcode.php';     // шорткод
 
 
+// интеграции
+if( class_exists('AsgarosForum') ){             // включен плагин Asgaros Forum https://wordpress.org/plugins/asgaros-forum/
+    require_once 'integration/plugin-asgaros.php';
+}
 
+if(rcl_exist_addon('rcl-asgaros')){             // включен доп Asgaros Forum + WP-Recall https://codeseller.ru/?p=13693
+    require_once 'integration/addon-asgaros-forum-to-wp-recall.php';
+}
 

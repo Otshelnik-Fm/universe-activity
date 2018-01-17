@@ -167,8 +167,8 @@ add_action('personal_options_update', 'una_change_user_status');
 
 // Поставил рейтинг
 function una_give_rating($data){
-    if($data['rating_type'] == 'review-content') return false; // рейтинг за отзыв не фиксируем
-    if($data['rating_type'] == 'smart-comment') return false; // рейтинг за smart-comment игнорим
+    if($data['rating_type'] == 'review-content') return false;  // рейтинг за отзыв не фиксируем
+    if($data['rating_type'] == 'smart-comment') return false;   // рейтинг за smart-comment игнорим
 
     $current_user = wp_get_current_user();
 
@@ -735,79 +735,6 @@ function una_del_avatar(){
     una_insert($args);
 }
 add_action('rcl_delete_avatar', 'una_del_avatar',10);
-
-
-
-
-// создал тему на Asgaros Forum
-function una_user_add_topic_asgaros($asf_post, $asf_topic){
-    global $asgarosforum;
-    $myTopic = $asgarosforum->getTopic($asf_topic);
-
-    $args['action'] = 'asgrs_add_topic';
-    $args['object_id'] = $asf_topic;
-    $args['object_name'] = $myTopic->name;
-    $args['object_type'] = 'asgaros_forum';
-
-    una_insert($args);
-}
-add_action('asgarosforum_after_add_thread_submit', 'una_user_add_topic_asgaros', 10, 2);
-
-
-
-
-
-// удалил тему на Asgaros Forum
-function una_user_del_topic_asgaros($topic_id){
-    global $wpdb, $user_ID;
-
-    $table = $wpdb->prefix.'otfm_universe_activity';
-    $topic_name = $wpdb->get_var($wpdb->prepare("SELECT object_name FROM $table WHERE action = 'asgrs_add_topic' AND object_type = 'asgaros_forum' AND object_id = %d", $topic_id));
-    if($topic_name){ // это значит создание топика было зафиксированно системой
-        $args['object_name'] = $topic_name;
-        // и поставим маркер что топик был удален:
-        $wpdb->update($table, // обновим строку
-            array('other_info' => 'del'),
-            array('action' => 'asgrs_add_topic', 'object_type' => 'asgaros_forum', 'object_id' => $topic_id)
-        );
-    } else { // если топик не найден в системе - запрашиваю из форума его название
-        global $asgarosforum;
-        $myTopic = $asgarosforum->getTopic($topic_id);
-        $args['object_name'] = $myTopic->name;
-    }
-
-
-    // а теперь создадим запись что топик выпилили
-    $topic_user_id = $wpdb->get_var($wpdb->prepare("SELECT author_id FROM ".$wpdb->prefix."forum_posts WHERE parent_id = %d ORDER BY date ASC", $topic_id));
-
-    if($topic_user_id != $user_ID){ // если удаляет топик не его автор
-        $userdata = get_userdata($topic_user_id);
-        $args['subject_id'] = $topic_user_id;
-        $args['other_info'] = $userdata->display_name;
-    }
-
-    $args['action'] = 'asgrs_del_topic';
-    $args['object_id'] = $topic_id;
-    $args['object_type'] = 'prime_forum';
-
-    una_insert($args);
-}
-add_action('asgarosforum_before_delete_topic', 'una_user_del_topic_asgaros');
-
-
-
-
-
-
-/*
-add_action('add_attachment', 'ual_shook_add_attachment');
-add_action('edit_attachment', 'ual_shook_edit_attachment');
-add_action('delete_attachment', 'ual_shook_delete_attachment');
-add_action('edit_comment', 'ual_shook_edit_comment');
-add_action('trash_comment', 'ual_shook_trash_comment');
-add_action('spam_comment', 'ual_shook_spam_comment');
-add_action('unspam_comment', 'ual_shook_unspam_comment');
- */
 
 
 
