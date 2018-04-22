@@ -241,17 +241,24 @@ class UNA_Shortcode {
         } else if($get_filter == 'subscriptions'){
             $attrs['include_actions'] = 'add_user_feed';
         }
+
+        if( !empty($get_filter) ){
+            $attrs['class'] .= ' una_wrapper_' . $get_filter . ' ';
+        } else {
+            $attrs['class'] .= ' una_wrapper_all ';
+        }
+
         return $attrs;
     }
 
 
     // подключим стили по переданному классу
     private function una_get_stylesheet_file($class){
-        if($class === 'una_zebra'){
+        if( strpos($class, 'una_zebra') !== false ){
             rcl_enqueue_style('una_zebra_style',rcl_addon_url('css/una_zebra.css', __FILE__));
-        } else if ($class === 'una_basic'){
+        } else if ( strpos($class, 'una_basic') !== false ){
             rcl_enqueue_style('una_basic_style',rcl_addon_url('css/una_basic.css', __FILE__));
-        } else if ($class === 'una_modern'){
+        } else if ( strpos($class, 'una_modern') !== false ){
             rcl_enqueue_style('una_modern_style',rcl_addon_url('css/una_modern.css', __FILE__));
         }
     }

@@ -320,6 +320,14 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 ------------------------------
 
 ## Changelog  
+**2018-04-22**  
+v0.23  
+* добавлены дополнительные классы оборачивающие главный контейнер:  
+Если ничего нету - добавляется класс una_wrapper_all  
+И если переходим по фильтру то соответственно: una_wrapper_publications, una_wrapper_comments, una_wrapper_ratings, una_wrapper_updates, una_wrapper_subscriptions  
+
+
+
 **2018-01-17**  
 v0.22  
 * Реорганизация файловой структуры. Была проблема - отключив плагин (пример: asgaros forum) события его работы продолжали выводиться  
