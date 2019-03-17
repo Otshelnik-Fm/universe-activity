@@ -10,19 +10,20 @@ class UNA_Insert_DB {
     // функция вставляет строку в БД (в fires.php)
     public function insert_db($argum){
         // предустановим некоторые аргументы
-        $args = wp_parse_args($argum,
-                              array(
-                                  'action'        => '',
-                                  'act_date'      => current_time('mysql'),
-                                  'object_id'     => '',
-                                  'object_name'   => '',
-                                  'object_type'   => '',
-                                  'subject_id'    => '',
-                                  'other_info'    => '',
-                                  'user_ip'       => $this->una_get_ip(),
-                              )
-                            );
-        // чтобы в каждой функции не передавать ID юзера:
+        $args = wp_parse_args( $argum, array(
+			'action'		 => '',
+			'act_date'		 => current_time( 'mysql' ),
+			'object_id'		 => '',
+			'object_name'	 => '',
+			'object_type'	 => '',
+			'subject_id'	 => '',
+			'other_info'	 => '',
+			'user_ip'		 => $this->una_get_ip(),
+			'hide'			 => '',
+			'group_id'		 => '',
+			)
+		);
+		// чтобы в каждой функции не передавать ID юзера:
         if ( empty($args['user_id']) ){
             $cur_user_id = get_current_user_id();
             if ( empty($cur_user_id) ){
@@ -39,21 +40,21 @@ class UNA_Insert_DB {
 
         // всё ок, вставляем
         $wpdb->insert(
-            $wpdb->prefix . "otfm_universe_activity",
-            array(
-                'user_id'       => $args['user_id'],
-                'action'        => $args['action'],
-                'act_date'      => $args['act_date'],
-                'object_id'     => $args['object_id'],
-                'object_name'   => $args['object_name'],
-                'object_type'   => $args['object_type'],
-                'subject_id'    => $args['subject_id'],
-                'other_info'    => $args['other_info'],
-                'user_ip'       => $args['user_ip'],
-            ),
-            array('%d', '%s', '%s', '%d', '%s', '%s', '%d', '%s', '%s')
-        );
-    }
+			$wpdb->prefix . "otfm_universe_activity", array(
+			'user_id'		 => $args['user_id'],
+			'action'		 => $args['action'],
+			'act_date'		 => $args['act_date'],
+			'object_id'		 => $args['object_id'],
+			'object_name'	 => $args['object_name'],
+			'object_type'	 => $args['object_type'],
+			'subject_id'	 => $args['subject_id'],
+			'other_info'	 => $args['other_info'],
+			'user_ip'		 => $args['user_ip'],
+			'hide'			 => $args['hide'],
+			'group_id'		 => $args['group_id'],
+			), array( '%d', '%s', '%s', '%d', '%s', '%s', '%d', '%s', '%s', '%d', '%d' )
+		);
+	}
 
 
     // получим ip
@@ -95,6 +96,8 @@ class UNA_Insert_DB {
                         AND `subject_id` = '%d'
                         AND `other_info` = '%s'
                         AND `user_ip` = '%s'
+						AND `hide` = '%d'
+						AND `group_id` = '%d'
                 ;",
                 $args['user_id'],
                 $args['action'],
@@ -104,7 +107,9 @@ class UNA_Insert_DB {
                 $args['object_type'],
                 $args['subject_id'],
                 $args['other_info'],
-                $args['user_ip']
+                $args['user_ip'],
+				$args['hide'],
+				$args['group_id']
             )
         );
         

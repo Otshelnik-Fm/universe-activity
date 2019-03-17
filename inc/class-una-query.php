@@ -21,7 +21,9 @@ class UNA_Activity_Query extends Rcl_Query {
                 'object_type',
                 'subject_id',
                 'other_info',
-                'user_ip'
+                'user_ip',
+				'hide',
+				'group_id'
             )
         );
 

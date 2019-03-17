@@ -64,7 +64,7 @@
 }
 .una_one_user .una_item_timeline::after {
     color: grey;
-    font-family: fontawesome;
+    font-family: rcl-awesome;
     font-size: 14px;
     left: -12px;
     line-height: 14px;

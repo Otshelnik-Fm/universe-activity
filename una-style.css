@@ -88,6 +88,9 @@
     font-size: 11px;
     padding: 0 8px 0 0;
 }
+.una_content {
+    flex-grow: 1;
+}
 .universe_userlist .una_author_name {
     margin: 0 5px 0 0;
 }
@@ -96,6 +99,9 @@
 }
 .universe_userlist .una_action {
     text-transform: lowercase;
+}
+.una_subject {
+    text-transform: none;
 }
 .una_post_status {
     color: #999;
@@ -119,15 +125,19 @@
 .una_goto_comments .fa {
     margin: 0 0 0 3px;
 }
+.una_sbt_del_subs .una_author_name::after,
+.una_sbt_add_subs .una_author_name::after,
+.una_bui_get_info .una_author_name::after,
 .una_change_status .una_author_name::after {
     content: "";
 }
 .universe_userlist .una_author_name:empty {
     display: none;
 }
-.una_user_status {
+.una_user_status > div {
     background-color: #f5f5f5;
     border: 1px solid #e5e5e5;
+    display: inline-block;
     margin: 5px;
     padding: 5px 10px;
 }

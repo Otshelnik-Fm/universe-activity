@@ -14,6 +14,68 @@ function una_insert($args){
 }
 
 
+// обновление в строке
+function una_update( $data, $where, $format = null, $where_format = null ) {
+	global $wpdb;
+
+	$res = $wpdb->update(
+		UNA_DB, $data, $where, $format, $where_format
+	);
+
+	return $res;
+}
+
+
+// получим значение ячейки
+function una_get_var( $sql, $var ) {
+	global $wpdb;
+
+	$res = $wpdb->get_var( $wpdb->prepare( $sql, $var ) );
+
+	return $res;
+}
+
+
+// получаем данные группы, которой принадлежит публикация
+function una_get_group_by_post( $post_id ) {
+	if ( !rcl_exist_addon( 'groups' ) )
+		return false;
+
+	$groups = get_the_terms( $post_id, 'groups' );
+	if ( !$groups )
+		return false;
+
+	foreach ( $groups as $group ) {
+		if ( $group->parent != 0 )
+			continue;
+		return $group;
+	}
+
+	return false;
+}
+
+
+// роль пользователя в группе
+function una_group_user_role_name( $role ) {
+    $role_human = '';
+    switch ( $role ) {
+        case 'reader':
+            $role_human = 'читатель';
+            break;
+        case 'author':
+            $role_human = 'автор';
+            break;
+        case 'moderator':
+            $role_human = 'модератор';
+            break;
+        case 'admin':
+            $role_human = 'администратор';
+            break;
+    }
+	return $role_human;
+}
+
+
 // зарегистрированные типы событий и их доступы и обработчики
 function una_register_type_callback(){
     if( !class_exists('UNA_Register_Type_Callback') ){
