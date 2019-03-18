@@ -117,7 +117,7 @@ function una_delete_userdata_activity( $user_id ) {
     una_insert( $args );
 
     global $wpdb;
-    $wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "otfm_universe_activity WHERE user_id = '%d'", $user_id ) );
+    $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE user_id = '%d'", $user_id ) );
 }
 
 // Юзер обновил настройки профиля.
@@ -145,8 +145,7 @@ function una_change_user_status( $user_id ) {
     $input_description      = sanitize_textarea_field( $_POST['description'] );
     $input_description_hash = wp_hash( $input_description );
 
-    $table        = $wpdb->prefix . 'otfm_universe_activity';
-    $current_hash = $wpdb->get_var( $wpdb->prepare( "SELECT other_info FROM $table WHERE action = 'change_status' AND user_id = %d ORDER BY act_date DESC", $user_id ) );
+    $current_hash = $wpdb->get_var( $wpdb->prepare( "SELECT other_info FROM " . UNA_DB . " WHERE action = 'change_status' AND user_id = %d ORDER BY act_date DESC", $user_id ) );
 
     // нет еще в событиях строки. Создадим его
     if ( empty( $current_hash ) ) {
@@ -163,7 +162,7 @@ function una_change_user_status( $user_id ) {
 
         // обновим строку
         $wpdb->update(
-            $table, array( 'other_info' => $input_description_hash, 'act_date' => current_time( 'mysql' ) ), array( 'user_id' => $user_id, 'action' => 'change_status' )
+            UNA_DB, array( 'other_info' => $input_description_hash, 'act_date' => current_time( 'mysql' ) ), array( 'user_id' => $user_id, 'action' => 'change_status' )
         );
     }
 }
@@ -233,8 +232,7 @@ add_action( 'rcl_delete_rating', 'una_delete_rating' );
 function una_delete_rating( $data ) {
     global $wpdb;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-    $wpdb->query( $wpdb->prepare( "DELETE FROM " . $table . " WHERE user_id = '%d' AND action = '%s' AND object_id = '%d' ", $data['user_id'], "give_rating_" . $data['rating_type'], $data['object_id'] ) );
+    $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE user_id = '%d' AND action = '%s' AND object_id = '%d' ", $data['user_id'], "give_rating_" . $data['rating_type'], $data['object_id'] ) );
 }
 
 // оставил комментарий
@@ -300,8 +298,8 @@ function una_approved_comment( $new_status, $old_status, $comment ) {
         return false;
 
     global $wpdb;
-    $table  = $wpdb->prefix . 'otfm_universe_activity'; // получим значение колонки other_info:
-    $status = $wpdb->get_var( $wpdb->prepare( "SELECT other_info FROM $table WHERE action = 'add_comment' AND object_type = 'comment' AND object_id = %d", $comment->comment_ID ) );
+    // получим значение колонки other_info:
+    $status = $wpdb->get_var( $wpdb->prepare( "SELECT other_info FROM " . UNA_DB . " WHERE action = 'add_comment' AND object_type = 'comment' AND object_id = %d", $comment->comment_ID ) );
 
     $other = unserialize( $status );
 
@@ -316,7 +314,7 @@ function una_approved_comment( $new_status, $old_status, $comment ) {
         $other['st']    = $new_status;                  // заменим его на новый
         $serializedData = serialize( $other );          // упакуем
 
-        $wpdb->update( $table, // и обновим данные в колонке
+        $wpdb->update( UNA_DB, // и обновим данные в колонке
                        array( 'other_info' => $serializedData ), array( 'action' => 'add_comment', 'object_type' => 'comment', 'object_id' => $comment->comment_ID )
         );
     }
@@ -327,8 +325,7 @@ add_action( 'delete_comment', 'una_delete_comment' );
 function una_delete_comment( $id ) {
     global $wpdb;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-    $wpdb->query( $wpdb->prepare( "DELETE FROM " . $table . " WHERE (action = 'add_comment' OR action = 'reply_comment') AND object_id = '%d' ", $id ) );
+    $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE (action = 'add_comment' OR action = 'reply_comment') AND object_id = '%d' ", $id ) );
 }
 
 /*
@@ -399,10 +396,8 @@ function una_post_status( $new_status, $old_status, $post ) {
     else if ( $old_status == 'draft' && $new_status == 'pending' || $old_status == 'draft' && $new_status == 'publish' ) {
         global $wpdb;
 
-        $table = $wpdb->prefix . 'otfm_universe_activity';
-
         // добавим флаг pending и сменим на add_post
-        $res = $wpdb->delete( $table, array( 'user_id' => $post_author, 'object_id' => $post->ID, 'action' => 'add_draft' ) );
+        $res = $wpdb->delete( UNA_DB, array( 'user_id' => $post_author, 'object_id' => $post->ID, 'action' => 'add_draft' ) );
 
         if ( isset( $res ) ) { // ответ 0 строк или > 0
             return true; // все прошло хорошо - обновили данные. Остановим скрипт
@@ -500,8 +495,7 @@ function una_delete_post_in_table( $postid ) {
 
     $post_type = get_post_field( 'post_type', $postid );
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-    $wpdb->query( $wpdb->prepare( "DELETE FROM " . $table . " WHERE object_type = '%s' AND object_id = '%d' AND action != 'delete_post_fully' ", $post_type, $postid ) );
+    $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE object_type = '%s' AND object_id = '%d' AND action != 'delete_post_fully' ", $post_type, $postid ) );
 }
 
 // подписка на юзера (доп FEED)
@@ -509,13 +503,11 @@ add_action( 'rcl_insert_feed_data', 'una_add_user_feed', 10, 2 );
 function una_add_user_feed( $feed_id, $argums ) {
     global $wpdb;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-
-    $res = $wpdb->update( $table, // обновим строку
+    $res = $wpdb->update( UNA_DB, // обновим строку
                           array( 'act_date' => current_time( 'mysql' ) ), array( 'user_id' => $argums['user_id'], 'action' => 'add_user_feed', 'subject_id' => $argums['object_id'] )
     );
     if ( $res > 0 ) { // были обновлены строки
-        $wpdb->query( $wpdb->prepare( "DELETE FROM " . $table . " WHERE action = 'del_user_feed' AND user_id = '%d' AND subject_id = '%d'", $argums['user_id'], $argums['object_id'] ) );
+        $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE action = 'del_user_feed' AND user_id = '%d' AND subject_id = '%d'", $argums['user_id'], $argums['object_id'] ) );
     } else {
         $userdata = get_userdata( $argums['object_id'] );
 
@@ -548,13 +540,11 @@ add_action( 'add_user_blacklist', 'una_add_user_blacklist' );
 function una_add_user_blacklist( $subject_id ) {
     global $wpdb, $user_ID;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-
-    $res = $wpdb->update( $table, // обновим строку
+    $res = $wpdb->update( UNA_DB, // обновим строку
                           array( 'act_date' => current_time( 'mysql' ) ), array( 'user_id' => $user_ID, 'action' => 'add_user_blacklist', 'subject_id' => $subject_id )
     );
     if ( $res > 0 ) { // были обновлены строки
-        $wpdb->query( $wpdb->prepare( "DELETE FROM " . $table . " WHERE action = 'del_user_blacklist' AND user_id = '%d' AND subject_id = '%d'", $user_ID, $subject_id ) );
+        $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE action = 'del_user_blacklist' AND user_id = '%d' AND subject_id = '%d'", $user_ID, $subject_id ) );
     } else { // нет у нас такой строки - значит создадим
         $userdata = get_userdata( $subject_id );
 
@@ -568,7 +558,7 @@ function una_add_user_blacklist( $subject_id ) {
     }
 }
 
-// отписался от юзера 
+// отписался от юзера
 add_action( 'remove_user_blacklist', 'una_del_user_blacklist' );
 function una_del_user_blacklist( $subject_id ) {
     global $user_ID;
@@ -606,14 +596,12 @@ add_action( 'rcl_pre_delete_group', 'una_delete_group' );
 function una_delete_group( $term_id ) {
     global $wpdb, $user_ID;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-
-    $group_name = $wpdb->get_var( $wpdb->prepare( "SELECT object_name FROM $table WHERE action = 'create_group' AND object_type = 'group' AND object_id = %d", $term_id ) );
+    $group_name = $wpdb->get_var( $wpdb->prepare( "SELECT object_name FROM " . UNA_DB . " WHERE action = 'create_group' AND object_type = 'group' AND object_id = %d", $term_id ) );
     if ( $group_name ) { // это значит создание группы было зафиксированно системой
         $args['object_name'] = $group_name;
 
         // и поставим маркер что группа была удалена:
-        $wpdb->update( $table, // обновим строку
+        $wpdb->update( UNA_DB, // обновим строку
                        array( 'other_info' => 'del' ), array( 'action' => 'create_group', 'object_type' => 'group', 'object_id' => $term_id )
         );
     }
@@ -769,12 +757,11 @@ add_action( 'pfm_pre_delete_topic', 'una_user_del_topic' );
 function una_user_del_topic( $topic_id ) {
     global $wpdb, $user_ID;
 
-    $table      = $wpdb->prefix . 'otfm_universe_activity';
-    $topic_name = $wpdb->get_var( $wpdb->prepare( "SELECT object_name FROM $table WHERE action = 'pfm_add_topic' AND object_type = 'prime_forum' AND object_id = %d", $topic_id ) );
+    $topic_name = $wpdb->get_var( $wpdb->prepare( "SELECT object_name FROM " . UNA_DB . " WHERE action = 'pfm_add_topic' AND object_type = 'prime_forum' AND object_id = %d", $topic_id ) );
     if ( $topic_name ) { // это значит создание топика было зафиксированно системой
         $args['object_name'] = $topic_name;
         // и поставим маркер что топик был удален:
-        $wpdb->update( $table, // обновим строку
+        $wpdb->update( UNA_DB, // обновим строку
                        array( 'other_info' => 'del' ), array( 'action' => 'pfm_add_topic', 'object_type' => 'prime_forum', 'object_id' => $topic_id )
         );
     } else { // если топик не найден в системе - запрашиваю из форума его название
@@ -802,10 +789,9 @@ add_action( 'rcl_cover_upload', 'una_add_cover', 10 );
 function una_add_cover() {
     global $wpdb, $user_ID;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-    $cover = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM $table WHERE action = 'add_cover' AND object_type = 'user' AND user_id = %d", $user_ID ) );
+    $cover = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM " . UNA_DB . " WHERE action = 'add_cover' AND object_type = 'user' AND user_id = %d", $user_ID ) );
     if ( $cover ) { // это значит что обложка уже зафиксирована системой
-        $wpdb->update( $table, // обновим дату
+        $wpdb->update( UNA_DB, // обновим дату
                        array( 'act_date' => current_time( 'mysql' ) ), array( 'action' => 'add_cover', 'object_type' => 'user', 'user_id' => $user_ID )
         );
     } else {
@@ -822,10 +808,9 @@ add_action( 'rcl_avatar_upload', 'una_add_avatar', 10 );
 function una_add_avatar() {
     global $wpdb, $user_ID;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-    $ava   = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM $table WHERE action = 'add_avatar' AND object_type = 'user' AND user_id = %d", $user_ID ) );
+    $ava = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM " . UNA_DB . " WHERE action = 'add_avatar' AND object_type = 'user' AND user_id = %d", $user_ID ) );
     if ( $ava ) { // это значит что ава уже зафиксирована системой
-        $wpdb->update( $table, // обновим дату
+        $wpdb->update( UNA_DB, // обновим дату
                        array( 'act_date' => current_time( 'mysql' ) ), array( 'action' => 'add_avatar', 'object_type' => 'user', 'user_id' => $user_ID )
         );
     } else {
@@ -842,14 +827,15 @@ add_action( 'rcl_delete_avatar', 'una_del_avatar', 10 );
 function una_del_avatar() {
     global $wpdb, $user_ID;
 
-    $table = $wpdb->prefix . 'otfm_universe_activity';
-    $id    = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $table WHERE action = 'add_avatar' AND object_type = 'user' AND user_id = %d ORDER BY act_date DESC", $user_ID ) );
-    if ( $id ) { // есть строка
-        $wpdb->delete( $table, array( 'id' => $id ) // удалим строку по id
-        );
-        $wpdb->delete( $table, array( 'action' => 'del_avatar', 'object_type' => 'user', 'user_id' => $user_ID ) // удалим строку по id
-        );
+    $id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM " . UNA_DB . " WHERE action = 'add_avatar' AND object_type = 'user' AND user_id = %d ORDER BY act_date DESC", $user_ID ) );
+    // есть строка
+    if ( $id ) {
+        // удалим строку по id
+        $wpdb->delete( UNA_DB, array( 'id' => $id ) );
+        // удалим строку по id
+        $wpdb->delete( UNA_DB, array( 'action' => 'del_avatar', 'object_type' => 'user', 'user_id' => $user_ID ) );
     }
+
     $args['user_id']     = $user_ID;
     $args['action']      = 'del_avatar';
     $args['object_type'] = 'user';

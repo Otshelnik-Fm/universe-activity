@@ -94,7 +94,7 @@ function una_define_constant() {
 
     global $wpdb;
 
-    define( 'UNA_DB', $wpdb->prefix . 'otfm_universe_activity' );
+    define( 'UNA_DB', $wpdb->base_prefix . 'otfm_universe_activity' );
 }
 
 // подключим файлы
