@@ -100,6 +100,7 @@
 .universe_userlist .una_action {
     text-transform: lowercase;
 }
+.una_group_name,
 .una_subject {
     text-transform: none;
 }
