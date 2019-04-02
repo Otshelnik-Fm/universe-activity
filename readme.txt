@@ -82,7 +82,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp; Причём для групп пишет: <code>Otshelnik-Fm в группе "Приют Отшельника", подписался на комментарии к записи: Кукла (The Inhabitant)(2016)</code>
         &nbsp;&nbsp;&nbsp;&nbsp; удалил подписку на комментарии записей или форума (событие видит админ)  
     * сменил урл кабинета (событие видит админ)(доп Pretty URL Author)  
-    * поддержка событий дополнений Групп (Group Recall):  
+    * поддержка событий дополнения Групп (Group Recall):  
         &nbsp;&nbsp;&nbsp;&nbsp; ловим создание новой группы  
         &nbsp;&nbsp;&nbsp;&nbsp; удаление группы (админка)  
         &nbsp;&nbsp;&nbsp;&nbsp; при удалении группы на строчку созданной группы вешаем маркер del - и наша система не будет на нее давать ссылку  
@@ -94,6 +94,11 @@
     * установил или сменил статус группы (событие видят все)(доп Groups Theme RePlace)  
     * установил или сменил аватарку группы (событие видят все)(доп Groups Theme RePlace)  
     * установил или сменил обложку группы (событие видят все)(доп Groups Theme RePlace)  
+    * поддержка событий дополнения Подписок на новые записи группы (Group New Post Notify):  
+        &nbsp;&nbsp;&nbsp;&nbsp; подписался на уведомления о новых записях группы (событие видит автор)  
+        &nbsp;&nbsp;&nbsp;&nbsp; изменил тип уведомлений подписки (событие видит автор)  
+        &nbsp;&nbsp;&nbsp;&nbsp; удалил подписку (событие видит автор)  
+
 
 <hr style="border: 1px solid #ddd;">
 
@@ -472,6 +477,33 @@
 </tbody></table>
 
 
+<strong>Group New Post Notify</strong>
+
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
+<thead><tr>
+<th>slug</th>
+<th>действие</th>
+<th>привилегия</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>add_group_notify</td>
+<td>подписался на уведомления о новых записях группы</td>
+<td>автор</td>
+</tr>
+<tr>
+<td>change_group_notify</td>
+<td>изменил тип уведомлений подписки</td>
+<td>автор</td>
+</tr>
+<tr>
+<td>del_group_notify</td>
+<td>удалил подписку</td>
+<td>автор</td>
+</tr>
+</tbody></table>
+
+
 <strong>Groups Theme RePlace</strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
@@ -715,6 +747,20 @@
 <td>del_avatar</td>
 <td>когда он удалил свой аватар (локальный, не граватар)</td>
 </tr>
+
+<tr>
+<td>add_group_notify</td>
+<td>подписался на уведомления о новых записях группы (Group New Post Notify)</td>
+</tr>
+<tr>
+<td>change_group_notify</td>
+<td>изменил тип уведомлений подписки (Group New Post Notify)</td>
+</tr>
+<tr>
+<td>del_group_notify</td>
+<td>удалил подписку (Group New Post Notify)</td>
+</tr>
+
 </tbody></table> 
 
 <h4>Админ видит: все что выше, плюс:</h4>
@@ -972,6 +1018,11 @@ db_version = '1.1.0':
 установил или сменил аватарку группы (событие видят все)
 установил или сменил обложку группы (событие видят все)
 
+
+Добавлена поддержка событий дополнения Group New Post Notify:  
+подписался на уведомления о новых записях группы (событие видит автор)  
+изменил тип уведомлений подписки (событие видит автор)  
+удалил подписку (событие видит автор)  
 
 
 = 2018-04-22 =

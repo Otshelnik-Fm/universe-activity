@@ -154,5 +154,9 @@ if ( rcl_exist_addon( 'groups-theme-replace' ) ) {
     require_once 'integration/addon-groups-theme-replace.php';
 }
 
+// доп "Group New Post Notify"
+if ( rcl_exist_addon( 'group-new-post-notify' ) ) {
+    require_once 'integration/addon-group-new-post-notify.php';
+}
 
 
