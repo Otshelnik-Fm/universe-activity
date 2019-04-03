@@ -13,7 +13,7 @@ class UNA_Shortcode {
     function __construct() {
         do_action( 'una_start_shortcode' );     // маяк - шорткод в работе
         require_once('class-una-get-db.php');   // получение из базы
-        rcl_enqueue_style( 'una_style', rcl_addon_url( 'una-style.css', __FILE__ ) );
+        rcl_enqueue_style( 'una_style', rcl_addon_url( 'css/una_core_style.css', __FILE__ ) );
     }
 
     // главная ф-ция - принимает по атрибутам и погнали
