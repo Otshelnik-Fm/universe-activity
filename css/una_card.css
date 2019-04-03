@@ -1,0 +1,81 @@
+.una_card #una_head {
+    color: #777;
+    float: right;
+    margin: 6px 0 0;
+}
+.una_card .una_timeline_box {
+    line-height: normal;
+}
+.una_card .una_date {
+    border: none;
+    color: #777;
+    font-size: 18px;
+    padding: 6px 0 6px 18px;
+}
+.una_card .una_item_timeline {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    margin: 0 0 12px;
+}
+.una_card div.una_author {
+    align-self: flex-start;
+    flex-shrink: 0;
+    height: 54px;
+    margin: 48px -6px 12px 12px;
+    width: 54px;
+    z-index: 2;
+}
+.una_card .una_author img {
+    height: 100%;
+    width: 100%;
+}
+.una_card .una_time {
+    left: 24px;
+    line-height: normal;
+    position: absolute;
+    top: 18px;
+}
+.una_card .una_content {
+    font-size: 14px;
+    width: 100%;
+}
+.una_card .una_content > span {
+    color: #333;
+}
+.una_card span.una_author_name {
+    color: #777;
+    font-size: 16px;
+    left: 72px;
+    line-height: normal;
+    margin: 12px 0 0 0;
+    padding: 3px 0;
+    position: absolute;
+    top: 0;
+}
+.una_avatar {
+    display: block;
+    padding: 6px;
+}
+.una_card div.una_right {
+    align-items: center;
+    background-color: #f4f9f8;
+    border: 1px solid #e8e8e8;
+    margin: 48px 12px 12px 0;
+    min-height: 30px;
+    overflow: hidden;
+    padding: 6px 12px 6px 18px;
+}
+.una_card .unac_comm_content {
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 12px 0 18px;
+    padding: 0;
+    width: 100%;
+}
+.una_card .una_goto_comments {
+    margin: 0 0 3px -6px;
+    padding: 0;
+}
+.una_card .unac_name_post {
+    font-weight: 500;
+}

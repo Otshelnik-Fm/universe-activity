@@ -11,7 +11,7 @@ class UNA_Shortcode {
     public $una_Date;
 
     function __construct() {
-        do_action( 'una_start_shortcode' );       // маяк - шорткод в работе
+        do_action( 'una_start_shortcode' );     // маяк - шорткод в работе
         require_once('class-una-get-db.php');   // получение из базы
         rcl_enqueue_style( 'una_style', rcl_addon_url( 'una-style.css', __FILE__ ) );
     }
@@ -205,8 +205,10 @@ class UNA_Shortcode {
 
     // кнопки фильтра
     private function una_filter() {
-        $cur_url = $_SERVER['REQUEST_URI'];                                     // текущий урл
-        if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['tab_url'] ) ) {  // если мы в лк - вкладка грузится ajax-ом
+        // текущий урл
+        $cur_url = $_SERVER['REQUEST_URI'];
+        // если мы в лк - вкладка грузится ajax-ом
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['tab_url'] ) ) {
             $cur_url = $_POST['tab_url'];
         }
 
@@ -267,6 +269,8 @@ class UNA_Shortcode {
             rcl_enqueue_style( 'una_basic_style', rcl_addon_url( 'css/una_basic.css', __FILE__ ) );
         } else if ( strpos( $class, 'una_modern' ) !== false ) {
             rcl_enqueue_style( 'una_modern_style', rcl_addon_url( 'css/una_modern.css', __FILE__ ) );
+        } else if ( strpos( $class, 'una_card' ) !== false ) {
+            rcl_enqueue_style( 'una_card_style', rcl_addon_url( 'css/una_card.css', __FILE__ ) );
         }
     }
 
