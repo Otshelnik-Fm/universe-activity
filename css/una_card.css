@@ -52,10 +52,6 @@
     position: absolute;
     top: 0;
 }
-.una_avatar {
-    display: block;
-    padding: 6px;
-}
 .una_card div.una_right {
     align-items: center;
     background-color: #f4f9f8;

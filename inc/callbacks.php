@@ -200,7 +200,7 @@ function una_get_add_comment( $data ) {
     if ( $other['st'] == 1 ) { // комментарий опубликован, одобрен и есть на сайте
         $go_to = '<div class="una_goto_comments">';
         $go_to .= '<a href="/?una_comment_id=' . $data['object_id'] . '" title="Перейти" rel="nofollow">';
-        $go_to .= '<span>Прочитать комментарий</span><i class="fa fa-angle-double-right" aria-hidden="true"></i>';
+        $go_to .= '<span>Прочитать комментарий</span><i class="rcli fa-angle-double-right" aria-hidden="true"></i>';
         $go_to .= '</a>';
         $go_to .= '</div>';
     } else {

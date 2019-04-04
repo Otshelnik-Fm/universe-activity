@@ -310,7 +310,7 @@ function una_manual_start( $class ) {
     } else if ( $class === 'una_modern' ) {
         rcl_enqueue_style( 'una_modern_style', rcl_addon_url( 'css/una_modern.css', __FILE__ ) );
     } else if ( $class === 'author_lk' ) {
-        rcl_enqueue_style( 'una_modern_style', rcl_addon_url( 'css/una_one_user.css', __FILE__ ) );
+        rcl_enqueue_style( 'una_one_user_style', rcl_addon_url( 'css/una_one_user.css', __FILE__ ) );
     } else if ( $class === 'una_card' ) {
         rcl_enqueue_style( 'una_card_style', rcl_addon_url( 'css/una_card.css', __FILE__ ) );
     }

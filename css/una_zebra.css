@@ -1,11 +1,6 @@
-.una_zebra .una_item_timeline.una_even {
-    background-color: rgb(235, 235, 235);
-}
 .una_zebra .una_item_timeline {
-    background-color: rgb(245, 245, 245);
-    margin: 0;
-    padding: 5px;
+    padding: 12px;
 }
-.una_zebra .una_item_timeline .una_author {
-    background-color: #ddd;
+.una_zebra .una_item_timeline.una_even {
+    background-color: #eaeaea;
 }

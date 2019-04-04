@@ -1,49 +1,56 @@
+.una_adv {
+    margin: 0 0 18px;
+}
+.una_adv a,
+.una_adv img {
+    display: flex;
+}
 .una_adv:empty {
     display: none;
-}
-.una_basic .una_adv {
-    margin: 0 0 0 30px;
-}
-.una_modern .una_adv {
-    margin: 0 8px 0 24px;
 }
 .una_adv > a img:hover {
     filter: contrast(1.4);
     opacity: 0.9;
 }
 .una_data_not_found {
-    background: #fce6db;
-    padding: 10px;
+    background-color: #fce6db;
+    padding: 12px;
     text-align: center;
 }
 .universe_userlist {
-    padding: 10px 5px;
+    font-size: 16px;
+    line-height: normal;
+    padding: 12px 6px;
     position: relative;
 }
 #una_filters {
-    margin: 5px 0 10px;
+    display: flex;
+    margin: 6px 0 12px;
 }
 #una_filters a {
-    display: inline-block;
     margin: 0 3px 0 0;
-    padding: 8px 10px;
+    padding: 9px 12px;
 }
-.una_header span:first-child {
+.una_header {
+    line-height: 1;
+    margin: 0 0 12px;
+}
+.una_header span {
     padding: 0 3px 0 0;
 }
 #universe_visible:empty {
     opacity: 0;
     top: 0;
+    z-index: -1;
 }
 #universe_visible {
     align-items: center;
     background-color: #cad9e7;
     color: #000;
     display: flex;
-    font-size: 16px;
-    height: 40px;
+    height: 42px;
     justify-content: center;
-    margin: 0 0 0 -35px;
+    margin: 0 0 0 -12px;
     opacity: 1;
     position: fixed;
     top: 36px;
@@ -53,22 +60,20 @@
 }
 .una_date {
     border-top: 1px solid #e5e5e5;
-    font-size: 16px;
-    padding: 10px 0 0;
+    padding: 12px 0;
 }
 .una_item_timeline {
     align-items: center;
     display: flex;
-    line-height: normal;
-    margin: 15px 0;
+    margin: 0 0 18px 6px;
     position: relative;
 }
 .una_item_timeline .una_author {
     background-color: #e5e5e5;
-    height: 32px;
-    min-width: 32px;
+    height: 36px;
+    min-width: 36px;
     overflow: hidden;
-    width: 32px;
+    width: 36px;
 }
 .una_author img {
     border: none;
@@ -79,23 +84,36 @@
 }
 .una_item_timeline .una_right {
     display: flex;
-    padding: 0 8px;
+    padding: 0 12px;
     width: 100%;
 }
 .una_time {
     align-self: center;
     color: #777;
     font-size: 11px;
-    padding: 0 8px 0 0;
+    padding: 0 12px 0 0;
 }
 .una_content {
     flex-grow: 1;
 }
+.una_avatar {
+    display: block;
+    margin: 6px 6px 6px 18px;
+}
 .universe_userlist .una_author_name {
-    margin: 0 5px 0 0;
+    margin: 0 6px 0 0;
+}
+.universe_userlist .una_author_name:empty {
+    display: none;
 }
 .universe_userlist .una_author_name::after {
     content: ":";
+}
+.una_sbt_del_subs .una_author_name::after,
+.una_sbt_add_subs .una_author_name::after,
+.una_bui_get_info .una_author_name::after,
+.una_change_status .una_author_name::after {
+    content: "";
 }
 .universe_userlist .una_action {
     text-transform: lowercase;
@@ -107,10 +125,10 @@
 .una_post_status {
     color: #999;
     font-size: 11px;
-    margin: 0 0 0 8px;
+    margin: 0 0 0 6px;
 }
 .una_post_status.una_st_spam {  /*spam comment*/
-    color: red;
+    color: #f05151;
 }
 .una_post_status.una_st_0 {     /*pending comment*/
     color: #e19201;
@@ -119,46 +137,53 @@
     position: relative;
 }
 .una_goto_comments {
-    font-size: 12px;
-    line-height: 1;
-    padding: 0 0 0 43px;
+    font-size: 14px;
+    padding: 6px 0 6px 42px;
 }
-.una_goto_comments .fa {
-    margin: 0 0 0 3px;
+.una_goto_comments > a {
+    align-items: center;
+    display: flex;
 }
-.una_sbt_del_subs .una_author_name::after,
-.una_sbt_add_subs .una_author_name::after,
-.una_bui_get_info .una_author_name::after,
-.una_change_status .una_author_name::after {
-    content: "";
+.una_goto_comments > a:hover {
+    text-decoration: none;
 }
-.universe_userlist .una_author_name:empty {
-    display: none;
+.una_goto_comments > a span {
+	border-bottom: 1px dashed #ccc;
+}
+.una_goto_comments > a span:hover {
+	border-bottom-color: #555;
+}
+.una_goto_comments .rcli {
+    margin: 0 0 0 6px;
 }
 .una_user_status > div {
     background-color: #f5f5f5;
     border: 1px solid #e5e5e5;
     display: inline-block;
-    margin: 5px;
-    padding: 5px 10px;
+    margin: 6px 18px;
+    padding: 6px 12px;
 }
 .una_rating_plus {
     color: #3ad11f;
 }
 .una_rating_minus {
-    color: #ff6262;
+    color: #f05151;
+}
+.una_admin_dashboard #universe_visible {
+    margin-left: -18px;
+    top: 32px;
 }
 .una_admin_dashboard .una_item_timeline {
     overflow: hidden;
 }
 .una_admin_dashboard .una_header {
-    font-size: 15px;
     float: right;
+    font-size: 14px;
     margin: -20px 0 0;
 }
 /* una comment */
 .unac_comm_content {
     border-left: 3px solid #ddd;
-    padding: 0 10px;
     margin: 5px 0;
+    padding: 0 10px;
 }
