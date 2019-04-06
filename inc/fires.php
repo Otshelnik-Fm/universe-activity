@@ -185,10 +185,22 @@ function una_give_rating( $data ) {
         $args['object_name'] = get_the_title( $data['object_id'] );
     }
 
-    // рейтинг за комментарий групп
+    // рейтинг за запись групп
     if ( $data['rating_type'] == 'post-group' ) {
         $group = una_get_group_by_post( $data['object_id'] );
         if ( $group ) {
+            $args['group_id'] = $group->term_id;
+        }
+    }
+
+    $p_id = [];
+    // рейтинг за комментарий групп
+    if ( $data['rating_type'] == 'comment' ) {
+        $comment = get_comment( $data['object_id'] );
+
+        $group = una_get_group_by_post( $comment->comment_post_ID );
+        if ( $group ) {
+            $p_id             = [ $comment->comment_post_ID ];
             $args['group_id'] = $group->term_id;
         }
     }
@@ -214,8 +226,12 @@ function una_give_rating( $data ) {
     $other = array( // какой оценкой
         $current_user->display_name,
         $data['rating_status'],
-        $data['rating_value']
+        $data['rating_value'],
     );
+
+    if ( isset( $p_id ) ) {
+        $other = array_merge( $other, $p_id );
+    }
 
     $args['object_type'] = $data['rating_type'];
     $args['user_id']     = $data['user_id'];                        // кто

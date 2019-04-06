@@ -121,10 +121,16 @@ function una_get_give_rating_post( $data ) {
         $group = una_get_group_by_post( $data['object_id'] );
 
         if ( $group ) {
-            $group_id   = $group->term_id;
-            $group_name = $group->name;
+            $gp_info = '<a href="/?una_group_url=' . $group->term_id . '" title="Перейти" rel="nofollow">' . $group->name . '</a>';
+            $object  = ', в группе ' . $gp_info;
+        }
+    }
+    //
+    else if ( $data['action'] == 'give_rating_comment' && isset( $data['group_id'] ) ) {
+        $group = una_get_group_by_post( $other[3] );
 
-            $gp_info = '<a href="/?una_group_url=' . $group_id . '" title="Перейти" rel="nofollow">' . $group_name . '</a>';
+        if ( $group ) {
+            $gp_info = '<a href="/?una_group_url=' . $group->term_id . '" title="Перейти" rel="nofollow">' . $group->name . '</a>';
             $object  = ', в группе ' . $gp_info;
         }
     }
@@ -258,7 +264,7 @@ function una_get_add_post( $data ) {
         $group = una_get_group_by_post( $data['object_id'] );
 
         if ( $group ) {
-            $gp_info .= '<a class="una_p_link" href="/?una_group_url=' . $group->term_id . '" title="Перейти" rel="nofollow">' . $group->name . '</a>';
+            $gp_info = '<a class="una_p_link" href="/?una_group_url=' . $group->term_id . '" title="Перейти" rel="nofollow">' . $group->name . '</a>';
             $object  = ', в группе ' . $gp_info;
         }
     }
@@ -357,8 +363,10 @@ function una_get_user_in_out_group( $data ) {
         $out = 'Покинул группу';
     }
     if ( $data['action'] == 'user_out_group' && $data['other_info'] == 'kick' ) {
-        $userdata    = get_userdata( $data['subject_id'] );
-        $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $userdata->display_name . '</a>';
+        $userdata = get_userdata( $data['subject_id'] );
+        $name     = ( ! empty( $userdata )) ? $userdata->display_name : '';
+
+        $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $name . '</a>';
         $out         = 'удалил пользователя ' . $link_author . ' из группы';
     }
     $link = '<a class="una_group_name" href="/?una_group_url=' . $data['object_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
