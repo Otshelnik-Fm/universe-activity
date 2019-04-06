@@ -122,15 +122,15 @@
 .una_subject {
     text-transform: none;
 }
-.una_post_status {
+#universe_time .una_post_status {
     color: #999;
     font-size: 11px;
     margin: 0 0 0 6px;
 }
-.una_post_status.una_st_spam {  /*spam comment*/
+#universe_time .una_post_status.una_st_spam {  /*spam comment*/
     color: #f05151;
 }
-.una_post_status.una_st_0 {     /*pending comment*/
+#universe_time .una_post_status.una_st_0 {     /*pending comment*/
     color: #e19201;
 }
 .una_timeline_blk .rcl-pager {
@@ -148,10 +148,10 @@
     text-decoration: none;
 }
 .una_goto_comments > a span {
-	border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed #ccc;
 }
 .una_goto_comments > a span:hover {
-	border-bottom-color: #555;
+    border-bottom-color: #555;
 }
 .una_goto_comments .rcli {
     margin: 0 0 0 6px;
@@ -163,10 +163,10 @@
     margin: 6px 18px;
     padding: 6px 12px;
 }
-.una_rating_plus {
-    color: #3ad11f;
+#universe_time .una_rating_plus {
+    color: #3bb525;
 }
-.una_rating_minus {
+#universe_time .una_rating_minus {
     color: #f05151;
 }
 .una_admin_dashboard #universe_visible {
