@@ -40,7 +40,7 @@ require_once 'inc/class-una-shortcode.php';     // шорткод
 /*
  * Интеграции
  *
- * пока набиваю так, как накопится критическая масса перепишу 💩
+ * пока набиваю так, как накопится критическая масса перепишу
  */
 
 
@@ -89,8 +89,7 @@ if ( rcl_exist_addon( 'group-new-post-notify' ) ) {
     require_once 'integration/addon-group-new-post-notify.php';
 }
 
-
-// доп "Group New Post Notify"
+// доп "Bookmarks" https://codeseller.ru/?p=4231
 if ( rcl_exist_addon( 'bookmarks' ) ) {
     require_once 'integration/addon-bookmarks.php';
 }
