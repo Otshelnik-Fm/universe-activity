@@ -100,6 +100,10 @@
         &nbsp;&nbsp;&nbsp;&nbsp; изменил тип уведомлений подписки (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; удалил подписку (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; это событие будет доступно в фильтре "Подписки"  
+    * поддержка событий дополнения Закладок (Bookmarks):  
+        &nbsp;&nbsp;&nbsp;&nbsp; добавил в закладки запись (событие видят все)  
+        &nbsp;&nbsp;&nbsp;&nbsp; Пишет: <code>Добавил в закладки запись: Секретные материалы (The X-Files)(2016)(1 сезон)</code>
+        &nbsp;&nbsp;&nbsp;&nbsp; И если в группе запись: <code>В группе "Кино", добавил в закладки к запись: Секретные материалы (The X-Files)(2016)(1 сезон)</code>
 
 
 <hr style="border: 1px solid #ddd;">
@@ -371,6 +375,7 @@
 </tr>
 </tbody></table>
 
+Другие плагины:
 
 <h4>uLogin</h4>
 
@@ -431,6 +436,23 @@
 <td>bip_change_dob</td>
 <td>сменил дату рождения</td>
 <td>админ</td>
+</tr>
+</tbody></table>
+
+
+<strong>Bookmarks</strong>
+
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
+<thead><tr>
+<th>slug</th>
+<th>действие</th>
+<th>привилегия</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>bkmrk_add</td>
+<td>добавил в закладки</td>
+<td>гость</td>
 </tr>
 </tbody></table>
 
@@ -668,6 +690,10 @@
 <td>add_group_cover</td>
 <td>установил или сменил обложку группы (дополнение Groups Theme RePlace)</td>
 </tr>
+<tr>
+<td>bkmrk_add</td>
+<td>добавил в закладки (дополнение Bookmarks)</td>
+</tr>
 </tbody></table>
 
 
@@ -877,8 +903,8 @@
 <code>"Публикации"</code> - add_post  
 <code>"Комментарии"</code> - add_comment  
 <code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post   
-<code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar  
-<code>"Подписки"</code> - add_user_feed  
+<code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar,add_group_avatar,group_change_exc,add_group_cover,cpp_add_city,cpp_change_city,bip_add_dob,bip_change_dob  
+<code>"Подписки"</code> - add_user_feed,sbt_add_subs,sbt_del_subs,add_group_notify,change_group_notify,del_group_notify  
 
 
 
@@ -958,7 +984,7 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
-= 2019-03-15 =
+= 2019-04-18 =
 v0.30   
 * поддержка WP-Recall 16.16
 * для крон события добавлена своя аватарка
@@ -982,6 +1008,9 @@ db_version = '1.1.0':
 - добавлена колонка hide (число) - маркер "1" укажет что событие в архиве (скрыто)
 
 Добавлена константа <code>UNA_DB</code> - для быстрого доступа к таблице БД 'wp_otfm_universe_activity'
+
+
+* Добавлена поддержка дополнения Bookmarks - добавил запись в закладки. Событие видят все. Гостям сайта покажет что есть возможность закладок.
 
 
 * Добавлена поддержка событий дополнения Country & User in Profile PRO:

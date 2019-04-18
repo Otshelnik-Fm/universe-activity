@@ -143,6 +143,11 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
         &nbsp;&nbsp;&nbsp;&nbsp; изменил тип уведомлений подписки (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; удалил подписку (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; это событие будет доступно в фильтре "Подписки"  
+- [x] поддержка событий дополнения Закладок (Bookmarks):  
+        &nbsp;&nbsp;&nbsp;&nbsp; добавил в закладки запись (событие видят все)  
+        &nbsp;&nbsp;&nbsp;&nbsp; Пишет: *Добавил в закладки запись: Секретные материалы (The X-Files)(2016)(1 сезон)*
+        &nbsp;&nbsp;&nbsp;&nbsp; И если в группе запись: *В группе "Кино", добавил в закладки к запись: Секретные материалы (The X-Files)(2016)(1 сезон)*
+
 
 ------------------------------
 
@@ -231,6 +236,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | pfm_del_topic | удалил тему с форума (Prime Forum) | админ |  
 
 
+Другие плагины:
 
 #### uLogin:  
 
@@ -255,6 +261,13 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 |------|----------|------------|
 | bip_add_dob | установил день рождения | админ |  
 | bip_change_dob | сменил дату рождения | админ |  
+
+
+**Bookmarks**  
+
+| slug | действие | привилегия |
+|------|----------|------------|
+| bkmrk_add | добавил в закладки | гость |  
 
 
 **Bot User Info**  
@@ -347,6 +360,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | group_change_exc | установил или сменил статус группы (дополнение Groups Theme RePlace) |  
 | add_group_avatar | установил или сменил аватарку группы (дополнение Groups Theme RePlace) |  
 | add_group_cover | установил или сменил обложку группы (дополнение Groups Theme RePlace) |  
+| bkmrk_add | добавил в закладки (дополнение Bookmarks) |  
 
 
 #### Залогиненый видит: те что выше, плюс:  
@@ -456,8 +470,8 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 **Публикации** - add_post  
 **Комментарии** - add_comment  
 **Рейтинг** - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post    
-**Обновления** - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar   
-**Подписки** - add_user_feed  
+**Обновления** - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar,add_group_avatar,group_change_exc,add_group_cover,cpp_add_city,cpp_change_city,bip_add_dob,bip_change_dob  
+**Подписки** - add_user_feed,sbt_add_subs,sbt_del_subs,add_group_notify,change_group_notify,del_group_notify  
 
 ------------------------------
 
@@ -543,7 +557,7 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 ## Changelog  
 
-**2019-03-15**  
+**2019-04-18**  
 v0.30   
 
 - [x] поддержка WP-Recall 16.16  
@@ -567,6 +581,9 @@ v0.30
 добавлена колонка hide (число) - маркер "1" укажет что событие в архиве (скрыто)  
 
 - [x] Добавлена константа `UNA_DB` - для быстрого доступа к таблице БД `wp_otfm_universe_activity`  
+
+
+- [x] Добавлена поддержка дополнения Bookmarks - добавил запись в закладки. Событие видят все. Гостям сайта покажет что есть возможность закладок.
 
 
 - [x] Добавлена поддержка событий дополнения Country & User in Profile PRO:  
