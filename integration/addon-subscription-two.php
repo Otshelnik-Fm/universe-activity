@@ -17,7 +17,7 @@ function una_register_sbt_addon( $type ) {
     $type['sbt_del_subs']['callback'] = 'una_del_sbt_subs';   // отписался
 
     $type['sbt_add_subs']['access'] = 'logged';
-    $type['sbt_del_subs']['access'] = 'admin';
+    $type['sbt_del_subs']['access'] = 'author';
 
     return $type;
 }
@@ -116,8 +116,11 @@ function una_get_sbt_subs( $data ) {
     } else if ( $data['object_type'] == 'products' ) {
         return '<span class="una_action">Подписался на товар:</span> ' . $data['object_name'];
     } else if ( $data['object_type'] == 'post-group' ) {
-        $other = unserialize( $data['other_info'] );
-
+        if ( is_serialized( $data['other_info'] ) ) {
+            $other = unserialize( $data['other_info'] );
+        } else {
+            $other = $data['other_info'];
+        }
         // обратная совместимость пока не было интеграции с допом групп
         if ( isset( $other['grn'] ) ) {
             $group = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $other['grn'] . '"</a>';
@@ -127,6 +130,8 @@ function una_get_sbt_subs( $data ) {
         } else {
             $name = 'записи в группе';
         }
+    } else {
+        $data['object_name'] = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
     }
 
     return '<span class="una_action">Подписался на ' . $name . ':</span> ' . $data['object_name'];
@@ -151,7 +156,21 @@ function una_del_sbt_subs( $data ) {
         } else {
             $name = 'записи в группе';
         }
+    } else {
+        $data['object_name'] = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
     }
 
     return '<span class="una_action">Отписался от ' . $name . ':</span> ' . $data['object_name'];
+}
+
+/*
+ * 4. Я добавлю также к кнопкам фильтрам
+ *
+ */
+// к кнопке-фильтр "Подписки" добавлю пару событий
+add_filter( 'una_filter_subscriptions', 'una_add_sbt_filter_button_subscriptions', 10 );
+function una_add_sbt_filter_button_subscriptions( $actions ) {
+    array_push( $actions, 'sbt_add_subs', 'sbt_del_subs' );
+
+    return $actions;
 }

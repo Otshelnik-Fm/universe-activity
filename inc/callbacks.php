@@ -126,7 +126,7 @@ function una_get_give_rating_post( $data ) {
         }
     }
     //
-    else if ( $data['action'] == 'give_rating_comment' && isset( $data['group_id'] ) ) {
+    else if ( $data['action'] == 'give_rating_comment' && isset( $data['group_id'] ) && isset( $other[3] ) ) {
         $group = una_get_group_by_post( $other[3] );
 
         if ( $group ) {

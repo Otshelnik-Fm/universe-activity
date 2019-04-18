@@ -147,3 +147,15 @@ function una_get_gnp_del_group_notify( $data ) {
 
     return '<span class="una_action">Отменил подписку в группе</span> ' . $name;
 }
+
+/*
+ * 4. Я добавлю также к кнопкам фильтрам
+ *
+ */
+// к кнопке-фильтр "Подписки" добавлю пару событий
+add_filter( 'una_filter_subscriptions', 'una_add_gnp_filter_button_subscriptions', 10 );
+function una_add_gnp_filter_button_subscriptions( $actions ) {
+    array_push( $actions, 'add_group_notify', 'change_group_notify', 'del_group_notify' );
+
+    return $actions;
+}

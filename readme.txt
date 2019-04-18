@@ -81,6 +81,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp; оформил подписку на комментарии записей или форума (событие видит залогиненный)  
         &nbsp;&nbsp;&nbsp;&nbsp; Причём для групп пишет: <code>Otshelnik-Fm в группе "Приют Отшельника", подписался на комментарии к записи: Кукла (The Inhabitant)(2016)</code>
         &nbsp;&nbsp;&nbsp;&nbsp; удалил подписку на комментарии записей или форума (событие видит админ)  
+        &nbsp;&nbsp;&nbsp;&nbsp; это событие будет доступно в фильтре "Подписки"  
     * сменил урл кабинета (событие видит админ)(доп Pretty URL Author)  
     * поддержка событий дополнения Групп (Group Recall):  
         &nbsp;&nbsp;&nbsp;&nbsp; ловим создание новой группы  
@@ -98,6 +99,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp; подписался на уведомления о новых записях группы (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; изменил тип уведомлений подписки (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; удалил подписку (событие видит автор)  
+        &nbsp;&nbsp;&nbsp;&nbsp; это событие будет доступно в фильтре "Подписки"  
 
 
 <hr style="border: 1px solid #ddd;">
@@ -565,7 +567,7 @@
 <tr>
 <td>sbt_del_subs</td>
 <td>удалил подписку на комментарии записей или форума</td>
-<td>админ</td>
+<td>автор</td>
 </tr>
 </tbody></table>
 
@@ -760,6 +762,10 @@
 <td>del_group_notify</td>
 <td>удалил подписку (Group New Post Notify)</td>
 </tr>
+<tr>
+<td>sbt_del_subs</td>
+<td>удалил подписку на комментарии записей или форума (Subscription Two)</td>
+</tr>
 
 </tbody></table> 
 
@@ -811,10 +817,6 @@
 <tr>
 <td>bui_get_info</td>
 <td>запросил статистику в чате (Bot User Info)</td>
-</tr>
-<tr>
-<td>sbt_del_subs</td>
-<td>удалил подписку на комментарии записей или форума (Subscription Two)</td>
 </tr>
 <tr>
 <td>pua_change_url</td>
