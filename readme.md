@@ -8,10 +8,11 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 
 ## Demo:
 
-На [этой странице](http://across-ocean.otshelnik-fm.ru/top-secret-addons/) и там же примеры  
+На [этой странице](http://across-ocean.otshelnik-fm.ru/top-secret-addons/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=page-top-secret-addons) и там же примеры  
 
-В [личном кабинете](https://otshelnik-fm.ru/author/otshelnik-fm/) - под дополнением "User Info Tab"  
-На [живом сайте](https://otshelnik-fm.ru/)  
+В [личном кабинете](https://otshelnik-fm.ru/author/otshelnik-fm/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=lk-author-otshelnik-fm) - под дополнением "User Info Tab"  
+На [живом сайте](https://otshelnik-fm.ru/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=home-page)  
+Если поставить [Theme Control](https://codeseller.ru/products/theme-control/) + [User Info Tab](https://codeseller.ru/products/user-info-tab/) + Universe Activity + [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/) то [на этом сайте работают они](http://theme-control.otshelnik-fm.ru/author/otshelnik-fm/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=lk-author-otshelnik-fm)   
 
 Большой скрин: что видит [админ](http://across-ocean.otshelnik-fm.ru/wp-content/uploads/2017/07/snapshot.jpg)  
 
@@ -115,8 +116,8 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
         &nbsp;&nbsp;&nbsp;&nbsp; удалил город - указывается старый город  
         &nbsp;&nbsp;&nbsp;&nbsp; эти события будут доступны и в кнопке-фильтре "Обновления"  
 - [x] установил день рождения, сменил дату рождения (дополнение Birthday in Profile)  
-        &nbsp;&nbsp;&nbsp;&nbsp; установил день рождения (событие видит админ)  
-        &nbsp;&nbsp;&nbsp;&nbsp; сменил дату рождения (событие видит админ)  
+        &nbsp;&nbsp;&nbsp;&nbsp; установил день рождения (событие видит автор)  
+        &nbsp;&nbsp;&nbsp;&nbsp; сменил дату рождения (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; эти события выводятся также в кнопке-фильтре "Обновления"  
 - [x] запросил статистику по себе в чате (доп Bot User Info)  
         &nbsp;&nbsp;&nbsp;&nbsp; пишет событие, когда пользователь запросил информацию по себе (событие видит админ)  
@@ -259,8 +260,8 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 
 | slug | действие | привилегия |
 |------|----------|------------|
-| bip_add_dob | установил день рождения | админ |  
-| bip_change_dob | сменил дату рождения | админ |  
+| bip_add_dob | установил день рождения | автор |  
+| bip_change_dob | сменил дату рождения | автор |  
 
 
 **Bookmarks**  
@@ -394,6 +395,7 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | change_group_notify | изменил тип уведомлений подписки (Group New Post Notify) |  
 | del_group_notify | удалил подписку (Group New Post Notify) |  
 | sbt_del_subs | удалил подписку на комментарии записей или форума (Subscription Two) |  
+| bip_add_dob | установил день рождения (Birthday in Profile) |  
 
 #### Админ видит: все что выше, плюс:  
 
@@ -408,7 +410,6 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
 | pfm_del_topic | удалил тему с форума (Prime Forum) |  
 | asgrs_del_topic | удалил тему с форума (Asgaros Forum) |  
 | cpp_del_city | удалил город (Country & User in Profile PRO) |  
-| bip_add_dob | установил день рождения (Birthday in Profile) |  
 | bip_change_dob | сменил дату рождения (Birthday in Profile) |  
 | bui_get_info | запросил статистику в чате (Bot User Info) |  
 | pua_change_url | сменил урл кабинета (Pretty URL Author) |  
@@ -557,11 +558,12 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 ## Changelog  
 
-**2019-04-18**  
+**2019-04-26**  
 v0.30   
 
 - [x] поддержка WP-Recall 16.16  
 - [x] для крон события добавлена своя аватарка  
+- [x] для событий от имени гостя добавлена своя аватарка  
 - [x] добавлен новый стиль вывода: "una_card" - веведет события карточкой (используйте в шорткоде вписам в атрибут class="una_card")  
 - [x] тип записи "wp_block" не участвует в логах. Это создание, импорт или удаление гутенберг блока  
 - [x] теперь при выставлении рейтинга к посту в группе пишется и имя группы. Пример: "Проголосовал +5 за запись: "Посёлок программистов", в группе Открытая 2019"  
@@ -595,8 +597,8 @@ v0.30
 
 
 - [x] Добавлена поддержка событий дополнения Birthday in Profile:  
-установил день рождения (событие видит админ)  
-сменил дату рождения (событие видит админ)  
+установил день рождения (событие видит автор)  
+сменил дату рождения (событие видит автор)  
 \- эти события выводятся также в кнопке-фильтре "Обновления"  
 
 
@@ -872,7 +874,7 @@ v0.007
 * При возникновении проблемы, создайте соотвествующую тему на [форуме поддержки](https://codeseller.ru/forum/product-15611/) товара  
 * Если вам нужна доработка под ваши нужды - вы можете обратиться ко мне в <a href="https://codeseller.ru/author/otshelnik-fm/?tab=chat" target="_blank">ЛС</a> с техзаданием на платную доработку.  
 
-Полный список моих работ опубликован на [моём сайте](https://otshelnik-fm.ru/all-my-addons-for-wp-recall/) и в каталоге магазина [CodeSeller.ru](https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products)  
+Полный список моих работ опубликован на [моём сайте](https://otshelnik-fm.ru/?p=2562&utm_source=free-addons&utm_medium=addon-description&utm_campaign=universe-activity&utm_content=codeseller.ru&utm_term=all-my-addons) и в каталоге магазина [CodeSeller.ru](https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products)  
 
 ------------------------------
 

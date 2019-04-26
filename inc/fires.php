@@ -73,10 +73,10 @@ function una_confirm_registration( $user_id ) {
 add_filter( 'registration_errors', 'una_failed_registration', 10, 3 );
 function una_failed_registration( $errors, $sanitized_user_login, $user_email ) {
     $reason = '';
-    if ( $errors->errors['username_exists'] ) { // логин такой есть
+    if ( isset( $errors->errors['username_exists'] ) && $errors->errors['username_exists'] ) { // логин такой есть
         $reason = 'name';
     }
-    if ( $errors->errors['email_exists'] ) {    // мейл такой уже есть
+    if ( isset( $errors->errors['email_exists'] ) && $errors->errors['email_exists'] ) {    // мейл такой уже есть
         $reason .= 'email';
     }
     if ( ! $reason )

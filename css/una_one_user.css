@@ -1,5 +1,6 @@
 .una_one_user .una_timeline_box {
-    margin: 0 0 0 12px;
+    box-sizing: content-box;
+    margin: 0 0 0 18px;
     position: relative;
 }
 .una_one_user .una_timeline_box::before {
@@ -42,7 +43,7 @@
     z-index: 3;
 }
 .una_one_user .una_item_timeline {
-    margin: 12px 0 12px 6px;
+    margin: 18px 0 12px 6px;
     min-height: 30px;
     padding: 6px 0 6px 12px;
 }
@@ -168,4 +169,27 @@
 .una_one_user .una_group_change_desc::after,
 .una_one_user .una_group_change_exc::after {
     content: "\f10d";
+}
+.una_one_user .una_bkmrk_add::after {
+    content: "\f097";
+}
+.una_one_user .una_cpp_add_city::after,
+.una_one_user .una_cpp_change_city::after { /*sity*/
+    content: "\f041";
+}
+.una_one_user .una_pua_change_url::after {
+    content: "\f25c";
+}
+.una_one_user .una_register::after {
+    content: "\f133";
+}
+.una_one_user .una_confirm_register::after {
+    content: "\f274";
+}
+.una_one_user .una_bip_change_dob::after,
+.una_one_user .una_bip_add_dob::after {
+    content: "\f1fd";
+}
+.una_one_user .una_bui_get_info::after {
+    content: "\f2bc";
 }

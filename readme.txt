@@ -72,8 +72,8 @@
         &nbsp;&nbsp;&nbsp;&nbsp; удалил город - указывается старый город  
         &nbsp;&nbsp;&nbsp;&nbsp; эти события будут доступны и в кнопке-фильтре "Обновления"  
     * установил день рождения, сменил дату рождения (дополнение Birthday in Profile)  
-        &nbsp;&nbsp;&nbsp;&nbsp; установил день рождения (событие видит админ)  
-        &nbsp;&nbsp;&nbsp;&nbsp; сменил дату рождения (событие видит админ)  
+        &nbsp;&nbsp;&nbsp;&nbsp; установил день рождения (событие видит автор)  
+        &nbsp;&nbsp;&nbsp;&nbsp; сменил дату рождения (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; эти события выводятся также в кнопке-фильтре "Обновления"  
     * запросил статистику по себе в чате (доп Bot User Info)  
         &nbsp;&nbsp;&nbsp;&nbsp; пишет событие, когда пользователь запросил информацию по себе (событие видит админ)  
@@ -430,12 +430,12 @@
 <tr>
 <td>bip_add_dob</td>
 <td>установил день рождения</td>
-<td>админ</td>
+<td>автор</td>
 </tr>
 <tr>
 <td>bip_change_dob</td>
 <td>сменил дату рождения</td>
-<td>админ</td>
+<td>автор</td>
 </tr>
 </tbody></table>
 
@@ -775,7 +775,6 @@
 <td>del_avatar</td>
 <td>когда он удалил свой аватар (локальный, не граватар)</td>
 </tr>
-
 <tr>
 <td>add_group_notify</td>
 <td>подписался на уведомления о новых записях группы (Group New Post Notify)</td>
@@ -791,6 +790,10 @@
 <tr>
 <td>sbt_del_subs</td>
 <td>удалил подписку на комментарии записей или форума (Subscription Two)</td>
+</tr>
+<tr>
+<td>bip_add_dob</td>
+<td>установил день рождения (Birthday in Profile)</td>
 </tr>
 
 </tbody></table> 
@@ -831,10 +834,6 @@
 <tr>
 <td>cpp_del_city</td>
 <td>удалил город (Country & User in Profile PRO)</td>
-</tr>
-<tr>
-<td>bip_add_dob</td>
-<td>установил день рождения (Birthday in Profile)</td>
 </tr>
 <tr>
 <td>bip_change_dob</td>
@@ -984,10 +983,11 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
-= 2019-04-18 =
+= 2019-04-26 =
 v0.30   
 * поддержка WP-Recall 16.16
 * для крон события добавлена своя аватарка
+* для событий от имени гостя добавлена своя аватарка
 * добавлен новый стиль вывода: "una_card" - веведет события карточкой (используйте в шорткоде вписам в атрибут class="una_card")  
 * тип записи "wp_block" не участвует в логах. Это создание, импорт или удаление гутенберг блока
 * теперь при выставлении рейтинга к посту в группе пишется и имя группы. Пример: "Проголосовал +5 за запись: "Посёлок программистов", в группе Открытая 2019"
@@ -1022,8 +1022,8 @@ db_version = '1.1.0':
 
 
 * Добавлена поддержка событий дополнения Birthday in Profile:
-установил день рождения (событие видит админ)
-сменил дату рождения (событие видит админ)
+установил день рождения (событие видит автор)
+сменил дату рождения (событие видит автор)
 - эти события выводятся также в кнопке-фильтре "Обновления"
 
 * Добавлена поддержка дополнения Bot User Info: 
@@ -1241,4 +1241,4 @@ v0.007
 * При возникновении проблемы, создайте соотвествующую тему на <a href="https://codeseller.ru/forum/product-15611/" target="_blank">форуме поддержки</a> товара
 * Если вам нужна доработка под ваши нужды - вы можете обратиться ко мне в <a href="https://codeseller.ru/author/otshelnik-fm/?tab=chat" target="_blank">ЛС</a> с техзаданием на платную доработку.
 
-Полный список моих работ опубликован <a href="https://otshelnik-fm.ru/all-my-addons-for-wp-recall/" target="_blank">моём сайте</a> и в каталоге магазина <a href="https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products" target="_blank">CodeSeller.ru</a>
+Полный список моих работ опубликован <a href="https://otshelnik-fm.ru/?p=2562&utm_source=free-addons&utm_medium=addon-description&utm_campaign=universe-activity&utm_content=codeseller.ru&utm_term=all-my-addons" target="_blank">моём сайте</a> и в каталоге магазина <a href="https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products" target="_blank">CodeSeller.ru</a>

@@ -147,6 +147,7 @@ class UNA_Shortcode {
                         $user_name = get_the_author_meta( 'display_name', $data['user_id'] );
                     } else if ( $data['user_id'] == 0 ) {
                         $user_name = 'Гость';
+                        $author    = '<img alt="" src="' . rcl_addon_url( 'img/wp-guest.png?ver=1.0', __FILE__ ) . '" class="avatar avatar-wp-guest">';
                     }
                     // wp cron
                     else if ( $data['user_id'] == "-1" ) {
