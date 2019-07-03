@@ -124,7 +124,10 @@ function una_get_user_add_topic_asgaros( $data ) {
         $del  = '<span class="una_post_status">(удалено)</span>';
     }
 
-    $out = '<span class="una_action">Создал новую тему на форуме:</span> ' . $link . $del;
+    $texts   = [ 'Создал', 'Создала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $out = '<span class="una_action">' . $decline . ' новую тему на форуме:</span> ' . $link . $del;
 
     return $out;
 }

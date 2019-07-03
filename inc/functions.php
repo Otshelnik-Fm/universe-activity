@@ -315,3 +315,20 @@ function una_manual_start( $class ) {
         rcl_enqueue_style( 'una_card_style', rcl_addon_url( 'css/una_card.css', __FILE__ ) );
     }
 }
+
+// склоняем по полу
+//$data = ['опубликовал','опубликовала']
+function una_decline_by_sex( $user_id, $data ) {
+    if ( $user_id == '-1' )
+        return $data[0];
+
+    $sex = get_user_meta( $user_id, 'rcl_sex', true );
+
+    $out = $data[0];
+
+    if ( $sex ) {
+        $out = ($sex === 'Женский') ? $data[1] : $data[0];
+    }
+
+    return $out;
+}

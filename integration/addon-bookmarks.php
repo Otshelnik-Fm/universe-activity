@@ -69,8 +69,8 @@ function bkmrk_add_action( $post_id ) {
   [display_name] => Владимир Otshelnik-Fm
   [post_status] =>
   ) */
-// Добавил в закладки запись: Секретные материалы (The X-Files)(2016)(1 сезон)
-// В группе "Кино", добавил в закладки к запись: Секретные материалы (The X-Files)(2016)(1 сезон)
+// Анжелика добавила в закладки запись: Секретные материалы (The X-Files)(2016)(1 сезон)
+// Анжелика в группе "Кино", добавила в закладки запись: Секретные материалы (The X-Files)(2016)(1 сезон)
 function una_get_bkmrk_add( $data ) {
     if ( $data['object_type'] == 'post-group' ) {
         $other = '';
@@ -81,10 +81,16 @@ function una_get_bkmrk_add( $data ) {
         $group = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $other['grn'] . '"</a>';
         $link  = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
 
-        return '<span class="una_action">В группе ' . $group . ', добавил в закладки к запись:</span> ' . $link;
+        $texts   = [ 'добавил', 'добавила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        return '<span class="una_action">В группе ' . $group . ', ' . $decline . ' в закладки запись:</span> ' . $link;
     } else {
+        $texts   = [ 'Добавил', 'Добавила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
         $link = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
 
-        return '<span class="una_action">Добавил в закладки к запись:</span> ' . $link;
+        return '<span class="una_action">' . $decline . ' в закладки запись:</span> ' . $link;
     }
 }

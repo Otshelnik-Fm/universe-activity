@@ -119,6 +119,7 @@
 .una_one_user .una_add_post::after {
     content: "\f067";
 }
+.una_one_user .una_cpp_del_city::after,
 .una_one_user .una_del_user_feed::after,
 .una_one_user .una_del_avatar::after,
 .una_one_user .una_asgrs_del_topic::after,

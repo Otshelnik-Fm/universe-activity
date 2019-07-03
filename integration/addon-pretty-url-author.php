@@ -56,6 +56,9 @@ function una_change_pua_actions( $user_id, $old_nicename, $new_nicename ) {
   [post_status] =>
   ) */
 function una_get_pua_change_url( $data ) {
+    $texts   = [ 'Сменил', 'Сменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $url = explode( "|", $data['other_info'] );
-    return '<span class="una_action">Сменил урл кабинета.</span> ' . $url[0] . ' -> ' . $url[1];
+    return '<span class="una_action">' . $decline . ' урл кабинета:</span> <span>' . $url[0] . '</span> <i class="rcli fa-long-arrow-right" aria-hidden="true"></i> <span>' . $url[1] . '</span>';
 }

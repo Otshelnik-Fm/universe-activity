@@ -139,7 +139,10 @@ function una_get_gtr_add_group_avatar( $data ) {
     $name  = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
     $cover = '<a class="mpr_image una_avatar" href="' . $full . '" title="Аватарка группы: ' . $data['object_name'] . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $medium[0] . '" alt=""></a>';
 
-    return '<span class="una_action">Установил аватарку в группе</span> ' . $name . ' ' . $cover;
+    $texts   = [ 'Установил', 'Установила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' аватарку в группе</span> ' . $name . ' ' . $cover;
 }
 
 // Установил обложку в группе
@@ -152,7 +155,10 @@ function una_get_gtr_add_group_cover( $data ) {
     $name  = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
     $cover = '<a class="mpr_image una_avatar" href="' . $full . '" title="Обложка группы: ' . $data['object_name'] . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $medium[0] . '" alt=""></a>';
 
-    return '<span class="una_action">Установил обложку в группе</span> ' . $name . ' ' . $cover;
+    $texts   = [ 'Установил', 'Установила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' обложку в группе</span> ' . $name . ' ' . $cover;
 }
 
 // установил в группе статус, сменил его
@@ -160,7 +166,10 @@ function una_get_group_change_exc( $data ) {
     $excerpt = rcl_get_group_option( $data['group_id'], 'gtr_excerpt' );
     $name    = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
 
-    return '<span class="una_action">Новый статус группы:</span> ' . $name . '<div class="una_user_status"><div>' . $excerpt . '</div></div>';
+    $texts   = [ 'Установил', 'Установила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' новый статус группы:</span> ' . $name . '<div class="una_user_status"><div>' . $excerpt . '</div></div>';
 }
 
 /*

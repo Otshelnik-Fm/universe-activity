@@ -55,5 +55,8 @@ function una_add_bui_user_stats( $data ) {
   [post_status] =>
   ) */
 function una_get_bui_add( $data ) {
-    return '<span class="una_action">запросил данные в чате:</span><div class="una_user_status"><div>' . $data['other_info'] . '</div></div>';
+    $texts   = [ 'запросил', 'запросила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' данные в чате:</span><div class="una_user_status"><div>' . $data['other_info'] . '</div></div>';
 }

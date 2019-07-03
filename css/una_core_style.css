@@ -102,19 +102,10 @@
     margin: 6px 6px 6px 18px;
 }
 .universe_userlist .una_author_name {
-    margin: 0 6px 0 0;
+    margin: 0 4px 0 0;
 }
 .universe_userlist .una_author_name:empty {
     display: none;
-}
-.universe_userlist .una_author_name::after {
-    content: ":";
-}
-.una_sbt_del_subs .una_author_name::after,
-.una_sbt_add_subs .una_author_name::after,
-.una_bui_get_info .una_author_name::after,
-.una_change_status .una_author_name::after {
-    content: "";
 }
 .universe_userlist .una_action {
     text-transform: lowercase;

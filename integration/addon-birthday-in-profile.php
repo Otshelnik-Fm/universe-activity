@@ -68,11 +68,17 @@ function una_change_birthday_bip( $year, $month, $day ) {
   [post_status] =>
   ) */
 function una_get_bip_add_dob( $data ) {
-    return '<span class="una_action">Указал день рождения:</span> ' . bip_get_full_dob( $data['other_info'], $no_filter = true );
+    $texts   = [ 'Указал', 'Указала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' день рождения:</span> ' . bip_get_full_dob( $data['other_info'], $no_filter = true );
 }
 
 function una_get_bip_change_dob( $data ) {
-    return '<span class="una_action">Изменил день рождения:</span> ' . bip_get_full_dob( $data['other_info'], $no_filter = true );
+    $texts   = [ 'Изменил', 'Изменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' день рождения:</span> ' . bip_get_full_dob( $data['other_info'], $no_filter = true );
 }
 
 /*

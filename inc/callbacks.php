@@ -23,7 +23,13 @@ if ( ! defined( 'ABSPATH' ) )
  */
 // выводим входы/выходы
 function una_get_logged_in_out( $data ) {
-    $act = ( $data['action'] == 'logged_out' ) ? 'Вышел с сайта' : 'Вошел на сайт';
+    $texts_login   = [ 'Вошел', 'Вошла' ];
+    $decline_login = una_decline_by_sex( $data['user_id'], $texts_login );
+
+    $texts_logout   = [ 'Вышел', 'Вышла' ];
+    $decline_logout = una_decline_by_sex( $data['user_id'], $texts_logout );
+
+    $act = ( $data['action'] == 'logged_out' ) ? $decline_logout . ' с сайта' : $decline_login . ' на сайт';
 
     $net = '';
     if ( $data['action'] == 'logged_in_ulogin' ) {
@@ -68,14 +74,20 @@ function una_get_delete_user( $data ) {
 
 // обновил профиль
 function una_get_profile_update( $data ) {
-    return '<span class="una_action">Обновил настройки профиля</span>';
+    $texts   = [ 'Обновил', 'Обновила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' настройки профиля</span>';
 }
 
 // обновил статус профиля
 function una_get_change_user_status( $data ) {
+    $texts   = [ 'Сменил', 'Сменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $userdata = get_userdata( $data['user_id'] );
 
-    return '<span class="una_action">Сменил статус:</span><div class="una_user_status"><div>' . $userdata->description . '</div></div>';
+    return '<span class="una_action">' . $decline . ' статус:</span><div class="una_user_status"><div>' . $userdata->description . '</div></div>';
 }
 
 // поставил рейтинг за (потом перепишу ее - главное скелет есть)
@@ -135,7 +147,10 @@ function una_get_give_rating_post( $data ) {
         }
     }
 
-    $out = '<span class="una_action">Проголосовал</span> ' . $rating . ' за ' . $type . ': ';
+    $texts   = [ 'Проголосовал', 'Проголосовала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $out = '<span class="una_action">' . $decline . '</span> ' . $rating . ' за ' . $type . ': ';
     $out .= $link . $object;
 
     return $out;
@@ -157,12 +172,18 @@ function una_get_give_rating_post( $data ) {
 
 // зарегался
 function una_get_register( $data ) {
-    return '<span class="una_action">Зарегистрировался на сайте</span>';
+    $texts   = [ 'Зарегистрировался', 'Зарегистрировалась' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' на сайте</span>';
 }
 
 // подтвердил регу
 function una_get_confirm_register( $data ) {
-    return '<span class="una_action">Подтвердил регистрацию на сайте</span>';
+    $texts   = [ 'Подтвердил', 'Подтвердила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' регистрацию на сайте</span>';
 }
 
 // оставил комментарий
@@ -214,7 +235,10 @@ function una_get_add_comment( $data ) {
             $go_to = ' <span class="una_post_status una_st_' . $other['st'] . '">(' . $status . ')</span>';
     }
     if ( isset( $other['par'] ) && $other['par'] && isset( $other['sbj_nm'] ) && $other['sbj_nm'] ) { // если это ответ и не самому себе
-        $do          = 'Ответил ';
+        $texts   = [ 'Ответил', 'Ответила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        $do          = $decline . ' ';
         $whom        = 'на комментарий пользователя ';
         $link_author = '"' . $other['sbj_nm'] . '"';
 
@@ -224,7 +248,10 @@ function una_get_add_comment( $data ) {
 
         $out = '<span class="una_action">' . $do . $whom . '</span>' . $link_author . $type_fin . $gp_info;
     } else {
-        $out = '<span class="una_action">Оставил комментарий</span>' . $type_fin . $gp_info;
+        $texts   = [ 'Оставил', 'Оставила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        $out = '<span class="una_action">' . $decline . ' комментарий</span>' . $type_fin . $gp_info;
     }
 
     return $out . $go_to;
@@ -269,14 +296,20 @@ function una_get_add_post( $data ) {
         }
     }
 
-    $out = '<span class="una_action">Добавил ' . $type . ':</span> ' . $link . $object;
+    $texts   = [ 'Добавил', 'Добавила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $out = '<span class="una_action">' . $decline . ' ' . $type . ':</span> ' . $link . $object;
 
     return $out;
 }
 
 // убрал запись в черновик
 function una_get_add_draft( $data ) {
-    $out = '<span class="una_action">Убрал запись в черновик:</span> ';
+    $texts   = [ 'Убрал', 'Убрала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $out = '<span class="una_action">' . $decline . ' запись в черновик:</span> ';
     $out .= '"' . $data['object_name'] . '"';
 
     return $out;
@@ -284,10 +317,14 @@ function una_get_add_draft( $data ) {
 
 // удалил запись
 function una_get_delete_post( $data ) {
+    $texts   = [ 'удалил', 'удалила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $status      = 'в корзину';
-    $what        = 'Автор удалил ';
+    $what        = $decline . ' ';
     $type        = 'запись';
     $link_author = '';
+
     if ( $data['action'] === 'delete_post_fully' ) {
         $status = 'навсегда';
     }
@@ -296,10 +333,6 @@ function una_get_delete_post( $data ) {
     if ( $data['object_type'] === 'products' )
         $type = 'товар';
     if ( $data['subject_id'] ) {
-        $what = 'Удалил ';
-        if ( $data['action'] === 'delete_post_fully' ) {
-            $what = 'WP-Cron удалил ';
-        }
         $link_author = '<span class="una_post_status una_post_author">- автор: <a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $data['other_info'] . '</a></span>';
     }
 
@@ -311,29 +344,41 @@ function una_get_delete_post( $data ) {
 
 // Подписка на юзера
 function una_get_add_user_feed( $data ) {
+    $texts   = [ 'Подписался', 'Подписалась' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
-    $out         = '<span class="una_action">Подписался на пользователя</span> ' . $link_author;
+    $out         = '<span class="una_action">' . $decline . ' на пользователя</span> ' . $link_author;
     return $out;
 }
 
 // Отписка на юзера
 function una_get_del_user_feed( $data ) {
+    $texts   = [ 'Отписался', 'Отписалась' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
-    $out         = '<span class="una_action">Отписался от пользователя</span> ' . $link_author;
+    $out         = '<span class="una_action">' . $decline . ' от пользователя</span> ' . $link_author;
     return $out;
 }
 
 // Добавил в черный список
 function una_get_add_user_blacklist( $data ) {
+    $texts   = [ 'Добавил', 'Добавила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
-    $out         = '<span class="una_action">Добавил пользователя</span> ' . $link_author . ' в черный список';
+    $out         = '<span class="una_action">' . $decline . ' пользователя</span> ' . $link_author . ' в чёрный список';
     return $out;
 }
 
 // Удалил из черного списка
 function una_get_del_user_blacklist( $data ) {
+    $texts   = [ 'Убрал', 'Убрала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $link_author = '<a class="una_subject" class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
-    $out         = '<span class="una_action">Убрал пользователя</span> ' . $link_author . ' из черного списка';
+    $out         = '<span class="una_action">' . $decline . ' пользователя</span> ' . $link_author . ' из чёрного списка';
     return $out;
 }
 
@@ -345,7 +390,10 @@ function una_get_create_group( $data ) {
         //$link = rcl_get_group_permalink($data['object_id']); // +1 db
     }
 
-    $out = '<span class="una_action">Создал новую группу<span class="una_colon">:</span></span> ' . $link . '';
+    $texts   = [ 'Создал', 'Создала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $out = '<span class="una_action">' . $decline . ' новую группу<span class="una_colon">:</span></span> ' . $link . '';
     return $out;
 }
 
@@ -353,21 +401,33 @@ function una_get_create_group( $data ) {
 function una_get_delete_group( $data ) {
     $group_name = ( ! empty( $data['object_name'] )) ? $data['object_name'] : 'unknown';
 
-    return '<span class="una_action">Удалил группу:</span> "' . $group_name . '"';
+    $texts   = [ 'Удалил', 'Удалила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' группу:</span> "' . $group_name . '"';
 }
 
 // вступил в группу/покинул группу/удалили из группы
 function una_get_user_in_out_group( $data ) {
-    $out = 'Вступил в группу';
+    $texts   = [ 'Вступил', 'Вступила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $out = $decline . ' в группу';
     if ( $data['action'] == 'user_out_group' ) {
-        $out = 'Покинул группу';
+        $texts   = [ 'Покинул', 'Покинула' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        $out = $decline . ' группу';
     }
     if ( $data['action'] == 'user_out_group' && $data['other_info'] == 'kick' ) {
         $userdata = get_userdata( $data['subject_id'] );
         $name     = ( ! empty( $userdata )) ? $userdata->display_name : '';
 
+        $texts   = [ 'удалил', 'удалила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
         $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $name . '</a>';
-        $out         = 'удалил пользователя ' . $link_author . ' из группы';
+        $out         = $decline . ' пользователя ' . $link_author . ' из группы';
     }
     $link = '<a class="una_group_name" href="/?una_group_url=' . $data['object_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
     return '<span class="una_action">' . $out . '<span class="una_colon">:</span> </span>' . $link;
@@ -381,10 +441,16 @@ function una_get_group_user_change_role( $data ) {
 
     $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $other['un'] . '</a>';
 
-    $role_txt  = 'забанил пользователя';
+    $texts   = [ 'забанил', 'забанила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $role_txt  = $decline . ' пользователя';
     $role_type = '';
     if ( $data['action'] !== 'group_user_ban' ) {
-        $role_txt  = 'сменил роль пользователя';
+        $texts   = [ 'сменил', 'сменила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        $role_txt  = $decline . ' роль пользователя';
         $role_type = '. Назначена роль - ' . una_group_user_role_name( $other['ur'] );
     }
     $group_link = '<a class="una_group_name" href="/?una_group_url=' . $data['object_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
@@ -394,24 +460,33 @@ function una_get_group_user_change_role( $data ) {
 
 // установил в группе описание, сменил его
 function una_get_group_change_desc( $data ) {
+    $texts   = [ 'Установил', 'Установила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $termdata = get_term( $data['group_id'] );
     $name     = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
 
-    return '<span class="una_action">Установил описание группы<span class="una_colon">:</span></span> ' . $name . '<div class="una_user_status"><div>' . $termdata->description . '</div></div>';
+    return '<span class="una_action">' . $decline . ' описание группы<span class="una_colon">:</span></span> ' . $name . '<div class="una_user_status"><div>' . $termdata->description . '</div></div>';
 }
 
 // статус группы: открыта/закрыта
 // изменил приватность группы Gutenberg. Сейчас это открытая группа
 function una_get_group_is_closed( $data ) {
+    $texts   = [ 'Изменил', 'Изменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $status = ('closed' === $data['other_info']) ? 'закрытая' : 'открытая';
 
     $name = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
 
-    return '<span class="una_action">Изменил приватность группы </span> ' . $name . '. Сейчас это ' . $status . ' группа';
+    return '<span class="una_action">' . $decline . ' приватность группы </span> ' . $name . '. Сейчас это ' . $status . ' группа';
 }
 
 // создал тему на primeForum
 function una_get_user_add_topic( $data ) {
+    $texts   = [ 'Создал', 'Создала' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $del  = '';
     $link = '<a href="/?una_prime_forum_url=' . $data['object_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
     if ( $data['other_info'] == 'del' ) { // если группа удалена - то пишется в нее del. А так колонка пустая
@@ -419,35 +494,44 @@ function una_get_user_add_topic( $data ) {
         $del  = '<span class="una_post_status">(удалено)</span>';
     }
 
-    $out = '<span class="una_action">Создал новую тему на форуме:</span> ' . $link . $del;
+    $out = '<span class="una_action">' . $decline . ' новую тему на форуме:</span> ' . $link . $del;
 
     return $out;
 }
 
 // удалил топик (тему на форуме)
 function una_get_user_del_topic( $data ) {
+    $texts   = [ 'Удалил', 'Удалила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $link_author = '';
 
     if ( $data['subject_id'] ) {
         $link_author = '<span class="una_post_status una_post_author">- автор: <a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $data['other_info'] . '</a></span>';
     }
 
-    $out = '<span class="una_action">Удалил тему:</span> "' . $data['object_name'] . '" с форума' . $link_author;
+    $out = '<span class="una_action">' . $decline . ' тему:</span> "' . $data['object_name'] . '" с форума' . $link_author;
 
     return $out;
 }
 
 // поставил обложку
 function una_get_add_cover( $data ) {
+    $texts   = [ 'Установил', 'Установила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $user_name = get_the_author_meta( 'display_name', $data['user_id'] );
     $src       = RCL_UPLOAD_URL . 'covers/' . $data['user_id'] . '.jpg';
     $cover     = '<a class="mpr_image una_cover" href="' . $src . '" title="Обложка пользователя: ' . $user_name . '"><img style="max-height: 250px;display: block;" src="' . $src . '" alt=""></a>';
 
-    return '<span class="una_action">Установил обложку</span>' . $cover;
+    return '<span class="una_action">' . $decline . ' обложку</span>' . $cover;
 }
 
 // поставил аватар
 function una_get_add_avatar( $data ) {
+    $texts   = [ 'Установил', 'Установила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     $user_name = get_the_author_meta( 'display_name', $data['user_id'] );
     if ( $data['other_info'] == 'archive' ) {
         $datename = date( 'Y-m-d--H-i-s', strtotime( $data['act_date'] ) );
@@ -458,10 +542,13 @@ function una_get_add_avatar( $data ) {
 
     $cover = '<a class="mpr_image una_avatar" href="' . $src . '" title="Аватарка пользователя: ' . $user_name . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $src . '" alt=""></a>';
 
-    return '<span class="una_action">Установил аватарку</span>' . $cover;
+    return '<span class="una_action">' . $decline . ' аватарку</span>' . $cover;
 }
 
 // удалил аватар
 function una_get_del_avatar( $data ) {
-    return '<span class="una_action">Удалил аватарку</span>';
+    $texts   = [ 'Удалил', 'Удалила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' аватарку</span>';
 }

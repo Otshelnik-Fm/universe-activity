@@ -125,7 +125,10 @@ function una_get_gnp_add_group_notify( $data ) {
         $type = 'дайджеста за неделю';
     }
 
-    return '<span class="una_action">Подписался в группе</span> ' . $name . ' на получение ' . $type;
+    $texts   = [ 'Подписался', 'Подписалась' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' в группе</span> ' . $name . ' на получение ' . $type;
 }
 
 // вывод смены подписки
@@ -139,13 +142,19 @@ function una_get_gnp_change_group_notify( $data ) {
         $type = 'дайджеста за неделю';
     }
 
-    return '<span class="una_action">Изменил тип подписки в группе</span> ' . $name . ' на получение ' . $type;
+    $texts   = [ 'Изменил', 'Изменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' тип подписки в группе</span> ' . $name . ' на получение ' . $type;
 }
 
 function una_get_gnp_del_group_notify( $data ) {
     $name = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
 
-    return '<span class="una_action">Отменил подписку в группе</span> ' . $name;
+    $texts   = [ 'Отменил', 'Отменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' подписку в группе</span> ' . $name;
 }
 
 /*

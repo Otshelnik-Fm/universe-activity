@@ -111,10 +111,13 @@ function una_del_sbt_subs_action( $post_id, $post_type ) {
 function una_get_sbt_subs( $data ) {
     $name = 'запись';
 
+    $texts   = [ 'Подписался', 'Подписалась' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
     if ( $data['object_type'] == 'forum' ) {
-        return '<span class="una_action">Подписался на тему форума:</span> ' . $data['object_name'];
+        return '<span class="una_action">' . $decline . ' на тему форума:</span> ' . $data['object_name'];
     } else if ( $data['object_type'] == 'products' ) {
-        return '<span class="una_action">Подписался на товар:</span> ' . $data['object_name'];
+        return '<span class="una_action">' . $decline . ' на товар:</span> ' . $data['object_name'];
     } else if ( $data['object_type'] == 'post-group' ) {
         if ( is_serialized( $data['other_info'] ) ) {
             $other = unserialize( $data['other_info'] );
@@ -126,7 +129,10 @@ function una_get_sbt_subs( $data ) {
             $group = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $other['grn'] . '"</a>';
             $link  = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
 
-            return '<span class="una_action">В группе ' . $group . ', подписался на комментарии к записи:</span> ' . $link;
+            $texts   = [ 'подписался', 'подписалась' ];
+            $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+            return '<span class="una_action">В группе ' . $group . ', ' . $decline . ' на комментарии к записи:</span> ' . $link;
         } else {
             $name = 'записи в группе';
         }
@@ -134,7 +140,7 @@ function una_get_sbt_subs( $data ) {
         $data['object_name'] = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
     }
 
-    return '<span class="una_action">Подписался на ' . $name . ':</span> ' . $data['object_name'];
+    return '<span class="una_action">' . $decline . ' на ' . $name . ':</span> ' . $data['object_name'];
 }
 
 function una_del_sbt_subs( $data ) {
@@ -152,7 +158,10 @@ function una_del_sbt_subs( $data ) {
             $group = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $other['grn'] . '"</a>';
             $link  = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
 
-            return '<span class="una_action">В группе ' . $group . ', отписался от комментариев к записи:</span> ' . $link;
+            $texts   = [ 'отписался', 'отписалась' ];
+            $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+            return '<span class="una_action">В группе ' . $group . ', ' . $decline . ' от комментариев к записи:</span> ' . $link;
         } else {
             $name = 'записи в группе';
         }
@@ -160,7 +169,10 @@ function una_del_sbt_subs( $data ) {
         $data['object_name'] = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
     }
 
-    return '<span class="una_action">Отписался от ' . $name . ':</span> ' . $data['object_name'];
+    $texts   = [ 'Отписался', 'Отписалась' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' от ' . $name . ':</span> ' . $data['object_name'];
 }
 
 /*
