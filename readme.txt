@@ -983,6 +983,11 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 
 
 == Changelog ==
+= 2019-07-08 =
+v0.41  
+* Корректировка стилей под <a href="https://codeseller.ru/products/universe-activity-comments/">Universe Activity Comments</a>
+
+
 = 2019-07-05 =
 v0.40   
 * Смена версии т.к. менеджер дополнений и репозиторий WP-Recall не видит увеличения цифры при переходе с версии 0.30 на 0.4. Соответственно не предлагает обновиться.

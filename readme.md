@@ -557,6 +557,11 @@ add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // 
 ------------------------------
 
 ## Changelog  
+**2019-07-08**  
+v0.41  
+- [x] Корректировка стилей под [Universe Activity Comments](https://codeseller.ru/products/universe-activity-comments/)  
+
+
 
 **2019-07-05**  
 v0.40   

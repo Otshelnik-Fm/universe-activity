@@ -175,7 +175,15 @@
 }
 /* una comment */
 .unac_comm_content {
-    border-left: 3px solid #ddd;
-    margin: 5px 0;
-    padding: 0 10px;
+    border-left: 3px solid #ff8f8f;
+    margin: 12px 6px 18px 12px;
+    padding: 6px 12px;
+}
+.unac_comm_content > p:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+.unac_comm_content > p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }

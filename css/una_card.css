@@ -64,9 +64,7 @@
 .una_card .unac_comm_content {
     box-sizing: border-box;
     font-size: 16px;
-    margin: 12px 0 18px;
-    padding: 0;
-    width: 100%;
+    width: calc(100% - 18px);
 }
 .una_card .una_goto_comments {
     margin: 0 0 3px -6px;
