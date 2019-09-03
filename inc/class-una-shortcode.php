@@ -172,7 +172,7 @@ class UNA_Shortcode {
                 }
 
 
-                $out .= '<div class="una_item_timeline ' . $una_even_class . ' una_' . $data['action'] . ' ' . $attr_val['modal_class'] . ' una_id_' . $data['id'] . '" data-unam_data="' . $attr_val['data_attr'] . '">';
+                $out .= '<div class="una_item_timeline ' . $una_even_class . ' una_type_' . $data['object_type'] . ' una_' . $data['action'] . ' ' . $attr_val['modal_class'] . ' una_id_' . $data['id'] . '" data-unam_data="' . $attr_val['data_attr'] . '">';
                 if ( $attrs['use_name'] ) {
                     $out .= '<div class="una_author">';
                     $out .= $author;
