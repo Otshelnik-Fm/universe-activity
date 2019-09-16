@@ -57,11 +57,9 @@ class UNA_Register_Type_Callback {
             ),
             'logged_in'              => array( // когда он вошел на сайт
                 'callback' => 'una_get_logged_in_out',
-                'access'   => 'author',
             ),
             'logged_in_ulogin'       => array( // когда он вошел через плагин u-login
                 'callback' => 'una_get_logged_in_out',
-                'access'   => 'author',
             ),
             'logged_out'             => array( // когда он вышел с сайта
                 'callback' => 'una_get_logged_in_out',

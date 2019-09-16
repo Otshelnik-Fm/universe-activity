@@ -143,7 +143,7 @@
 <tr>
 <td>logged_in</td>
 <td>пользователь вошел на сайт</td>
-<td>автор</td>
+<td>гость</td>
 </tr>
 <tr>
 <td>logged_out</td>
@@ -389,7 +389,7 @@
 <tr>
 <td>logged_in_ulogin</td>
 <td>вошел на сайт и через какую сеть</td>
-<td>автор</td>
+<td>гость</td>
 </tr>
 </tbody></table>
 
@@ -616,6 +616,14 @@
 <th>действие</th>
 </tr></thead><tbody>
 <tr>
+<td>logged_in</td>
+<td>когда юзер вошел на сайт</td>
+</tr>
+<tr>
+<td>logged_in_ulogin</td>
+<td>когда юзер вошел через плагин u-login и через какую сеть</td>
+</tr>
+<tr>
 <td>add_comment</td>
 <td>добавлен комментарий</td>
 </tr><tr>
@@ -760,13 +768,6 @@
 <th>slug</th>
 <th>действие</th>
 </tr></thead><tbody>
-<tr>
-<td>logged_in</td>
-<td>когда он вошел на сайт</td>
-</tr><tr>
-<td>logged_in_ulogin</td>
-<td>когда он вошел через плагин u-login и через какую сеть</td>
-</tr>
 <tr>
 <td>logged_out</td>
 <td>когда он вышел с сайта</td>
@@ -1005,6 +1006,16 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 
 == Changelog ==
+
+= 2019-09-16 =
+v0.51  
+* События logged_in и logged_in_ulogin будут видеть гости. Мотивация - залогиниться, когда видишь что и другие также делают.
+* Поддержка дополнения <a href="https://codeseller.ru/products/fake-online/" target="_blank">Fake Online</a> совместно с <a href="https://codeseller.ru/products/bonus-on-login/" target="_blank">Bonus on Login</a>
+- боты как будто страмятся получить рейтинг "За логин" и поэтому каждый день логинятся на сайте.
+
+* рейтинг активности "bonus-login" также как и 'smart-comment' исключены из ленты чтобы не засорять активность.
+
+
 
 = 2019-09-04 =
 v0.50  
