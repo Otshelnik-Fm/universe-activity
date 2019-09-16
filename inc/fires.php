@@ -15,6 +15,17 @@ function una_login( $user_login, $user ) {
     una_insert( $args );
 }
 
+// фейковый логин через доп Fake Online
+add_action( 'fknl_daily', 'una_fake_login', 10, 2 );
+function una_fake_login( $user_id, $time ) {
+    $args['user_id']     = $user_id;
+    $args['act_date']    = $time;
+    $args['action']      = 'logged_in';
+    $args['object_type'] = 'user';
+
+    una_insert( $args );
+}
+
 // логин через uLogin (хук сработает если только есть uLogin)
 add_action( 'ulogin_enter_user', 'una_login_ulogin', 999 );
 function una_login_ulogin( $user_id ) {
@@ -176,6 +187,10 @@ function una_give_rating( $data ) {
 
     // рейтинг за smart-comment игнорим
     if ( $data['rating_type'] == 'smart-comment' )
+        return false;
+
+    // рейтинг за bonus-login игнорим
+    if ( $data['rating_type'] == 'bonus-login' )
         return false;
 
     // обрабатываемые записи для вывода заголовка
