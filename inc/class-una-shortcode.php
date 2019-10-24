@@ -143,7 +143,7 @@ class UNA_Shortcode {
 
                 if ( $attrs['use_name'] ) { // в выводе нам нужна ава и имя
                     if ( $data['user_id'] > 0 ) {
-                        $author    = '<a href="/?una_author=' . $data['user_id'] . '" title="Перейти в кабинет" rel="nofollow">' . get_avatar( $data['user_id'], 36 ) . '</a>';
+                        $author    = '<a href="/?una_author=' . $data['user_id'] . '" title="Перейти в кабинет" rel="nofollow">' . get_avatar( $data['user_id'], 36, '', '', array( 'extra_attr' => 'loading="lazy"' ) ) . '</a>';
                         $user_name = get_the_author_meta( 'display_name', $data['user_id'] );
                     } else if ( $data['user_id'] == 0 ) {
                         $user_name = 'Гость';

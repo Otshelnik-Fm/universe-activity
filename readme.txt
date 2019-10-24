@@ -1007,7 +1007,11 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 == Changelog ==
 
-= 2019-09-16 =
+= 2019-10-24 =
+v0.52  
+* к аватаркам добавлен атрибут loading="lazy" (пока его поддерживает хром). Полезно для 1-й длинной страницы
+
+
 v0.51  
 * События logged_in и logged_in_ulogin будут видеть гости. Мотивация - залогиниться, когда видишь что и другие также делают.
 * Поддержка дополнения <a href="https://codeseller.ru/products/fake-online/" target="_blank">Fake Online</a> совместно с <a href="https://codeseller.ru/products/bonus-on-login/" target="_blank">Bonus on Login</a>
