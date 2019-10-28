@@ -39,3 +39,6 @@
     border: 3px solid #c4cbe7;
     box-sizing: content-box;
 }
+.una_basic .una_right {
+    width: calc(100% - 42px);
+}

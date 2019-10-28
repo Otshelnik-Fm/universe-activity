@@ -194,3 +194,6 @@
 .una_one_user .una_bui_get_info::after {
     content: "\f2bc";
 }
+.una_one_user .una_right {
+    width: 100%;
+}

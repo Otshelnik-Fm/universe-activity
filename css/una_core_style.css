@@ -86,16 +86,17 @@
 .una_item_timeline .una_right {
     display: flex;
     padding: 0 12px;
-    width: 100%;
+    width: calc(100% - 36px);
 }
 .una_time {
     align-self: center;
-    color: #777;
+    color: #616161;
     font-size: 11px;
     padding: 0 12px 0 0;
 }
 .una_content {
     flex-grow: 1;
+    overflow: hidden;
 }
 .una_avatar {
     display: block;
@@ -115,7 +116,7 @@
     text-transform: none;
 }
 #universe_time .una_post_status {
-    color: #999;
+    color: #9e5353;
     font-size: 11px;
     margin: 0 0 0 6px;
 }
