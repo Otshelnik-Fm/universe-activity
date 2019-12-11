@@ -79,12 +79,12 @@ if ( rcl_exist_addon( 'pretty-url-author' ) ) {
     require_once 'integration/addon-pretty-url-author.php';
 }
 
-// доп "Groups Theme RePlace"
+// доп "Groups Theme RePlace" https://codeseller.ru/?p=21473
 if ( rcl_exist_addon( 'groups-theme-replace' ) ) {
     require_once 'integration/addon-groups-theme-replace.php';
 }
 
-// доп "Group New Post Notify"
+// доп "Group New Post Notify" https://codeseller.ru/?p=21596
 if ( rcl_exist_addon( 'group-new-post-notify' ) ) {
     require_once 'integration/addon-group-new-post-notify.php';
 }

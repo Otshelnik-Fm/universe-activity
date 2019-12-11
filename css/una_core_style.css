@@ -131,7 +131,6 @@
 }
 .una_goto_comments {
     font-size: 14px;
-    padding: 6px 0 6px 42px;
 }
 .una_goto_comments > a {
     align-items: center;
@@ -140,11 +139,8 @@
 .una_goto_comments > a:hover {
     text-decoration: none;
 }
-.una_goto_comments > a span {
-    border-bottom: 1px dashed #ccc;
-}
 .una_goto_comments > a span:hover {
-    border-bottom-color: #555;
+    text-decoration: underline;
 }
 .una_goto_comments .rcli {
     margin: 0 0 0 6px;
