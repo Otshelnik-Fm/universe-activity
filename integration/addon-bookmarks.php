@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) )
 add_filter( 'una_register_type', 'una_register_bkmrk_addon', 10 );
 function una_register_bkmrk_addon( $type ) {
     $type['bkmrk_add']['callback'] = 'una_get_bkmrk_add';   // добавил в закладки
+    $type['bkmrk_del']['callback'] = 'una_get_bkmrk_del';   // удалил из закладок
+
+    $type['bkmrk_del']['access'] = 'author';
 
     return $type;
 }
@@ -39,6 +42,31 @@ function bkmrk_add_action( $post_id ) {
 
     $args['action']      = 'bkmrk_add'; // тот самый уникальный экшен
     $args['object_id']   = $post_id;
+    $args['object_name'] = $name;
+    $args['object_type'] = $post->post_type;
+    $args['subject_id']  = $id_author;
+
+    una_insert( $args );                // запишем в бд
+}
+
+// хук: удалил из закладок
+add_action( 'rcl_delete_bookmark', 'bkmrk_del_action', 10 );
+function bkmrk_del_action( $data ) {
+    $post      = get_post( $data->post_id );
+    $name      = $post->post_title;
+    $id_author = $post->post_author;
+
+    if ( $post->post_type == 'post-group' ) {
+        $group = una_get_group_by_post( $data->post_id );
+
+        $group_data = array( 'grn' => $group->name );
+
+        $args['other_info'] = serialize( $group_data );
+        $args['group_id']   = $group->term_id;
+    }
+
+    $args['action']      = 'bkmrk_del';
+    $args['object_id']   = $data->post_id;
     $args['object_name'] = $name;
     $args['object_type'] = $post->post_type;
     $args['subject_id']  = $id_author;
@@ -92,5 +120,29 @@ function una_get_bkmrk_add( $data ) {
         $link = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
 
         return '<span class="una_action">' . $decline . ' в закладки запись:</span> ' . $link;
+    }
+}
+
+function una_get_bkmrk_del( $data ) {
+    if ( $data['object_type'] == 'post-group' ) {
+        $other = '';
+        if ( is_serialized( $data['other_info'] ) ) {
+            $other = unserialize( $data['other_info'] );
+        }
+
+        $group = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $other['grn'] . '"</a>';
+        $link  = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
+
+        $texts   = [ 'удалил', 'удалила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        return '<span class="una_action">В группе ' . $group . ', ' . $decline . ' закладку к записи:</span> ' . $link;
+    } else {
+        $texts   = [ 'Удалил', 'Удалила' ];
+        $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+        $link = '<a href="/?p=' . $data['object_id'] . '" title="Перейти" rel="nofollow">' . $data['object_name'] . '</a>';
+
+        return '<span class="una_action">' . $decline . ' закладку к записи:</span> ' . $link;
     }
 }
