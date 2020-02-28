@@ -11,6 +11,7 @@ class UNA_Insert_DB {
     public function insert_db( $argum ) {
         // предустановим некоторые аргументы
         $args = wp_parse_args( $argum, array(
+            'user_id'     => false,
             'action'      => '',
             'act_date'    => current_time( 'mysql' ),
             'object_id'   => '',

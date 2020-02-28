@@ -138,6 +138,22 @@ class UNA_Register_Type_Callback {
                 'callback' => 'una_get_group_is_closed',
                 'access'   => 'logged',
             ),
+            'pass_reset_fail'        => array( // неверные попытки сброса пароля
+                'callback' => 'una_get_pass_reset_fail',
+                'access'   => 'admin',
+            ),
+            'pass_reset_mail'        => array( // успешная отправка письма с ссылкой сброса пароля
+                'callback' => 'una_get_pass_reset_mail',
+                'access'   => 'admin',
+            ),
+            'pass_reset_confirm'     => array( // подтвердил изменение пароля через почту
+                'callback' => 'una_get_pass_reset_confirm',
+                'access'   => 'author',
+            ),
+            'pass_change'            => array( // изменил пароль через ЛК
+                'callback' => 'una_get_pass_change',
+                'access'   => 'author',
+            ),
         );
         $types = apply_filters( 'una_register_type', $type ); // чтобы можно было зарегистрировать тип и коллбэк функцию
 

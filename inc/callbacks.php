@@ -552,3 +552,49 @@ function una_get_del_avatar( $data ) {
 
     return '<span class="una_action">' . $decline . ' аватарку</span>';
 }
+
+// неверные попытки сброса пароля
+function una_get_pass_reset_fail( $data ) {
+    $other = unserialize( $data['other_info'] );
+
+    $type = '';
+    if ( isset( $other['ml'] ) ) {
+        $type = 'по почте: ' . $other['ml'];
+    } else if ( isset( $other['nm'] ) ) {
+        $type = 'по имени:  ' . $other['nm'];
+    }
+
+    $ip = '<span class="una_post_status">(запрос с ip: ' . $data['user_ip'] . ')</span>';
+
+    return '<span class="una_action"> попытался сбросить пароль ' . $type . $ip . '</span>';
+}
+
+// успешная отправка письма с ссылкой сброса пароля
+function una_get_pass_reset_mail( $data ) {
+    $userdata    = get_userdata( $data['subject_id'] );
+    $name        = ( ! empty( $userdata )) ? $userdata->display_name : '';
+    $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $name . '</a>';
+
+    $texts   = [ 'Запросил', 'Запросила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $ip = '<span class="una_post_status">(запрос с ip: ' . $data['user_ip'] . ')</span>';
+
+    return '<span class="una_action">' . $decline . ' отправку письма на сброс пароля пользователя ' . $link_author . $ip . '</span>';
+}
+
+// Подтвердил изменение пароля через почту
+function una_get_pass_reset_confirm( $data ) {
+    $texts   = [ 'Подтвердил', 'Подтвердила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' изменение пароля через почту</span>';
+}
+
+// Изменил пароль через ЛК
+function una_get_pass_change( $data ) {
+    $texts   = [ 'Изменил', 'Изменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' пароль через личный кабинет</span>';
+}

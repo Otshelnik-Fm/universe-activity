@@ -6,10 +6,22 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 // логин через вордпресс
-add_action( 'wp_login', 'una_login', 10, 2 );
-function una_login( $user_login, $user ) {
-    $args['user_id']     = $user->data->ID;
+add_action( 'set_auth_cookie', 'una_login', 20, 4 );
+function una_login( $auth_cookie, $expire, $expiration, $user_id ) {
+    $args['user_id']     = $user_id;
     $args['action']      = 'logged_in';
+    $args['object_type'] = 'user';
+
+    una_insert( $args );
+}
+
+// вышел с сайта
+add_action( 'clear_auth_cookie', 'una_logout', 5 );
+function una_logout() {
+    $user = wp_get_current_user();
+
+    $args['user_id']     = $user->ID;
+    $args['action']      = 'logged_out';
     $args['object_type'] = 'user';
 
     una_insert( $args );
@@ -45,12 +57,13 @@ function una_login_ulogin( $user_id ) {
 // регистрация пользователя
 add_action( 'user_register', 'una_register', 10 );
 function una_register( $user_id ) {
-    $date_time = current_time( 'mysql' );
-    $time      = new DateTime( $date_time );
-
-    $time->modify( '-1 second' ); // хак. Чтобы регистрация была раньше логина
-
-    $args['act_date']    = $time->format( 'Y-m-d H:i:s' );
+    // del in v0.56 - посмотрим, понаблюдаем
+//    $date_time = current_time( 'mysql' );
+//    $time      = new DateTime( $date_time );
+//
+//    $time->modify( '-1 second' ); // хак. Чтобы регистрация была раньше логина
+//
+//    $args['act_date']    = $time->format( 'Y-m-d H:i:s' );
     $args['action']      = 'register';
     $args['object_type'] = 'user';
     $args['user_id']     = $user_id;
@@ -101,15 +114,6 @@ function una_failed_registration( $errors, $sanitized_user_login, $user_email ) 
     una_insert( $args );
 
     return $errors;
-}
-
-// выход с сайта
-add_action( 'wp_logout', 'una_logout' );
-function una_logout() {
-    $args['action']      = 'logged_out';
-    $args['object_type'] = 'user';
-
-    una_insert( $args );
 }
 
 // при удалении юзера - запишем кто удалил его и очистим историю удаленного юзера
@@ -891,3 +895,88 @@ function una_del_avatar() {
 
     una_insert( $args );
 }
+
+/*
+ *
+ * Действия с паролями
+ *
+ */
+
+// успешная отправка письма с ссылкой сброса пароля
+add_filter( 'retrieve_password_message', 'una_pass_reset_on_mail', 10, 4 );
+function una_pass_reset_on_mail( $message, $key, $user_login, $user_data ) {
+    $args['action']      = 'pass_reset_mail';
+    $args['object_type'] = 'user';
+    $args['subject_id']  = $user_data->data->ID;
+
+    una_insert( $args );
+
+    // фильтр возвращаем
+    return $message;
+}
+
+// неверные попытки сброса пароля
+add_action( 'lostpassword_post', 'una_pass_reset' );
+function una_pass_reset( $errors ) {
+    // нет запроса
+    if ( ! isset( $_POST['user_login'] ) )
+        return;
+
+    $in_form = trim( $_POST['user_login'] );
+
+    $args['action']      = 'pass_reset_fail';
+    $args['object_type'] = 'user';
+
+    // wp вернул ошибку
+    if ( $errors->has_errors() ) {
+        $email = sanitize_email( $in_form );
+
+        // ml as mail
+        $other = [ 'ml' => $email ];
+
+        $args['other_info'] = serialize( $other );
+
+        una_insert( $args );
+    }
+    // или проверим на логин
+    else {
+        $user_data = get_user_by( 'login', $in_form );
+
+        if ( ! $user_data ) {
+            $user = sanitize_user( $in_form );
+
+            // nm as name
+            $other = [ 'nm' => $user ];
+
+            $args['other_info'] = serialize( $other );
+
+            una_insert( $args );
+        }
+    }
+
+    return;
+}
+
+// Подтвердил изменение пароля через почту
+add_action( 'after_password_reset', 'una_change_pass_confirm' );
+function una_change_pass_confirm( $user ) {
+    $args['user_id']     = $user->data->ID;
+    $args['action']      = 'pass_reset_confirm';
+    $args['object_type'] = 'user';
+
+    una_insert( $args );
+}
+
+// Изменил пароль через ЛК
+add_filter( 'password_change_email', 'una_pass_change', 10 );
+function una_pass_change( $pass_change_email ) {
+    $args['action']      = 'pass_change';
+    $args['object_type'] = 'user';
+
+    una_insert( $args );
+
+    // фильтр возвращаем
+    return $pass_change_email;
+}
+
+//////////////////////////////// END ////////////////////////////////

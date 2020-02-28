@@ -58,7 +58,7 @@ class UNA_Get_DB {
         if ( isset( $args['offset'] ) ) {
             $argum['offset'] = $args['offset'];
         }
-        $argum['orderby']    = 'act_date';
+        $argum['orderby']    = 'act_date DESC,activity.id';
         $argum['return_as']  = 'ARRAY_A';
         $argum['join_query'] = array(
             array(
