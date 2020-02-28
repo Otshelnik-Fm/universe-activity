@@ -197,6 +197,7 @@
 .una_one_user .una_right {
     width: 100%;
 }
-.una_one_user .una_change_pass::after {
+.una_one_user .una_pass_change::after,
+.una_one_user .una_pass_reset_confirm::after {
     content: "\f12a";
 }
