@@ -332,3 +332,32 @@ function una_decline_by_sex( $user_id, $data ) {
 
     return $out;
 }
+
+/**
+ * получим имя юзера по его id
+ *
+ * @since 0.60
+ *
+ * @param int $user_id      id user.
+ * @param bool $link        Обернуть короткой ссылкой:
+ *                          'true'  - вернет имя и ссылку на его ЛК.
+ *                          'false' - имя без ссылки.
+ *                          Default 'false'.
+ *
+ * @return string|bool    строка - имя пользователя
+ *                        'false' - если юзера по данному id не существует
+ */
+function una_get_username( $user_id, $link = false ) {
+    $user_data = get_userdata( $user_id );
+
+    if ( false === $user_data )
+        return false;
+
+    $name = ($user_data->display_name) ? $user_data->display_name : $user_data->user_login;
+
+    if ( false === $link ) {
+        return $name;
+    }
+
+    return '<a class="una_subject" href="/?una_author=' . $user_id . '" title="Перейти" rel="nofollow">' . $name . '</a>';
+}

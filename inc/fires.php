@@ -468,11 +468,9 @@ function una_post_status( $new_status, $old_status, $post ) {
     // если действие не автора записи
     if ( $user_ID != $post_author ) {
         if ( $args['action'] == 'delete_post' ) { // запись удаляет не автор записи (а например админ сайта)
-            $user_info = get_userdata( $post_author );
-
             $args['user_id']    = $user_ID;
             $args['subject_id'] = $post_author;
-            $args['other_info'] = $user_info->display_name;
+            $args['other_info'] = una_get_username( $post_author );
         } else { // все другие действия (например одобрил запись)
             $args['other_info'] = $user_ID;
         }
@@ -532,10 +530,8 @@ function una_delete_post( $postid ) {
     $post_author = get_post_field( 'post_author', $postid );
 
     if ( $user_ID != $post_author ) { // не сам автор удаляет запись, а скорее всего редакторы или админ
-        $user_info = get_userdata( $post_author );
-
         $args['subject_id'] = $post_author;
-        $args['other_info'] = $user_info->display_name;
+        $args['other_info'] = una_get_username( $post_author );
     }
 
     una_insert( $args );
@@ -562,12 +558,10 @@ function una_add_user_feed( $feed_id, $argums ) {
     if ( $res > 0 ) { // были обновлены строки
         $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE action = 'del_user_feed' AND user_id = '%d' AND subject_id = '%d'", $argums['user_id'], $argums['object_id'] ) );
     } else {
-        $userdata = get_userdata( $argums['object_id'] );
-
         $args['user_id']     = $argums['user_id'];
         $args['action']      = 'add_user_feed';
         $args['subject_id']  = $argums['object_id'];
-        $args['object_name'] = $userdata->display_name;
+        $args['object_name'] = una_get_username( $argums['object_id'] );
         $args['object_type'] = 'user';
 
         una_insert( $args );
@@ -577,12 +571,10 @@ function una_add_user_feed( $feed_id, $argums ) {
 // отписался от юзера (доп FEED)
 add_action( 'rcl_pre_remove_feed', 'una_del_user_feed' );
 function una_del_user_feed( $feed ) {
-    $userdata = get_userdata( $feed->object_id );
-
     $args['user_id']     = $feed->user_id;
     $args['action']      = 'del_user_feed';
     $args['subject_id']  = $feed->object_id;
-    $args['object_name'] = $userdata->display_name;
+    $args['object_name'] = una_get_username( $feed->object_id );
     $args['object_type'] = 'user';
 
     una_insert( $args );
@@ -599,12 +591,10 @@ function una_add_user_blacklist( $subject_id ) {
     if ( $res > 0 ) { // были обновлены строки
         $wpdb->query( $wpdb->prepare( "DELETE FROM " . UNA_DB . " WHERE action = 'del_user_blacklist' AND user_id = '%d' AND subject_id = '%d'", $user_ID, $subject_id ) );
     } else { // нет у нас такой строки - значит создадим
-        $userdata = get_userdata( $subject_id );
-
         $args['user_id']     = $user_ID;
         $args['action']      = 'add_user_blacklist';
         $args['subject_id']  = $subject_id;
-        $args['object_name'] = $userdata->display_name;
+        $args['object_name'] = una_get_username( $subject_id );
         $args['object_type'] = 'user';
 
         una_insert( $args );
@@ -616,12 +606,10 @@ add_action( 'remove_user_blacklist', 'una_del_user_blacklist' );
 function una_del_user_blacklist( $subject_id ) {
     global $user_ID;
 
-    $userdata = get_userdata( $subject_id );
-
     $args['user_id']     = $user_ID;
     $args['action']      = 'del_user_blacklist';
     $args['subject_id']  = $subject_id;
-    $args['object_name'] = $userdata->display_name;
+    $args['object_name'] = una_get_username( $subject_id );
     $args['object_type'] = 'user';
 
     una_insert( $args );
@@ -661,14 +649,12 @@ function una_delete_group( $term_id ) {
 
     $admin_group = $wpdb->get_var( $wpdb->prepare( "SELECT admin_id FROM " . RCL_PREF . "groups WHERE ID = %d", $term_id ) );
 
-    $userdata = get_userdata( $admin_group );
-
     $args['user_id']     = $user_ID;
     $args['action']      = 'delete_group';
     $args['object_id']   = $term_id;
     $args['object_type'] = 'group';
     $args['subject_id']  = $admin_group;
-    $args['other_info']  = $userdata->display_name;
+    $args['other_info']  = una_get_username( $admin_group );
 
     una_insert( $args );
 }
@@ -775,10 +761,9 @@ function una_group_closed_opened( $data ) {
 // сменили юзеру в группе роль/забанили в группе
 add_action( 'rcl_update_group_user_role', 'una_group_change_user_role' );
 function una_group_change_user_role( $data ) {
-    $term     = get_term( $data['group_id'], 'groups' );
-    $userdata = get_userdata( $data['user_id'] );
+    $term = get_term( $data['group_id'], 'groups' );
 
-    $in_other = array( 'un' => $userdata->display_name, 'ur' => $data['user_role'] ); // массив данных записи
+    $in_other = array( 'un' => una_get_username( $data['user_id'] ), 'ur' => $data['user_role'] ); // массив данных записи
 
     $action = ('banned' === $data['user_role']) ? 'group_user_ban' : 'group_user_role';
 
@@ -824,10 +809,8 @@ function una_user_del_topic( $topic_id ) {
     $topic_user_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM " . RCL_PREF . "pforum_topics WHERE topic_id = %d", $topic_id ) );
 
     if ( $topic_user_id != $user_ID ) { // если удаляет топик не его автор
-        $userdata = get_userdata( $topic_user_id );
-
         $args['subject_id'] = $topic_user_id;
-        $args['other_info'] = $userdata->display_name;
+        $args['other_info'] = una_get_username( $topic_user_id );
     }
 
     $args['action']      = 'pfm_del_topic';

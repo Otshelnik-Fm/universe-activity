@@ -120,12 +120,10 @@ function una_get_give_rating_post( $data ) {
         $type = 'товар';
     } else if ( $data['action'] == 'give_rating_forum-post' ) { // если рейтинг за комментарий на prime forum
         $type = 'комментарий на форуме';
-        $name = get_userdata( $data['subject_id'] );
-        $link = '<a href="/?una_prime_forum_topic_url=' . $data['object_id'] . '" title="Перейти к комментарию" rel="nofollow">' . $name->display_name . '</a>';
+        $link = '<a href="/?una_prime_forum_topic_url=' . $data['object_id'] . '" title="Перейти к комментарию" rel="nofollow">' . una_get_username( $data['subject_id'] ) . '</a>';
     } else if ( $data['action'] == 'give_rating_forum-page' ) { // если рейтинг за комментарий на Asgaros forum
         $type = 'комментарий на форуме';
-        $name = get_userdata( $data['subject_id'] );
-        $link = '<a href="/?una_asgrs_forum_post_url=' . $data['object_id'] . '" title="Перейти к комментарию" rel="nofollow">' . $name->display_name . '</a>';
+        $link = '<a href="/?una_asgrs_forum_post_url=' . $data['object_id'] . '" title="Перейти к комментарию" rel="nofollow">' . una_get_username( $data['subject_id'] ) . '</a>';
     }
 
     $object = '';
@@ -420,16 +418,14 @@ function una_get_user_in_out_group( $data ) {
         $out = $decline . ' группу';
     }
     if ( $data['action'] == 'user_out_group' && $data['other_info'] == 'kick' ) {
-        $userdata = get_userdata( $data['subject_id'] );
-        $name     = ( ! empty( $userdata )) ? $userdata->display_name : '';
-
         $texts   = [ 'удалил', 'удалила' ];
         $decline = una_decline_by_sex( $data['user_id'], $texts );
 
-        $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $name . '</a>';
-        $out         = $decline . ' пользователя ' . $link_author . ' из группы';
+        $out = $decline . ' пользователя ' . una_get_username( $data['subject_id'], 1 ) . ' из группы';
     }
+
     $link = '<a class="una_group_name" href="/?una_group_url=' . $data['object_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
+
     return '<span class="una_action">' . $out . '<span class="una_colon">:</span> </span>' . $link;
 }
 
@@ -571,16 +567,12 @@ function una_get_pass_reset_fail( $data ) {
 
 // успешная отправка письма с ссылкой сброса пароля
 function una_get_pass_reset_mail( $data ) {
-    $userdata    = get_userdata( $data['subject_id'] );
-    $name        = ( ! empty( $userdata )) ? $userdata->display_name : '';
-    $link_author = '<a class="una_subject" href="/?una_author=' . $data['subject_id'] . '" title="Перейти" rel="nofollow">' . $name . '</a>';
-
     $texts   = [ 'Запросил', 'Запросила' ];
     $decline = una_decline_by_sex( $data['user_id'], $texts );
 
     $ip = '<span class="una_post_status">(запрос с ip: ' . $data['user_ip'] . ')</span>';
 
-    return '<span class="una_action">' . $decline . ' отправку письма на сброс пароля пользователя ' . $link_author . $ip . '</span>';
+    return '<span class="una_action">' . $decline . ' отправку письма на сброс пароля пользователя ' . una_get_username( $data['subject_id'], 1 ) . $ip . '</span>';
 }
 
 // Подтвердил изменение пароля через почту

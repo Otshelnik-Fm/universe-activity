@@ -81,9 +81,8 @@ function una_user_del_topic_asgaros( $topic_id ) {
     $topic_user_id = $wpdb->get_var( $wpdb->prepare( "SELECT author_id FROM " . $wpdb->prefix . "forum_posts WHERE parent_id = %d ORDER BY date ASC", $topic_id ) );
 
     if ( $topic_user_id != $user_ID ) { // если удаляет топик не его автор
-        $userdata           = get_userdata( $topic_user_id );
         $args['subject_id'] = $topic_user_id;
-        $args['other_info'] = $userdata->display_name;
+        $args['other_info'] = una_get_username( $topic_user_id );
     }
 
     $args['action']      = 'asgrs_del_topic';

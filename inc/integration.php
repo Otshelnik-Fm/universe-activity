@@ -19,9 +19,9 @@ function una_output_content_type() {
     );
 
     $out  = '';
-    $user = get_userdata( $user_LK );
+    $user = una_get_username( $user_LK );
     if ( $user ) {
-        $out = '<div class="una_title">Журнал действий ' . $user->get( 'display_name' ) . ':</div>';
+        $out = '<div class="una_title">Журнал действий ' . $user . ':</div>';
     }
 
     rcl_enqueue_style( 'una_one_user_style', rcl_addon_url( 'css/una_one_user.css', __FILE__ ) );

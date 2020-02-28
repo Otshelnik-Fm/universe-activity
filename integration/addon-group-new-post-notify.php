@@ -16,10 +16,16 @@ function una_register_gnp_addon( $type ) {
     $type['add_group_notify']['callback']    = 'una_get_gnp_add_group_notify';      // подписался на уведомления группы
     $type['change_group_notify']['callback'] = 'una_get_gnp_change_group_notify';   // изменил тип уведомлений
     $type['del_group_notify']['callback']    = 'una_get_gnp_del_group_notify';      // удалил уведомление
+    $type['unsub_group_notify']['callback']  = 'una_get_gnp_unsub_group_notify';    // кто-то удалил подписку
+    $type['verify_group_notify']['callback'] = 'una_get_gnp_verify_group_notify';   // админ отправил письмо с напоминанием о продолжении подписки
+    $type['send_group_digest']['callback']   = 'una_get_gnp_send_group_digest';     // успешная отправка недельного дайджеста
 
     $type['add_group_notify']['access']    = 'author';
     $type['change_group_notify']['access'] = 'author';
     $type['del_group_notify']['access']    = 'author';
+    $type['unsub_group_notify']['access']  = 'admin';
+    $type['verify_group_notify']['access'] = 'admin';
+    $type['send_group_digest']['access']   = 'admin';
 
     return $type;
 }
@@ -91,6 +97,42 @@ function una_del_gnp_subscribe( $group_id ) {
     una_insert( $args );
 }
 
+// кто-то удалил подписку
+add_action( 'gnp_remove_subscribtion', 'una_unsub_gnp_subscribe', 10, 3 );
+function una_unsub_gnp_subscribe( $group_id, $user_id, $unsub_user_id ) {
+    $termdata = get_term( $group_id );
+
+    $args['action']      = 'unsub_group_notify';
+    $args['object_id']   = $group_id;
+    $args['object_name'] = $termdata->name;
+    $args['object_type'] = 'user';
+    $args['subject_id']  = $unsub_user_id;
+    $args['group_id']    = $group_id;
+
+    una_insert( $args );
+}
+
+// админ отправил письмо с напоминанием о продолжении подписки
+add_action( 'gnp_mail_verify', 'una_gnp_verify_subscribe', 10, 5 );
+function una_gnp_verify_subscribe( $group_id, $user_id, $mail, $userdata, $term ) {
+    $args['action']      = 'verify_group_notify';
+    $args['object_id']   = $group_id;
+    $args['object_name'] = $term->name;
+    $args['object_type'] = 'user';
+    $args['subject_id']  = $user_id;
+    $args['group_id']    = $group_id;
+
+    una_insert( $args );
+}
+
+// успешная отправка недельного дайджеста
+add_action( 'gnp_send_digest', 'una_send_gnp_digest' );
+function una_send_gnp_digest() {
+    $args['action'] = 'send_group_digest';
+
+    una_insert( $args );
+}
+
 /*
  * 3. Выводим в общую ленту
  * add_group_notify - зарегистрированная в 1-й функции в callback
@@ -148,6 +190,7 @@ function una_get_gnp_change_group_notify( $data ) {
     return '<span class="una_action">' . $decline . ' тип подписки в группе</span> ' . $name . ' на получение ' . $type;
 }
 
+// удалил подписку
 function una_get_gnp_del_group_notify( $data ) {
     $name = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
 
@@ -155,6 +198,29 @@ function una_get_gnp_del_group_notify( $data ) {
     $decline = una_decline_by_sex( $data['user_id'], $texts );
 
     return '<span class="una_action">' . $decline . ' подписку в группе</span> ' . $name;
+}
+
+// кто-то удалил подписку
+function una_get_gnp_unsub_group_notify( $data ) {
+    $texts   = [ 'Отменил', 'Отменила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    $name = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
+
+    return '<span class="una_action">' . $decline . ' подписку пользователю ' . una_get_username( $data['subject_id'], 1 ) . ' в группе</span> ' . $name;
+}
+
+// админ отправил письмо с напоминанием о продолжении подписки
+function una_get_gnp_verify_group_notify( $data ) {
+    $texts   = [ 'Отправил', 'Отправила' ];
+    $decline = una_decline_by_sex( $data['user_id'], $texts );
+
+    return '<span class="una_action">' . $decline . ' письмо (напоминание) - о продолжении подписки на рассылку из групп</span>, пользователю ' . una_get_username( $data['subject_id'], 1 );
+}
+
+// успешная отправка недельного дайджеста
+function una_get_gnp_send_group_digest( $data ) {
+    return '<span class="una_action">Недельный дайджест был успешно отправлен</span>';
 }
 
 /*
