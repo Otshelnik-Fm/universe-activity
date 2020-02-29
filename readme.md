@@ -1,20 +1,20 @@
 ## Описание:
 
-Дополнение для WordPress плагина [WP-Recall](https://wordpress.org/plugins/wp-recall/) - добавляет возможность писать пользовательскую активность в базу данных, а так же выводить ее - формируя ленту активности сайта. 
+Дополнение для WordPress плагина [WP-Recall](https://wordpress.org/plugins/wp-recall/) - добавляет возможность писать  📝  пользовательскую активность в базу данных, а так же выводить ее - формируя ленту активности сайта. 
 
 p.s. - это базовое ядро. Оно пишет в базу, выводит из нее, но имеет ограничения (смотри ниже) 
 
 ------------------------------
 
-## Demo:
+## Demo:  
 
-На [этой странице](http://across-ocean.otshelnik-fm.ru/top-secret-addons/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=page-top-secret-addons) и там же примеры  
+1. На [этой странице](http://across-ocean.otshelnik-fm.ru/top-secret-addons/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=page-top-secret-addons) и там же примеры  
 
-В [личном кабинете](https://otshelnik-fm.ru/author/otshelnik-fm/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=lk-author-otshelnik-fm) - под дополнением "User Info Tab"  
-На [живом сайте](https://otshelnik-fm.ru/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=home-page)  
-Если поставить [Theme Control](https://codeseller.ru/products/theme-control/) + [User Info Tab](https://codeseller.ru/products/user-info-tab/) + Universe Activity + [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/) то [на этом сайте работают они](http://theme-control.otshelnik-fm.ru/author/otshelnik-fm/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=lk-author-otshelnik-fm)   
+2. В [личном кабинете](https://otshelnik-fm.ru/author/otshelnik-fm/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=lk-author-otshelnik-fm) - под дополнением "User Info Tab"  
+3. На [живом сайте](https://otshelnik-fm.ru/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=home-page) - лента основана 100% на нём.  
+4. Если поставить [Theme Control](https://codeseller.ru/products/theme-control/) + [User Info Tab](https://codeseller.ru/products/user-info-tab/) + Universe Activity + [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/) то [на этом сайте работают они](http://theme-control.otshelnik-fm.ru/author/otshelnik-fm/?utm_source=free-addons&utm_medium=github&utm_campaign=universe-activity&utm_content=github-com&utm_term=lk-author-otshelnik-fm)   
 
-Большой скрин: что видит [админ](http://across-ocean.otshelnik-fm.ru/wp-content/uploads/2017/07/snapshot.jpg)  
+5. Большой скрин: что видит [админ](http://across-ocean.otshelnik-fm.ru/wp-content/uploads/2017/07/snapshot.jpg)  
 
 ------------------------------
 
@@ -519,15 +519,19 @@ p.s. - это базовое ядро. Оно пишет в базу, вывод
   
   
 #### Установил, вывел. Пишет счетчик: событий 100, но я вижу только 30  
-- По умолчанию и выводит 30. Нужно вывести все - ставь в атрибут шорткода `number="-1"`. Нужна постраничная навигация ставь дополнение [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/) (читай пункт **"Ограничения"**)  
-  
+- По умолчанию и выводит 30. Нужно вывести все - ставь в атрибут шорткода `number="-1"`.  
+Нужно вывести 100 - ставь в атрибут шорткода `number="100"`.  
+Нужна постраничная навигация ставь дополнение [Universe Activity Extended](https://codeseller.ru/products/universe-activity-extended/) (читай пункт **"Ограничения"**)  
+
+
+
   
 #### Как вывести активность пользователя в его личном кабинете?  
 - Читай пункт **"Шорткод"**. Второй пример.  
   
   
 #### Вывел фильтр - но я не вижу рейтинг и подписки  
-- Дополнения "Rating System (Система рейтинга)" и "Feed (Подписки)" должны быть у вас активны  
+- Базовые дополнения "Rating System (Система рейтинга)" и "Feed (Подписки)" должны быть у вас активны  
   
   
 #### У дополнения есть настройки?  
@@ -591,6 +595,12 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 Находите в БД таблицу активности wp_otfm_universe_activity и в поиске по колонке object_type находите и удаляете эти события.  
 
 
+#### События каких плагинов и дополнений он пишет?  
+
+Читай выше **"Список событий по группам"**  
+- там более подробно описаны а плагины/дополнения и что из них пишет.  
+
+
 ------------------------------
 
 ## Установка/Обновление  
@@ -609,7 +619,7 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 ------------------------------
 
 ## Changelog  
-**2020-02-28**  
+**2020-02-29**  
 v0.60  
 - [x] работа с WP-Recall 16.18.7  
   

@@ -1,13 +1,13 @@
 == Установка/Обновление ==
 
-<h3 style="text-align: center;">Установка:</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Установка:</h2>
 Т.к. это дополнение для WordPress плагина <a href="https://codeseller.ru/groups/plagin-wp-recall-lichnyj-kabinet-na-wordpress/" target="_blank">WP-Recall</a>, то оно устанавливается через <a href="https://codeseller.ru/obshhie-svedeniya-o-dopolneniyax-wp-recall/" target="_blank"><strong>менеджер дополнений WP-Recall</strong></a>.
 
 1. В админке вашего сайта перейдите на страницу "WP-Recall" -> "Дополнения" и в самом верху нажмите на кнопку "Обзор", выберите .zip архив дополнения на вашем пк и нажмите кнопку "Установить".
 2. В списке загруженных дополнений, на этой странице, найдите это дополнение, наведите на него курсор мыши и нажмите кнопку "Активировать". Или выберите чекбокс и в выпадающем списке действия выберите "Активировать". Нажмите применить.
 
 
-<h3 style="text-align: center;">Обновление:</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Обновление:</h2>
 Дополнение поддерживает <a href="https://codeseller.ru/avtomaticheskie-obnovleniya-dopolnenij-plagina-wp-recall/" target="_blank">автоматическое обновление</a> - два раза в день отправляются вашим сервером запросы на обновление.
 Если в течении суток вы не видите обновления (а на странице дополнения вы видите что версия вышла новая), советую ознакомиться с этой <a href="https://codeseller.ru/post-group/rabota-wordpress-krona-cron-prinuditelnoe-vypolnenie-kron-zadach-dlya-wp-recall/" target="_blank">статьёй</a>
 
@@ -15,8 +15,15 @@
 
 == Логика/Настройки ==
 
-<h2>Список регистрируемых событий и логика:</h2>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Список регистрируемых событий и логика:</h2>
 
+&nbsp;&nbsp;&nbsp;&nbsp;Убрал под спойлер - т.к. много + примеры что пишет.
+
+<details style="margin: 15px 0;">
+<summary>
+<h3>Список регистрируемых событий и логика</h3>
+</summary>
+<p>
     * пишет когда пользователь залогинился через ВП  
     * когда юзер залогинился через плагин uLogin и какая сеть  
     * когда зарегистрировался  
@@ -120,12 +127,16 @@
 
     * Также пишется событие изменения пароля в ЛК (через поля "Новый пароль" и "повтор нового пароля" в настройках профиля) (событие видит автор)  
         &nbsp;&nbsp;&nbsp;&nbsp; Пишет: <code>Василий изменил пароль через личный кабинет</code>
+<br>
+</p>
+</details>
+
 
 
 <hr style="border: 1px solid #ddd;">
 
 
-<h2>Список событий по группам:</h2>  
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Список событий по группам:</h2>  
 
 Активность дополнение пишет: как самого WordPress, WP-Recall плагина, сторонних плагинов и дополнений к WP-Recall.  
 Важно понимать: что пока дополнения или плагины отключены - регистрация связанных с ними событий не производится.  
@@ -269,7 +280,7 @@
 
 дополнения из базовой части плагина:  
 
-<strong>Rating System</strong>
+<strong><a href="https://codeseller.ru/products/rayting-recall-organizaciya-rejtingovoj-sistemy-wp-recall/" target="_blank">Rating System</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -316,7 +327,7 @@
 </tbody></table>
 
 
-<strong>Feed</strong>
+<strong><a href="https://codeseller.ru/products/feed-recall-dopolnenie-wp-recall-dlya-formirovaniya-feed-lenty-novostej-polzovatelya/" target="_blank">Feed</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -338,7 +349,7 @@
 </tbody></table>
 
 
-<strong>Groups</strong>
+<strong><a href="https://codeseller.ru/products/groups-recall-organizaciya-grupp-na-sajte-s-pomoshhyu-wp-recall/" target="_blank">Groups Recall</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -390,7 +401,7 @@
 </tbody></table>
 
 
-<strong>PrimeForum</strong>
+<strong><a href="https://codeseller.ru/products/primeforum/" target="_blank">PrimeForum</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -454,7 +465,7 @@
 
 <h3>Дополнения WP-Recall</h3>
 
-<strong>Birthday in Profile</strong>
+<strong><a href="https://codeseller.ru/products/birthday-in-profile/" target="_blank">Birthday in Profile</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -476,7 +487,7 @@
 </tbody></table>
 
 
-<strong>Bookmarks</strong>
+<strong><a href="https://codeseller.ru/products/bookmarks-recall-polzovatelskie-zakladki-s-wp-recall/" target="_blank">Bookmarks Recall</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -498,7 +509,7 @@
 </tbody></table>
 
 
-<strong>Bot User Info</strong>
+<strong><a href="https://codeseller.ru/products/bot-user-info/" target="_blank">Bot User Info</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -542,7 +553,7 @@
 </tbody></table>
 
 
-<strong>Group New Post Notify</strong>
+<strong><a href="https://codeseller.ru/products/group-new-post-notify/" target="_blank">Group New Post Notify</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -584,7 +595,7 @@
 </tbody></table>
 
 
-<strong>Groups Theme RePlace</strong>
+<strong><a href="https://codeseller.ru/products/groups-theme-replace/" target="_blank">Groups Theme RePlace</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -611,7 +622,7 @@
 </tbody></table>
 
 
-<strong>Pretty URL Author</strong>
+<strong><a href="https://codeseller.ru/products/pretty-url-author/" target="_blank">Pretty URL Author</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -628,7 +639,7 @@
 </tbody></table>
 
 
-<strong>Subscription Two</strong>
+<strong><a href="https://codeseller.ru/products/subscription-two/" target="_blank">Subscription Two</a></strong>
 
 <table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
 <thead><tr>
@@ -651,7 +662,7 @@
 
 <hr style="border: 1px solid #ddd;">
 
-<h2>События и привилегии:</h2>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">События и привилегии:</h2>
 
 Дополнение позволяет разным типам пользователей видеть разные события. Так что все события видит только админ, а гость видит минимум - у него есть мотивация зарегистрироваться или войти на сайт чтобы видет больше событий.  
 Ниже список все объясняет.  
@@ -940,11 +951,14 @@
 
 <hr style="border: 1px solid #ddd;">
 
-<h2>Шорткод:</h2>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Шорткод:</h2>
 Дополнение автоматически ничего нигде не выводит. За исключением поддержки дополнения <a href="https://codeseller.ru/products/user-info-tab/" target="_blank">User Info Tab</a> - но без постраничной навигации (там выводит последние 30 событий пользователя)  
 (чтобы у User Info Tab была постраничная навигация нужно поставить дополнение <a href="https://codeseller.ru/products/universe-activity-extended/" target="_blank">Universe Activity Extended</a>)  
 
-Итак - всё выводим с помощью шорткода: <code>[otfm_universe filter=1]</code>
+Итак - всё выводим с помощью шорткода: 
+```
+[otfm_universe filter=1]
+```
 
 <h3>Дополнительные атрибуты шорткода:</h3>
 
@@ -987,7 +1001,7 @@
 
 <hr style="border: 1px solid #ddd;">
 
-<h2>Какие события включены в фильтр:</h2>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Какие события включены в фильтр:</h2>
 <code>"Публикации"</code> - add_post  
 <code>"Комментарии"</code> - add_comment  
 <code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post   
@@ -1000,52 +1014,54 @@
 
 == FAQ ==
 
-<h3>Установил дополнение - не вижу ничего</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Установил дополнение - не вижу ничего</h2>
 - Нужно вывести шорткодом. Смотри описание шорткода в вкладке "Логика/Настройки" и конечно же должно быть записано хоть одно событие в базу - админ видит их все.  
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
   
-<h3>Я вижу не все события из последних. Некоторые скрыты</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Я вижу не все события из последних. Некоторые скрыты</h2>
 - У дополнения есть система событий и привилегий. Читай в вкладке "Логика/Настройки" - <strong>"События и привилегии"</strong>
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
   
-<h3>Установил, вывел. Пишет счетчик: событий 100, но я вижу только 30</h3>
-- По умолчанию и выводит 30. Нужно вывести все - ставь в атрибут шорткода <code>number="-1"</code>. Нужна постраничная навигация ставь дополнение <a href="https://codeseller.ru/products/universe-activity-extended/" target="_blank">Universe Activity Extended</a> (читай пункт <strong>"Ограничения"</strong> в вкладке "Описание")  
-<br/><br/>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Установил, вывел. Пишет счетчик: событий 100, но я вижу только 30</h2>
+- По умолчанию и выводит 30. Нужно вывести все - ставь в атрибут шорткода <code>number="-1"</code>. 
+Нужно вывести 100 - ставь в атрибут шорткода <code>number="100"</code>. 
+Нужна постраничная навигация ставь дополнение <a href="https://codeseller.ru/products/universe-activity-extended/" target="_blank">Universe Activity Extended</a> (читай пункт <strong>"Ограничения"</strong> в вкладке "Описание")  
 
+<hr style="border:1px solid #ddd;margin:18px;">
   
-<h3>Как вывести активность пользователя в его личном кабинете?</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Как вывести активность пользователя в его личном кабинете?</h2>
 - Читай в вкладке "Логика/Настройки" - <strong>"Шорткод"</strong>. Второй пример.  
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
   
-<h3>Вывел фильтр - но я не вижу рейтинг и подписки</h3>
-- Дополнения "Rating System (Система рейтинга)" и "Feed (Подписки)" должны быть у вас активны
-<br/><br/>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Вывел фильтр - но я не вижу рейтинг и подписки</h2>
+- Базовые дополнения "Rating System (Система рейтинга)" и "Feed (Подписки)" должны быть у вас активны
 
+<hr style="border:1px solid #ddd;margin:18px;">
 
-<h3>У дополнения есть настройки?</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">У дополнения есть настройки?</h2>
 - Да. В админке: "WP-Recall" -> "Настройки Universe Activity"  
-<br/><br/>
-  
 
-<h3>А в какой таблице в базе данных хранятся события?</h3>
+<hr style="border:1px solid #ddd;margin:18px;">  
+
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">А в какой таблице в базе данных хранятся события?</h2>
 - Смотрите таблицу: <strong>wp_otfm_universe_activity</strong>
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
 
-<h3>Как в лайтбоксе увеличивать аватарки и обложки? -открывает картинку в отдельной вкладке</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Как в лайтбоксе увеличивать аватарки и обложки? -открывает картинку в отдельной вкладке</h2>
 - Ставьте дополнение для просмотра увеличенных изображений <a href="https://codeseller.ru/products/magnific-popup-recall/" target="_blank">Magnific Popup Recall</a>
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
 
-<h3>Удалив это дополнение я потеряю данные о активности?</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Удалив это дополнение я потеряю данные о активности?</h2>
 - При удалении дополнения через менеджер дополнений - он за собой удалит свою таблицу, в которой он хранит пользовательскую активность.  
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
 
-<h3>Вписал шорткод в менеджере вкладок. Поставил галку на "кеширование" и все разъехалось (стили не загружаются)</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Вписал шорткод в менеджере вкладок. Поставил галку на "кеширование" и все разъехалось (стили не загружаются)</h2>
 - При кешировании вкладки (когда html из кеша отдается) дело до функции шорткода не доходит. Поэтому стили не загружаются (а стили у нас грузятся только там где требуется)
 Значит вам нужно вручную вызвать нужные стилевые файлы для нужной вкладки.
 
@@ -1063,16 +1079,15 @@ function otfm_una_manual_load_styles(){
     una_manual_start($class = 'author_lk'); // передаем сюда из шорткода атрибут class. Или, если вызываете шорткод для конкретного юзера, впишите author_lk
 }
 add_action('rcl_construct_aktivnost_89_tab', 'otfm_una_manual_load_styles'); // вместо aktivnost_89 - вписываем свой id вкладки на котором вызываете шорткод
-
 ```
 
 - обратите внимание на формирование динамического хука rcl_construct_<strong>aktivnost_89</strong>_tab вместо <strong>aktivnost_89</strong> вписывайте свой идентификатор вкладки
 - в функцию на 5 строке передавайте значение из атрибута class шорткода. А если вы просто выводите активность конкретного юзера - то впишите author_lk
 таким образом загрузится основной стилевой файл и стили для конкретного вызова (author_lk - значит файл будет загружаться una_one_user.css)
-<br/><br/>
 
+<hr style="border:1px solid #ddd;margin:18px;">
 
-<h3>Как исключить post_type - (типы записей WordPress) из логгирования?</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Как исключить post_type - (типы записей WordPress) из логгирования?</h2>
 - исключить ненужный для записи post_type в базу можно следующим сниппетом:
 ```
 add_filter( 'una_exclude_post_types', 'exs1_exclude_post_type', 10 );
@@ -1085,16 +1100,25 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 - после того как сниппет вписали - с этого момента этот тип записи перестанет логгироваться. Проверьте опубликовав что-нибудь.
 
+<hr style="border:1px solid #ddd;margin:18px;">
 
-<h3>Вписал сниппет выше - но этот тип записи так и выводится. Почему?</h3>
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">Вписал сниппет выше - но этот тип записи так и выводится. Почему?</h2>
 Выводится не этот, а тот, что был записан - когда вы еще не вписывали никакой сниппет на запрет логгирования.
 Находите в БД таблицу активности wp_otfm_universe_activity и в поиске по колонке object_type находите и удаляете эти события.
+
+
+<hr style="border:1px solid #ddd;margin:18px;">
+
+<h2 style="text-align:center;color:#26901b;font-weight:bold;">События каких плагинов и дополнений он пишет?</h2>
+
+Читай в вкладке "Логика/Настройки" - "Список событий по группам"
+- там более подробно описаны а плагины/дополнения и что из них пишет.
 
 
 
 
 == Changelog ==
-= 2020-02-28 =
+= 2020-02-29 =
 v0.60
 * работа с WP-Recall 16.18.7
 
@@ -1166,7 +1190,7 @@ v0.51
 = 2019-09-04 =
 v0.50  
 * В html отдельного пункта события добавлен класс типа выводимого объекта (object_type): una_type_%object_type%
-пример: https://yadi.sk/i/CG8Wxl2q8RCKqw
+пример: <a href="https://yadi.sk/i/CG8Wxl2q8RCKqw" target="_blank">Скрин</a> 
 Полезно для дополнительной стилизации например по типу записи.
 
 * Добавлен фильтр <code>una_exclude_post_types</code> - исключаем post_type - (типы записей WordPress)
