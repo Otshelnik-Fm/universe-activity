@@ -6,6 +6,21 @@ if ( ! defined( 'ABSPATH' ) )
 /*
  * под интеграции со сторонними дополнениями
  */
+
+// когда кеширование включено вкладки под user info tab
+add_action( 'rcl_construct_user-info_tab', 'una_style_one_user_load' );
+function una_style_one_user_load() {
+    if ( ! rcl_is_office() )
+        return;
+
+    if ( ! rcl_exist_addon( 'user-info-tab' ) )
+        return;
+
+    if ( rcl_get_option( 'use_cache', 0 ) == 1 ) {
+        una_manual_start( $class = 'author_lk' );
+    }
+}
+
 // выведем под User Info Tab
 add_action( 'uit_footer', 'una_output_content_type' );
 function una_output_content_type() {

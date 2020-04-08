@@ -1118,6 +1118,11 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 
 == Changelog ==
+= 2020-04-08 =
+v0.70
+* Исправлена ошибка с зарузкой стилей в ЛК если стоял user info tab и было включено кеширование реколл (спасибо за репорт Garry)
+
+
 = 2020-02-29 =
 v0.60
 * работа с WP-Recall 16.18.7
