@@ -12,11 +12,6 @@
     filter: contrast(1.4);
     opacity: 0.9;
 }
-.una_data_not_found {
-    background-color: #fce6db;
-    padding: 12px;
-    text-align: center;
-}
 .universe_userlist {
     font-size: 16px;
     line-height: normal;
@@ -24,13 +19,7 @@
     position: relative;
 }
 #una_filters {
-    display: flex;
     margin: 6px 0 9px;
-    flex-wrap: wrap;
-}
-#una_filters a {
-    margin: 0 3px 3px 0;
-    padding: 9px 12px;
 }
 .una_header {
     line-height: 1;

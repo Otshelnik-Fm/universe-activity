@@ -43,8 +43,6 @@ function una_output_content_type() {
 
     $shrt   = new UNA_Shortcode();
     $action = $shrt->get_universe( $attrs );
-    if ( ! $action )
-        $action = '<div class="una_data_not_found"></div>';
 
     echo '<div id="una_users" class="universe_userlist">' . $out . $action . '</div>';
 }
@@ -65,8 +63,6 @@ function una_custom_metabox() {
 
     $shrt   = new UNA_Shortcode();
     $action = $shrt->get_universe( $attrs );
-    if ( ! $action )
-        $action = '<div class="una_data_not_found"></div>';
 
     echo '<div id="una_users" class="universe_userlist una_admin_dashboard">' . $action . '</div>';
 }

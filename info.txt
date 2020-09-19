@@ -1,6 +1,6 @@
 Name: Universe Activity;
-Version: 0.70;
-Support Core: 16.18.7;
+Version: 0.80;
+Support Core: 16.23.20;
 Description: Пишет и выводит пользовательскую активность. Это дополнение - ядро под всю вселенную активности;
 Author: Владимир Дружаев (Otshelnik-Fm);
 Author URI: https://otshelnik-fm.ru/?utm_source=free-addons&utm_medium=addon-manager&utm_campaign=universe-activity&utm_content=not-domain&utm_term=home-page;

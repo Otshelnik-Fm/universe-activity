@@ -137,7 +137,7 @@ function una_get_gtr_add_group_avatar( $data ) {
     $full   = wp_get_attachment_url( $avatar_id );
 
     $name  = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
-    $cover = '<a class="mpr_image una_avatar" href="' . $full . '" title="Аватарка группы: ' . $data['object_name'] . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $medium[0] . '" alt=""></a>';
+    $cover = '<a class="mpr_image una_avatar" href="' . $full . '" title="Аватарка группы: ' . $data['object_name'] . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $medium[0] . '" alt="" loading="lazy"></a>';
 
     $texts   = [ 'Установил', 'Установила' ];
     $decline = una_decline_by_sex( $data['user_id'], $texts );
@@ -153,7 +153,7 @@ function una_get_gtr_add_group_cover( $data ) {
     $full   = wp_get_attachment_url( $cover_id );
 
     $name  = '<a class="una_group_name" href="/?una_group_url=' . $data['group_id'] . '" title="Перейти" rel="nofollow">"' . $data['object_name'] . '"</a>';
-    $cover = '<a class="mpr_image una_avatar" href="' . $full . '" title="Обложка группы: ' . $data['object_name'] . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $medium[0] . '" alt=""></a>';
+    $cover = '<a class="mpr_image una_avatar" href="' . $full . '" title="Обложка группы: ' . $data['object_name'] . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $medium[0] . '" alt="" loading="lazy"></a>';
 
     $texts   = [ 'Установил', 'Установила' ];
     $decline = una_decline_by_sex( $data['user_id'], $texts );

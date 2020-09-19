@@ -361,3 +361,31 @@ function una_get_username( $user_id, $link = false ) {
 
     return '<a class="una_subject" href="/?una_author=' . $user_id . '" title="Перейти" rel="nofollow">' . $name . '</a>';
 }
+
+/**
+ * получим урл до аватарки или обложки
+ *
+ * @since 0.80
+ *
+ * @param int $user_id  id пользователя.
+ *
+ * @param int $size   размер аватарки.
+ *
+ * @param string $type тип медиа: rcl_avatar или rcl_cover
+ *
+ * @return string     урл до аватарки пользователя
+ */
+function una_get_pictures_src( $user_id, $type = 'rcl_avatar' ) {
+    // rcl_avatar или rcl_cover
+    $ava_data = get_user_meta( $user_id, $type, 1 );
+
+    $url_img = '';
+    if ( is_numeric( $ava_data ) ) {
+        $image_attributes = image_downsize( $ava_data, 'full' );
+        $url_img          = $image_attributes[0];
+    } else {
+        $url_img = $ava_data;
+    }
+
+    return $url_img;
+}

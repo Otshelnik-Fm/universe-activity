@@ -517,8 +517,8 @@ function una_get_add_cover( $data ) {
     $decline = una_decline_by_sex( $data['user_id'], $texts );
 
     $user_name = get_the_author_meta( 'display_name', $data['user_id'] );
-    $src       = RCL_UPLOAD_URL . 'covers/' . $data['user_id'] . '.jpg';
-    $cover     = '<a class="mpr_image una_cover" href="' . $src . '" title="Обложка пользователя: ' . $user_name . '"><img style="max-height: 250px;display: block;" src="' . $src . '" alt=""></a>';
+    $src       = una_get_pictures_src( $data['user_id'], 'rcl_cover' );
+    $cover     = '<a class="mpr_image una_cover" href="' . $src . '" title="Обложка пользователя: ' . $user_name . '"><img style="max-height:250px;display:block;" src="' . $src . '" alt="" loading="lazy"></a>';
 
     return '<span class="una_action">' . $decline . ' обложку</span>' . $cover;
 }
@@ -533,10 +533,10 @@ function una_get_add_avatar( $data ) {
         $datename = date( 'Y-m-d--H-i-s', strtotime( $data['act_date'] ) );
         $src      = RCL_UPLOAD_URL . 'otfm-older-avatars/' . $data['user_id'] . '/' . $datename . '-ava.jpg';
     } else {
-        $src = RCL_UPLOAD_URL . 'avatars/' . $data['user_id'] . '.jpg';
+        $src = una_get_pictures_src( $data['user_id'] );
     }
 
-    $cover = '<a class="mpr_image una_avatar" href="' . $src . '" title="Аватарка пользователя: ' . $user_name . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height: 250px;display: block;" src="' . $src . '" alt=""></a>';
+    $cover = '<a class="mpr_image una_avatar" href="' . $src . '" title="Аватарка пользователя: ' . $user_name . '<br>Загружена: ' . $data['act_date'] . '"><img style="max-height:250px;display:block;" src="' . $src . '" alt="" loading="lazy"></a>';
 
     return '<span class="una_action">' . $decline . ' аватарку</span>' . $cover;
 }

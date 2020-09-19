@@ -20,19 +20,19 @@ class UNA_Shortcode {
     public function get_universe( $atts ) {
         $attrs = shortcode_atts(
             array(
-            'include_actions' => '', // включая события
-            'exclude_actions' => '', // или исключая их
-            'number'          => 30, // количество на страницу
-            'include_users'   => '', // включая юзеров
-            'exclude_users'   => '', // или исключая их
-            'class'           => '', // css class главного блока
-            'events_count'    => 1, // показать счетчик событий
-            'use_name'        => 1, // в выводе нам нужна ава и имя
-            'filter'          => 0, // фильтр над блоком
-            'no_pagination'   => '', // отключить пагинацию
-            'object_type__in' => '', // запрос по типу объекта
-            'object_id__in'   => '', // запрос по id объекта
-            'group_id__in'    => '',
+                'include_actions' => '', // включая события
+                'exclude_actions' => '', // или исключая их
+                'number'          => 30, // количество на страницу
+                'include_users'   => '', // включая юзеров
+                'exclude_users'   => '', // или исключая их
+                'class'           => '', // css class главного блока
+                'events_count'    => 1, // показать счетчик событий
+                'use_name'        => 1, // в выводе нам нужна ава и имя
+                'filter'          => 0, // фильтр над блоком
+                'no_pagination'   => '', // отключить пагинацию
+                'object_type__in' => '', // запрос по типу объекта
+                'object_id__in'   => '', // запрос по id объекта
+                'group_id__in'    => '',
             ), $atts, 'otfm_universe' );
 
         if ( $attrs['include_users'] === 'author_lk' ) {    // для вывода шорткодом в ЛК юзера
@@ -56,7 +56,13 @@ class UNA_Shortcode {
         $count = $this->una_count_results( $attrs );
 
         if ( ! $count ) {
-            return $is_filter . '<div class="una_data_not_found"><span>Активности нет</span></div>';
+            $args = [
+                'class' => 'una_data_not_found',
+                'type'  => 'warning', // info,success,warning,error,simple
+                'icon'  => 'fa-calendar-o', // https://fontawesome.com/v4.7.0/icons/
+                'text'  => 'Активности нет'
+            ];
+            return rcl_get_notice( $args );
         }
 
         $class = sanitize_text_field( $attrs['class'] );
@@ -147,11 +153,11 @@ class UNA_Shortcode {
                         $user_name = get_the_author_meta( 'display_name', $data['user_id'] );
                     } else if ( $data['user_id'] == 0 ) {
                         $user_name = 'Гость';
-                        $author    = '<img alt="" src="' . rcl_addon_url( 'img/wp-guest.png?ver=1.0', __FILE__ ) . '" class="avatar avatar-wp-guest">';
+                        $author    = '<img alt="" src="' . rcl_addon_url( 'img/wp-guest.png?ver=1.0', __FILE__ ) . '" class="avatar avatar-wp-guest" loading="lazy">';
                     }
                     // wp cron
                     else if ( $data['user_id'] == "-1" ) {
-                        $author = '<img alt="" src="' . rcl_addon_url( 'img/wp-cron.png?ver=1.0', __FILE__ ) . '" class="avatar avatar-wp-cron">';
+                        $author = '<img alt="" src="' . rcl_addon_url( 'img/wp-cron.png?ver=1.0', __FILE__ ) . '" class="avatar avatar-wp-cron" loading="lazy">';
                     }
                 }
 
@@ -201,7 +207,7 @@ class UNA_Shortcode {
         if ( ! $una_filter )
             $una_filter = 'all';
         if ( $filter === $una_filter )
-            return 'filter-active';
+            return 'active';
     }
 
     // кнопки фильтра
@@ -220,16 +226,52 @@ class UNA_Shortcode {
         $href_publications  = add_query_arg( 'una_filter', 'publications', $cur_url );
         $href_subscriptions = add_query_arg( 'una_filter', 'subscriptions', $cur_url );
 
-        $out = '<div id="una_filters" class="una_data_filters">';
-        $out .= '<a class="recall-button una_filter_all ' . $this->una_current_class( 'all' ) . '" href="' . $href_all . '">Все</a>';
-        $out .= '<a class="recall-button una_filter_publications ' . $this->una_current_class( 'publications' ) . '" href="' . $href_publications . '">Публикации</a>';
-        $out .= '<a class="recall-button una_filter_comments ' . $this->una_current_class( 'comments' ) . '" href="' . $href_comments . '">Комментарии</a>';
+        $out = '<div id="una_filters" class="rcl-wrap">';
+        $out .= rcl_get_button( [
+            'label'  => 'Все',
+            'status' => $this->una_current_class( 'all' ),
+            'class'  => 'una_filter_all',
+            'href'   => $href_all
+            ] );
+
+        $out .= rcl_get_button( [
+            'label'  => 'Публикации',
+            'status' => $this->una_current_class( 'publications' ),
+            'class'  => 'una_filter_publications',
+            'href'   => $href_publications
+            ] );
+
+        $out .= rcl_get_button( [
+            'label'  => 'Комментарии',
+            'status' => $this->una_current_class( 'comments' ),
+            'class'  => 'una_filter_comments',
+            'href'   => $href_comments
+            ] );
+
+
         if ( rcl_exist_addon( 'rating-system' ) ) {
-            $out .= '<a class="recall-button una_filter_ratings ' . $this->una_current_class( 'ratings' ) . '" href="' . $href_ratings . '">Рейтинг</a>';
+            $out .= rcl_get_button( [
+                'label'  => 'Рейтинг',
+                'status' => $this->una_current_class( 'ratings' ),
+                'class'  => 'una_filter_ratings',
+                'href'   => $href_ratings
+                ] );
         }
-        $out .= '<a class="recall-button una_filter_updates ' . $this->una_current_class( 'updates' ) . '" href="' . $href_updates . '">Обновления</a>';
+
+        $out .= rcl_get_button( [
+            'label'  => 'Обновления',
+            'status' => $this->una_current_class( 'updates' ),
+            'class'  => 'una_filter_updates',
+            'href'   => $href_updates
+            ] );
+
         if ( rcl_exist_addon( 'feed' ) ) {
-            $out .= '<a class="recall-button una_filter_subscriptions ' . $this->una_current_class( 'subscriptions' ) . '" href="' . $href_subscriptions . '">Подписки</a>';
+            $out .= rcl_get_button( [
+                'label'  => 'Подписки',
+                'status' => $this->una_current_class( 'subscriptions' ),
+                'class'  => 'una_filter_subscriptions',
+                'href'   => $href_subscriptions
+                ] );
         }
         $out .= '</div>';
 
