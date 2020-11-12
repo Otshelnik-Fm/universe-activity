@@ -619,6 +619,12 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 ------------------------------
 
 ## Changelog  
+**2020-11-12**  
+v0.81  
+- [x] Исправление ошибки
+
+
+
 **2020-09-19**  
 v0.80  
 - [x] работа с WP-Recall 16.23.20  

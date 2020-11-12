@@ -168,17 +168,19 @@ class UNA_Shortcode {
                 }
 
                 $attr_val = array( 'modal_class' => '', 'data_attr' => '', );
+                $data_una = '';
                 if ( rcl_exist_addon( 'universe-activity-modal' ) && $data['action'] == 'add_post' ) {  // интересуют только записи
                     if ( ! isset( $current_screen ) ) {                                                 // мы не в админке (это не ajax вызов)
                         $status = $data['post_status'];
                         if ( $status == 'publish' ) {                                                   // и опубликованные
                             $attr_val = unam_set_modal_attr( $data );
+                            $data_una = 'data-unam_data="' . $attr_val['data_attr'] . '"';
                         }
                     }
                 }
 
 
-                $out .= '<div class="una_item_timeline ' . $una_even_class . ' una_type_' . $data['object_type'] . ' una_' . $data['action'] . ' ' . $attr_val['modal_class'] . ' una_id_' . $data['id'] . '" data-unam_data="' . $attr_val['data_attr'] . '">';
+                $out .= '<div class="una_item_timeline ' . $una_even_class . ' una_type_' . $data['object_type'] . ' una_' . $data['action'] . ' ' . $attr_val['modal_class'] . ' una_id_' . $data['id'] . '" ' . $data_una . '>';
                 if ( $attrs['use_name'] ) {
                     $out .= '<div class="una_author">';
                     $out .= $author;

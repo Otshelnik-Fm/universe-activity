@@ -201,3 +201,6 @@
 .una_one_user .una_pass_reset_confirm::after {
     content: "\f12a";
 }
+.una_one_user .una_pp_get_gift::after {
+    content: "\f06b";
+}
