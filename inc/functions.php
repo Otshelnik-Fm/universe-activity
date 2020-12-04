@@ -202,9 +202,13 @@ function una_catch_type_vars_link() {
 
 // получим id заметки (доп notes) из имени поста. Они все начинаются с zametka-id
 function una_separate_id_notes( $post_name ) {
+    $name    = urldecode( $post_name );
     $matches = array();
     $pattern = '([0-9]+)'; // zametka-18 or zametka-13
-    preg_match( $pattern, $post_name, $matches );
+    preg_match( $pattern, $name, $matches );
+
+    if ( ! $matches )
+        return 1; // если это самая первая заметка ее вид просто zametka - без цифры
 
     return $matches[0];
 }

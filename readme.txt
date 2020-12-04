@@ -660,6 +660,59 @@
 </tr>
 </tbody></table>
 
+
+<strong><a href="https://codeseller.ru/products/video-room/" target="_blank">Video Room</a></strong>
+
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
+<thead><tr>
+<th>slug</th>
+<th>действие</th>
+<th>привилегия</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>vrm_add_video</td>
+<td>Добавил видео</td>
+<td>гость</td>
+</tr>
+</tbody></table>
+
+
+<strong><a href="https://codeseller.ru/products/gallery-reload/" target="_blank">Gallery Reload</a></strong>
+
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
+<thead><tr>
+<th>slug</th>
+<th>действие</th>
+<th>привилегия</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>grcl_add_pic</td>
+<td>Добавил изображение</td>
+<td>гость</td>
+</tr>
+</tbody></table>
+
+
+<strong><a href="https://codeseller.ru/products/soundplay/" target="_blank">SoundPlay</a></strong>
+
+<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
+<thead><tr>
+<th>slug</th>
+<th>действие</th>
+<th>привилегия</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>splay_add</td>
+<td>Добавил аудио</td>
+<td>гость</td>
+</tr>
+</tbody></table>
+
+
+
 <hr style="border: 1px solid #ddd;">
 
 <h2 style="text-align:center;color:#26901b;font-weight:bold;">События и привилегии:</h2>
@@ -768,6 +821,18 @@
 <tr>
 <td>bkmrk_add</td>
 <td>добавил в закладки (дополнение Bookmarks)</td>
+</tr>
+<tr>
+<td>vrm_add_video</td>
+<td>добавил видео (дополнение Video Room)</td>
+</tr>
+<tr>
+<td>grcl_add_pic</td>
+<td>добавил изображение (дополнение Gallery Reload)</td>
+</tr>
+<tr>
+<td>splay_add</td>
+<td>добавил аудио (дополнение SoundPlay)</td>
 </tr>
 </tbody></table>
 
@@ -1002,7 +1067,7 @@
 <hr style="border: 1px solid #ddd;">
 
 <h2 style="text-align:center;color:#26901b;font-weight:bold;">Какие события включены в фильтр:</h2>
-<code>"Публикации"</code> - add_post  
+<code>"Публикации"</code> - add_post,grcl_add_pic,vrm_add_video,splay_add  
 <code>"Комментарии"</code> - add_comment  
 <code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post   
 <code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar,add_group_avatar,group_change_exc,add_group_cover,cpp_add_city,cpp_change_city,bip_add_dob,bip_change_dob  
@@ -1118,6 +1183,20 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 
 == Changelog ==
+= 2020-12-04 =
+v0.90
+* Исправление ошибки когда нет транслитерации на сайте - порядковый номер заметки не считался
+* Поддержка дополнений Video Room и Gallery Reload и SoundPlay (спасибо пользователю Denver за спонсирование этой возможности)
+При добавлении пишет: "Анжелика добавила видео: Heres To Us (Halestorm)"
+ - при изменении заголовка видео - заголовок изменится и в событии публикации этого видео (и в галерее это же поведение)
+(часто бывает - видео загрузили как есть, а спустя минуту увидали что заголовок - это часть урл видео и поправили его)
+При удалении событие из ленты активности удаляется.
+Поддержка мультизагрузки аудио и в галерею картинок.
+В выводе галереи и видео галереи поддерживается модальное окно с чатом - такое же как у названных галерей.
+Пока Universe Activity Modal не поддерживает их - пусть будут. Но вполне возможно что на UNA Modal все переведу позже.
+
+
+
 = 2020-11-12 =
 v0.81
 * Исправление ошибки

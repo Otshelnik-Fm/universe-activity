@@ -391,26 +391,6 @@ function una_post_status( $new_status, $old_status, $post ) {
     if ( wp_is_post_revision( $post->ID ) )
         return false;
 
-//    // меню нам нафиг не надо
-//    if ( $post->post_type === 'nav_menu_item' )
-//        return false;
-//
-//    // а это кастомайзер - нам нафиг не надо
-//    if ( $post->post_type === 'customize_changeset' )
-//        return false;
-//
-//    // кеш оэмбеда - если в теле линк на ютуб например
-//    if ( $post->post_type === 'oembed_cache' )
-//        return false;
-//
-//    // кастомные стили
-//    if ( $post->post_type === 'custom_css' )
-//        return false;
-//
-//    // Импортирован или создан гутенберг блок
-//    if ( $post->post_type === 'wp_block' )
-//        return false;
-
     $exclude_post_type = [
         // меню - нам не надо
         'nav_menu_item',
@@ -422,6 +402,8 @@ function una_post_status( $new_status, $old_status, $post ) {
         'custom_css',
         // импортирован или создан гутенберг блок
         'wp_block',
+        // доп video room - у него свой обработчик а integrations папке
+        'video',
     ];
 
     $exclude_posts_type = apply_filters( 'una_exclude_post_types', $exclude_post_type );

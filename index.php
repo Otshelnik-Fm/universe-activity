@@ -94,3 +94,17 @@ if ( rcl_exist_addon( 'bookmarks' ) ) {
     require_once 'integration/addon-bookmarks.php';
 }
 
+// доп "Gallery Reload" https://codeseller.ru/?p=24885
+if ( rcl_exist_addon( 'gallery-reload' ) ) {
+    require_once 'integration/addon-gallery-reload.php';
+}
+
+// доп "video room" https://codeseller.ru/?p=24987
+if ( rcl_exist_addon( 'video-room' ) ) {
+    require_once 'integration/addon-video-room.php';
+}
+
+// доп "SoundPlay" https://codeseller.ru/?p=10165
+if ( rcl_exist_addon( 'soundplay' ) ) {
+    require_once 'integration/addon-soundplay.php';
+}

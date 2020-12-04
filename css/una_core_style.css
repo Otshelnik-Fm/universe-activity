@@ -87,9 +87,14 @@
     flex-grow: 1;
     overflow: hidden;
 }
+.una_cover,
 .una_avatar {
     display: block;
     margin: 6px 6px 6px 18px;
+}
+.una_media_box {
+    margin: 6px 6px 6px 18px;
+    display: flex;
 }
 .universe_userlist .una_author_name {
     margin: 0 4px 0 0;

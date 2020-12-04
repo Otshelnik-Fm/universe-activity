@@ -294,8 +294,7 @@ function una_get_add_post( $data ) {
         }
     }
 
-    $texts   = [ 'Добавил', 'Добавила' ];
-    $decline = una_decline_by_sex( $data['user_id'], $texts );
+    $decline = una_decline_by_sex( $data['user_id'], [ 'Добавил', 'Добавила' ] );
 
     $out = '<span class="una_action">' . $decline . ' ' . $type . ':</span> ' . $link . $object;
 
