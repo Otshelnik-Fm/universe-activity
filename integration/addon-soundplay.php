@@ -98,7 +98,7 @@ function una_add_splay_filter_button_publications( $actions ) {
  */
 add_action( 'init', 'una_update_title_splay', 30 );
 function una_update_title_splay() {
-    if ( $_POST['action'] !== 'sp_ajax_rename_sound' )
+    if ( ! isset( $_POST['action'] ) || $_POST['action'] !== 'sp_ajax_rename_sound' )
         return;
 
     $sound_id = intval( $_POST['sound_id'] );

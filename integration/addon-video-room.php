@@ -94,7 +94,7 @@ function una_add_vrm_filter_button_publications( $actions ) {
  */
 add_action( 'init', 'una_update_title_video_room', 30 );
 function una_update_title_video_room() {
-    if ( $_POST['action'] !== 'vrm_save_video_data' )
+    if ( ! isset( $_POST['action'] ) || $_POST['action'] !== 'vrm_save_video_data' )
         return;
 
     $post_id = intval( $_POST['post_id'] );

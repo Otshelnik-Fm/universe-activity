@@ -107,6 +107,7 @@
 .una_one_user .una_delete_post::after {
     content: "\f1f8";
 }
+.una_one_user .una_bkmrk_del::after,
 .una_one_user .una_delete_post_fully::after {
     content: "\f014";
 }
@@ -139,6 +140,7 @@
 .una_one_user .una_create_group::after {
     content: "\f0c0";
 }
+.una_one_user .una_grcl_add_pic::after,
 .una_one_user .una_add_group_avatar::after,
 .una_one_user .una_add_group_cover::after,
 .una_one_user .una_add_cover::after,
@@ -203,4 +205,10 @@
 }
 .una_one_user .una_pp_get_gift::after {
     content: "\f06b";
+}
+.una_one_user .una_vrm_add_video::after {
+    content: "\f03d";
+}
+.una_one_user .una_splay_add::after {
+    content: "\f028";
 }

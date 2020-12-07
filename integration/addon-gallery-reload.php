@@ -101,7 +101,7 @@ function una_add_grcl_filter_button_publications( $actions ) {
  */
 add_action( 'init', 'una_update_title_gallery_reload', 30 );
 function una_update_title_gallery_reload() {
-    if ( $_POST['action'] !== 'glrd_save_media_data' )
+    if ( ! isset( $_POST['action'] ) || $_POST['action'] !== 'glrd_save_media_data' )
         return;
 
     $post_id = intval( $_POST['media_id'] );
