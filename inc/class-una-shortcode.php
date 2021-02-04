@@ -98,6 +98,14 @@ class UNA_Shortcode {
             return $count;
         }
 
+        $una_db_query->set_query( $argum );
+
+        if ( ! empty( $args['date_1'] ) ) {
+            $current_date = ( ! empty( $args['date_2'] )) ? $args['date_2'] : current_time( 'mysql' );
+
+            $una_db_query->query['where'][] = "activity.act_date BETWEEN CAST('" . $args['date_1'] . "' AS DATE) AND CAST('" . $current_date . "' AS DATETIME) ";
+        }
+
         $count = $una_db_query->count( $argum );
 
         return $count;

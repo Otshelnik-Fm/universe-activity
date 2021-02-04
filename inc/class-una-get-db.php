@@ -43,14 +43,6 @@ class UNA_Get_DB {
             'group_id__in'    => $args['group_id__in'],
         );
 
-        if ( ! empty( $args['date_1'] ) ) {
-            $current_date        = ( ! empty( $args['date_2'] )) ? $args['date_2'] : current_time( 'mysql' );
-            $argum['date_query'] = array(
-                [ 'column' => 'act_date', 'compare' => 'BETWEEN', 'value' => [ $args['date_1'], $current_date ] ],
-            );
-        }
-
-
         return $argum;
     }
 
@@ -88,7 +80,15 @@ class UNA_Get_DB {
             ),
         );
 
-        $result = $una_db_query->get_results( $argum );
+        $una_db_query->set_query( $argum );
+
+        if ( ! empty( $args['date_1'] ) ) {
+            $current_date = ( ! empty( $args['date_2'] )) ? $args['date_2'] : current_time( 'mysql' );
+
+            $una_db_query->query['where'][] = "activity.act_date BETWEEN CAST('" . $args['date_1'] . "' AS DATE) AND CAST('" . $current_date . "' AS DATETIME) ";
+        }
+
+        $result = $una_db_query->get_data( 'get_results' );
 
         return $result;
     }
