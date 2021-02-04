@@ -108,3 +108,8 @@ if ( rcl_exist_addon( 'video-room' ) ) {
 if ( rcl_exist_addon( 'soundplay' ) ) {
     require_once 'integration/addon-soundplay.php';
 }
+
+// доп "Friends Recall" https://codeseller.ru/?p=20866
+if ( rcl_exist_addon( 'friends-recall' ) ) {
+    require_once 'integration/addon-friends-recall.php';
+}

@@ -33,6 +33,8 @@ class UNA_Shortcode {
                 'object_type__in' => '', // запрос по типу объекта
                 'object_id__in'   => '', // запрос по id объекта
                 'group_id__in'    => '',
+                'date_1'          => '',
+                'date_2'          => '',
             ), $atts, 'otfm_universe' );
 
         if ( $attrs['include_users'] === 'author_lk' ) {    // для вывода шорткодом в ЛК юзера

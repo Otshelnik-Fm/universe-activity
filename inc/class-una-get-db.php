@@ -43,6 +43,14 @@ class UNA_Get_DB {
             'group_id__in'    => $args['group_id__in'],
         );
 
+        if ( ! empty( $args['date_1'] ) ) {
+            $current_date        = ( ! empty( $args['date_2'] )) ? $args['date_2'] : current_time( 'mysql' );
+            $argum['date_query'] = array(
+                [ 'column' => 'act_date', 'compare' => 'BETWEEN', 'value' => [ $args['date_1'], $current_date ] ],
+            );
+        }
+
+
         return $argum;
     }
 

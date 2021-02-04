@@ -650,6 +650,7 @@ function una_user_in_group( $argums ) {
 //	$admin_group = $wpdb->get_var( $wpdb->prepare( "SELECT admin_id FROM " . RCL_PREF . "groups WHERE ID = %d", $argums['group_id'] ) );
 //	$userdata	 = get_userdata( $admin_group );
 
+    $args['user_id']     = $argums['user_id'];
     $args['action']      = 'user_in_group';
     $args['object_id']   = $argums['group_id'];
     $args['object_name'] = $term->name;
