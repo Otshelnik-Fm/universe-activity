@@ -131,6 +131,7 @@
 .una_one_user .una_pfm_add_topic::after {
     content: "\f0eb";
 }
+.una_one_user .una_frnd_del::after,
 .una_one_user .una_user_out_group::after {
     content: "\f235";
 }
@@ -211,4 +212,7 @@
 }
 .una_one_user .una_splay_add::after {
     content: "\f028";
+}
+.una_one_user .una_frnd_add::after {
+    content: "\f2b5";
 }
