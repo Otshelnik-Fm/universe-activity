@@ -204,7 +204,7 @@ function una_get_add_comment( $data ) {
     }
     $type_fin = $type . '"' . $data['object_name'] . '"';
 
-    if ( $other['pt'] == 'post-group' ) {
+    if ( $other['pt'] == 'post-group' && isset( $other['grid'] ) && isset( $other['grn'] ) ) {
         $gp_info = ', в группе ';
         $gp_info .= '<a href="/?una_group_url=' . $other['grid'] . '" title="Перейти" rel="nofollow">' . $other['grn'] . '</a>';
     }
