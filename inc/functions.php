@@ -229,10 +229,6 @@ function una_inline_css() {
     $color   = $r . ',' . $g . ',' . $b;
 
     echo '<style>
-#universe_time #universe_visible{
-    background: #fff;
-    box-shadow: 0 0 25px 25px rgba(' . $color . ',0.4) inset;
-}
 .una_one_user .una_timeline .una_date::before,
 .una_timeline_blk.una_modern .una_date::after,
 .una_timeline_blk.una_modern .una_date::before,
@@ -241,25 +237,25 @@ function una_inline_css() {
 .una_one_user .una_timeline .una_timeline_box::before,
 .una_timeline_blk.una_modern .una_item_timeline::after,
 .una_timeline_blk.una_modern .una_item_timeline::before{
-    background-color: rgba(' . $color . ',0.8);
+    background-color: rgba(' . $color . ',.8);
 }
 .una_timeline_blk.una_modern .una_date,
 .una_timeline_blk .una_timeline::before,
 .una_timeline_blk.una_basic .una_author,
 .una_timeline_blk.una_basic .una_timeline_box::before,
 .una_one_user .una_timeline .una_item_timeline::before{
-    border-color: rgba(' . $color . ',0.8);
+    border-color: rgba(' . $color . ',.8);
 }
 .una_one_user .una_timeline .una_date{
-    background-color: rgba(' . $color . ',0.25);
+    background-color: rgba(' . $color . ',.25);
 }
 .una_timeline_blk.una_basic .una_date{
-    border-top-color: rgba(' . $color . ',0.8);
+    border-top-color: rgba(' . $color . ',.8);
 }
 .una_timeline_blk.una_modern .una_item_timeline {
     background-color: #fff;
-    border-left-color: rgba(' . $color . ',0.8);
-    box-shadow: 0 0 100px 999px rgba(' . $color . ',0.2) inset;
+    border-left-color: rgba(' . $color . ',.8);
+    box-shadow: 0 0 100px 999px rgba(' . $color . ',.2) inset;
 }
 </style>';
 }
@@ -276,7 +272,7 @@ function una_admin_styles() {
     box-shadow: 5px 5px 10px #ccc;
 }
 #options-universe-activity h3::before {
-    color: rgba(180, 0, 45, 0.7);
+    color: rgba(180, 0, 45, .7);
     content: "\f468";
     font: 24px/1 dashicons;
     left: -10px;

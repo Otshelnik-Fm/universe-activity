@@ -1217,6 +1217,11 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 
 == Changelog ==
+= 2021-02-19 =
+v1.1.0
+* Улучшение для работы с Universe Activity Extended - плавающее окно даты встраивается в реколлбар
+
+
 = 2021-02-07 =
 v1.0.3
 * Исправление уведомлений уровня notice
