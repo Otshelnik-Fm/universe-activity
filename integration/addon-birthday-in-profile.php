@@ -5,19 +5,27 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_bip_addon', 10 );
 function una_register_bip_addon( $type ) {
-    $type['bip_add_dob']['callback']    = 'una_get_bip_add_dob';       // указал ДР
-    $type['bip_change_dob']['callback'] = 'una_get_bip_change_dob';    // сменил ДР
+    $type['bip_add_dob'] = [
+        'name'     => 'Указал день рождения', // Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'birthday-in-profile', /// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_bip_add_dob', /// функция вывода
+        'access'   => 'logged', //////////////// доступ
+    ];
 
-    $type['bip_add_dob']['access']    = 'author';
-    $type['bip_change_dob']['access'] = 'author';
+    $type['bip_change_dob'] = [
+        'name'     => 'Изменил день рождения',
+        'source'   => 'birthday-in-profile',
+        'callback' => 'una_get_bip_change_dob',
+        'access'   => 'author',
+    ];
 
     return $type;
 }

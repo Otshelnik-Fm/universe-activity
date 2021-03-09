@@ -6,14 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /*
  * 1. Зарегистрируем в массив новый тип
- * (если не указана привелегия - то видят все начиная от гостя)
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_grcl_addon', 10 );
 function una_register_grcl_addon( $type ) {
-    $type['grcl_add_pic']['callback'] = 'una_get_grcl_add';  // добавил в галерею картинку
+    $type['grcl_add_pic'] = [
+        'name'     => 'Добавил фото в галерею', /// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'gallery-reload', ////////////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_grcl_add', //////////// функция вывода
+    ];
 
     return $type;
 }

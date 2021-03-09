@@ -7,14 +7,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /*
  * 1. Зарегистрируем в массив новый тип
- * (если не указана привелегия - то видят все начиная от гостя)
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_splay_addon', 10 );
 function una_register_splay_addon( $type ) {
-    $type['splay_add']['callback'] = 'una_get_splay';  // добавил аудио
+    $type['splay_add'] = [
+        'name'     => 'Добавил аудио', /// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'soundplay', /////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_splay', /// функция вывода
+    ];
 
     return $type;
 }

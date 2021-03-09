@@ -6,17 +6,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_gtr_addon', 10 );
 function una_register_gtr_addon( $type ) {
-    $type['add_group_avatar']['callback'] = 'una_get_gtr_add_group_avatar';     // установил аву
-    $type['add_group_cover']['callback']  = 'una_get_gtr_add_group_cover';      // установил обложку
-    $type['group_change_exc']['callback'] = 'una_get_group_change_exc';         // статус
+    $type['add_group_avatar'] = [
+        'name'     => 'Установил аватарку группы', ////// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'groups-theme-replace', /////////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_gtr_add_group_avatar', /// функция вывода
+    ];
+
+    $type['add_group_cover'] = [
+        'name'     => 'Установил обложку группы',
+        'source'   => 'groups-theme-replace',
+        'callback' => 'una_get_gtr_add_group_cover',
+    ];
+
+    $type['group_change_exc'] = [
+        'name'     => 'Установил статус группы',
+        'source'   => 'groups-theme-replace',
+        'callback' => 'una_get_group_change_exc',
+    ];
 
     return $type;
 }

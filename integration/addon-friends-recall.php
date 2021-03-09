@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
@@ -26,8 +26,17 @@ if ( ! defined( 'ABSPATH' ) )
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_friends', 10 );
 function una_register_friends( $type ) {
-    $type['frnd_add']['callback'] = 'una_get_frnd_add_friend';      // добавил в друзья
-    $type['frnd_del']['callback'] = 'una_get_frnd_del_friend';      // убрал из друзей
+    $type['frnd_add'] = [
+        'name'     => 'Добавил в друзья', /////// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'friends-recall', //////////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_frnd_add_friend', /// функция вывода
+    ];
+
+    $type['frnd_del'] = [
+        'name'     => 'Удалил из друзей',
+        'source'   => 'friends-recall',
+        'callback' => 'una_get_frnd_del_friend',
+    ];
 
     return $type;
 }

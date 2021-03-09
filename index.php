@@ -35,6 +35,7 @@ require_once 'inc/integration.php';             // интеграции
 require_once 'inc/addon-settings.php';          // настройки
 require_once 'inc/class-una-query.php';         // класс регистрирущий нашу таблицу
 require_once 'inc/class-una-shortcode.php';     // шорткод
+require_once 'inc/class-una-render-actions.php';     // генерация настроек
 
 
 /*
@@ -49,9 +50,24 @@ if ( class_exists( 'AsgarosForum' ) ) {
     require_once 'integration/plugin-asgaros.php';
 }
 
-// доп "Asgaros Forum + WP-Recall" https://codeseller.ru/?p=13693
-if ( rcl_exist_addon( 'rcl-asgaros' ) ) {
-    require_once 'integration/addon-asgaros-forum-to-wp-recall.php';
+//
+if ( rcl_exist_addon( 'rating-system' ) ) {
+    require_once 'integration/core-addon-rating-system.php';
+}
+
+//
+if ( rcl_exist_addon( 'feed' ) ) {
+    require_once 'integration/core-addon-feed.php';
+}
+
+//
+if ( rcl_exist_addon( 'groups' ) ) {
+    require_once 'integration/core-addon-groups.php';
+}
+
+//
+if ( rcl_exist_addon( 'prime-forum' ) ) {
+    require_once 'integration/core-addon-prime-forum.php';
 }
 
 //

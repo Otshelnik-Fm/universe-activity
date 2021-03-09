@@ -5,17 +5,20 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_pua_change', 10 );
 function una_register_pua_change( $type ) {
-    $type['pua_change_url']['callback'] = 'una_get_pua_change_url'; // сменил URL кабинета
-
-    $type['pua_change_url']['access'] = 'admin';
+    $type['pua_change_url'] = [
+        'name'     => 'Сменил URL кабинета', /////// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'pretty-url-author', ///////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_pua_change_url', //// функция вывода
+        'access'   => 'admin', ///////////////////// доступ
+    ];
 
     return $type;
 }

@@ -5,19 +5,27 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_sbt_addon', 10 );
 function una_register_sbt_addon( $type ) {
-    $type['sbt_add_subs']['callback'] = 'una_get_sbt_subs';   // подписался
-    $type['sbt_del_subs']['callback'] = 'una_del_sbt_subs';   // отписался
+    $type['sbt_add_subs'] = [
+        'name'     => 'Подписался на комментарии', /////// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'subscription-two', ///////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_sbt_subs', //// функция вывода
+        'access'   => 'logged', ///////////////////// доступ
+    ];
 
-    $type['sbt_add_subs']['access'] = 'logged';
-    $type['sbt_del_subs']['access'] = 'author';
+    $type['sbt_del_subs'] = [
+        'name'     => 'Отписался от комментариев',
+        'source'   => 'subscription-two',
+        'callback' => 'una_del_sbt_subs',
+        'access'   => 'author',
+    ];
 
     return $type;
 }

@@ -15,21 +15,34 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 function una_register_cpp_pro( $type ) {
-    $type['cpp_add_city']['callback']    = 'una_get_cpp_add_city';       // указал город
-    $type['cpp_change_city']['callback'] = 'una_get_cpp_change_city';    // сменил город
-    $type['cpp_del_city']['callback']    = 'una_get_cpp_del_city';       // удалил город
+    $type['cpp_add_city'] = [
+        'name'     => 'Указание города', ////////////////// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'country-and-city-in-profile-pro', // Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_cpp_add_city', ///////////// функция вывода
+        'access'   => 'logged', /////////////////////////// доступ
+    ];
 
-    $type['cpp_add_city']['access']    = 'logged';
-    $type['cpp_change_city']['access'] = 'logged';
-    $type['cpp_del_city']['access']    = 'admin';
+    $type['cpp_change_city'] = [
+        'name'     => 'Смена города',
+        'source'   => 'country-and-city-in-profile-pro',
+        'callback' => 'una_get_cpp_change_city',
+        'access'   => 'logged',
+    ];
+
+    $type['cpp_del_city'] = [
+        'name'     => 'Удаление города',
+        'source'   => 'country-and-city-in-profile-pro',
+        'callback' => 'una_get_cpp_del_city',
+        'access'   => 'admin',
+    ];
 
     return $type;
 }

@@ -5,18 +5,26 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_bkmrk_addon', 10 );
 function una_register_bkmrk_addon( $type ) {
-    $type['bkmrk_add']['callback'] = 'una_get_bkmrk_add';   // добавил в закладки
-    $type['bkmrk_del']['callback'] = 'una_get_bkmrk_del';   // удалил из закладок
+    $type['bkmrk_add'] = [
+        'name'     => 'Добавил в закладки', // Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'bookmarks', ////////////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_bkmrk_add', ////// функция вывода
+    ];
 
-    $type['bkmrk_del']['access'] = 'author';
+    $type['bkmrk_del'] = [
+        'name'     => 'Удалил из закладок',
+        'source'   => 'bookmarks',
+        'callback' => 'una_get_bkmrk_del',
+        'access'   => 'author',
+    ];
 
     return $type;
 }

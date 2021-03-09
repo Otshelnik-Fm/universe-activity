@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) )
 
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
@@ -25,10 +25,18 @@ if ( ! defined( 'ABSPATH' ) )
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_asgaros', 10 );
 function una_register_asgaros( $type ) {
-    $type['asgrs_add_topic']['callback'] = 'una_get_user_add_topic_asgaros'; // создал новую тему на форуме
+    $type['asgrs_add_topic'] = [
+        'name'     => 'Создал тему на форуме', //////////// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'asgaros-forum', //////////////////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_user_add_topic_asgaros', /// функция вывода
+    ];
 
-    $type['asgrs_del_topic']['callback'] = 'una_get_user_del_topic';         // удалил тему форума (общий и для PrimeForum)
-    $type['asgrs_del_topic']['access']   = 'admin';                          // и его видит только админ
+    $type['asgrs_del_topic'] = [
+        'name'     => 'Удалил тему на форуме',
+        'source'   => 'asgaros-forum',
+        'callback' => 'una_get_user_del_topic', // общий и для PrimeForum
+        'access'   => 'admin',
+    ];
 
     return $type;
 }
@@ -155,4 +163,17 @@ function una_asgaros_catch_vars_link() {
         wp_redirect( $topic_link );
         exit;
     }
+}
+
+/*
+ * 4. добавлю к кнопкам фильтрам
+ *
+ */
+
+// к кнопке-фильтр "Обновления" добавлю события
+add_filter( 'una_filter_updates', 'una_asgros_filter_button', 10 );
+function una_asgros_filter_button( $actions ) {
+    array_push( $actions, 'asgrs_add_topic' );
+
+    return $actions;
 }

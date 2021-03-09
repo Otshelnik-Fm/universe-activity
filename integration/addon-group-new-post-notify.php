@@ -5,27 +5,54 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /*
- * 1. Зарегистрируем в массив новые типы и привелегии
- * (если не указана привелегия - то видят все начиная от гостя)
+ * 1. Зарегистрируем в массив новые типы и привилегии
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_gnp_addon', 10 );
 function una_register_gnp_addon( $type ) {
-    $type['add_group_notify']['callback']    = 'una_get_gnp_add_group_notify';      // подписался на уведомления группы
-    $type['change_group_notify']['callback'] = 'una_get_gnp_change_group_notify';   // изменил тип уведомлений
-    $type['del_group_notify']['callback']    = 'una_get_gnp_del_group_notify';      // удалил уведомление
-    $type['unsub_group_notify']['callback']  = 'una_get_gnp_unsub_group_notify';    // кто-то удалил подписку
-    $type['verify_group_notify']['callback'] = 'una_get_gnp_verify_group_notify';   // админ отправил письмо с напоминанием о продолжении подписки
-    $type['send_group_digest']['callback']   = 'una_get_gnp_send_group_digest';     // успешная отправка недельного дайджеста
+    $type['add_group_notify'] = [
+        'name'     => 'Подписался на уведомления группы', // Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'group-new-post-notify', /////////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_gnp_add_group_notify', //// функция вывода
+    ];
 
-    $type['add_group_notify']['access']    = 'author';
-    $type['change_group_notify']['access'] = 'author';
-    $type['del_group_notify']['access']    = 'author';
-    $type['unsub_group_notify']['access']  = 'admin';
-    $type['verify_group_notify']['access'] = 'admin';
-    $type['send_group_digest']['access']   = 'admin';
+    $type['change_group_notify'] = [
+        'name'     => 'Изменил тип уведомлений',
+        'source'   => 'group-new-post-notify',
+        'callback' => 'una_get_gnp_change_group_notify',
+        'access'   => 'author',
+    ];
+
+    $type['del_group_notify'] = [
+        'name'     => 'Отписался от уведомлений',
+        'source'   => 'group-new-post-notify',
+        'callback' => 'una_get_gnp_del_group_notify',
+        'access'   => 'author',
+    ];
+
+    $type['unsub_group_notify'] = [
+        'name'     => 'Кто-то удалил подписку',
+        'source'   => 'group-new-post-notify',
+        'callback' => 'una_get_gnp_unsub_group_notify',
+        'access'   => 'admin',
+    ];
+
+    $type['verify_group_notify'] = [
+        'name'     => 'Напоминание от админа о продолжении подписки',
+        'source'   => 'group-new-post-notify',
+        'callback' => 'una_get_gnp_verify_group_notify',
+        'access'   => 'admin',
+    ];
+
+    $type['send_group_digest'] = [
+        'name'     => 'Успешная отправка недельного дайджеста',
+        'source'   => 'group-new-post-notify',
+        'callback' => 'una_get_gnp_send_group_digest',
+        'access'   => 'admin',
+    ];
 
     return $type;
 }

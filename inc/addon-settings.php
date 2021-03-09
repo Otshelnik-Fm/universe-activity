@@ -67,29 +67,67 @@ function una_settings( $options ) {
             ],
         ) );
     } else {
-        $my_adv = '<div id="una_info">Вы можете расширить базовые возможности "Universe Activity" <br>установив дополнение '
-            . '<a href="https://codeseller.ru/products/universe-activity-extended/" title="Перейти к описанию" target="_blank">'
-            . '"Universe Activity Extended"</a></div>';
+
+        $text = '<a href="https://codeseller.ru/products/universe-activity-extended/" title="Перейти к описанию" target="_blank">'
+            . '"Universe Activity Extended"</a> - расширяет базовые возможности и добавляет постраничную навигацию и ajax, '
+            . 'анимацию, блок даты и многое другое.';
+
+        $args   = [
+            'type'  => 'success', // info,success,warning,error,simple
+            'icon'  => 'fa-check-square-o',
+            'title' => '"UNA Extended" - больше возможностей',
+            'text'  => $text,
+        ];
+        $my_adv = rcl_get_notice( $args );
     }
 
     if ( ! rcl_exist_addon( 'universe-activity-modal' ) ) {
-        $my_adv .= '<div id="una_info">Вы можете расширить базовые возможности "Universe Activity" <br>установив дополнение '
-            . '<a href="https://codeseller.ru/products/universe-activity-modal/" title="Перейти к описанию" target="_blank">'
-            . '"Universe Activity Modal"</a></div>';
+        $text   = '<a href="https://codeseller.ru/products/universe-activity-modal/" title="Перейти к описанию" target="_blank">'
+            . '"Universe Activity Modal"</a> - добавляет возможность просмотра полной записи в всплывающем (модальное) окне. И крутая галерея реколл.';
+        $args   = [
+            'type'  => 'warning', // info,success,warning,error,simple
+            'icon'  => 'fa-clone',
+            'title' => 'Словно в Instagram',
+            'text'  => $text,
+        ];
+        $my_adv .= rcl_get_notice( $args );
+    }
+    if ( ! rcl_exist_addon( 'una-subscriptions' ) ) {
+        $text   = '<a href="https://codeseller.ru/products/una-subscriptions/" title="Перейти к описанию" target="_blank">'
+            . '"UNA Subscriptions"</a> - организует уведомления пользователю об активности его друзей (Friends Recall) или на кого он подписан (FEED) '
+            . 'и он сам выбирает о чём его уведомлять.';
+        $args   = [
+            'type'  => 'error', // info,success,warning,error,simple
+            'icon'  => 'fa-bell-o',
+            'title' => 'Подписки и уведомления',
+            'text'  => $text,
+        ];
+        $my_adv .= rcl_get_notice( $args );
     }
     if ( ! rcl_exist_addon( 'universe-activity-comments' ) ) {
-        $my_adv .= '<div id="una_info">Вы можете расширить базовые возможности "Universe Activity" <br>установив дополнение '
-            . '<a href="https://codeseller.ru/products/universe-activity-comments/" title="Перейти к описанию" target="_blank">'
-            . '"Universe Activity Comments"</a></div>';
+        $text   = '<a href="https://codeseller.ru/products/universe-activity-comments/" title="Перейти к описанию" target="_blank">'
+            . '"Universe Activity Comments"</a> - выводит полные комментарии в ленте активности.';
+        $args   = [
+            'type'  => 'info', // info,success,warning,error,simple
+            'icon'  => 'fa-comments-o',
+            'title' => 'Комментарии как на ладони',
+            'text'  => $text,
+        ];
+        $my_adv .= rcl_get_notice( $args );
     }
 
-    // не активирована Система рейтинга
     if ( ! empty( $my_adv ) ) {
-        // создаем группу 1
-        $options->box( 'una_box_id' )->add_group( 'una_group_3' )->add_options( array(
+        $style = '<style>#options-group-una_group_3 .rcl-notice__text{text-align:left;margin-left:18px;}</style>';
+
+        // создаем группу 3
+        $options->box( 'una_box_id' )->add_group( 'una_group_3', array(
+            'title' => 'Расширьте функционал "Universe Activity"'
+        ) );
+
+        $options->box( 'una_box_id' )->group( 'una_group_3' )->add_options( array(
             [
                 'type'    => 'custom',
-                'content' => $my_adv
+                'content' => $my_adv . $style
             ],
         ) );
     }

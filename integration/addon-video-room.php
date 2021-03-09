@@ -7,14 +7,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /*
  * 1. Зарегистрируем в массив новый тип
- * (если не указана привелегия - то видят все начиная от гостя)
+ * (если не указана привилегия - то видят все начиная от гостя)
  * подробнее в описании допа вкладка "Логика/Настройки" пункт "События и привилегии"
  * https://codeseller.ru/products/universe-activity/
  */
 // $type['уникальный_экшен']['callback'] = 'имя_коллбек_функции';
 add_filter( 'una_register_type', 'una_register_vroom_addon', 10 );
 function una_register_vroom_addon( $type ) {
-    $type['vrm_add_video']['callback'] = 'una_get_vrm_add';  // добавил видео
+    $type['vrm_add_video'] = [
+        'name'     => 'Добавил видео', ///// Событие. "отвечая на вопрос: Что сделал"
+        'source'   => 'video-room', //////// Источник (wordpress, плагин, аддон - slug аддона или имя, как в списке допов)
+        'callback' => 'una_get_vrm_add', /// функция вывода
+    ];
 
     return $type;
 }

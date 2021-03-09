@@ -88,7 +88,6 @@
 .una_one_user .una_add_user_feed::after {
     content: "\f00c";
 }
-.una_one_user .una_logged_in_ulogin::after,
 .una_one_user .una_logged_in::after {
     content: "\f090";
 }

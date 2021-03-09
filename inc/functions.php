@@ -389,3 +389,22 @@ function una_get_pictures_src( $user_id, $type = 'rcl_avatar' ) {
 
     return $url_img;
 }
+
+/**
+ * получим все действия для настроек
+ *
+ * @since 1.2
+ *
+ * @param array     $args                       массив настроек
+ *                  $args['slug']               уникальный slug настроек. Обязательно
+ *                  $args['exclude-access']     массив исключаемого уровня доступа пользователя. admin, author, logged
+ *                  $args['exclude-actions']    массив исключаемых действий
+ *                  $args['split']              1 - чтобы группировать по источнику. По умолчанию 0
+ *                  $args['column']             1 - чтобы включить отображение колонкой. По умолчанию 0
+ *                  $args['save']               default: global. Also 'usermeta' or 'postmeta'
+ *
+ * @return string checkboxs list.
+ */
+function una_get_control_actions( $args ) {
+    return (new UNA_Render_Actions( $args ) )->render();
+}

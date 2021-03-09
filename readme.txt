@@ -25,7 +25,6 @@
 </summary>
 <p>
     * пишет когда пользователь залогинился через ВП  
-    * когда юзер залогинился через плагин uLogin и какая сеть  
     * когда зарегистрировался  
         &nbsp;&nbsp;&nbsp;&nbsp; если в WP-Recall стоит подтверждение регистрации - то запишет как ее подтвердит  
     * неверная регистрация и причина  
@@ -314,11 +313,6 @@
 <td>гость</td>
 </tr>
 <tr>
-<td>give_rating_forum-page</td>
-<td>рейтинг за сообщение на Asgaros Forum (+доп: Asgaros Forum + WP-Recall)</td>
-<td>гость</td>
-</tr>
-<tr>
 <td>give_rating_post-group</td>
 <td>рейтинг за запись в группе - тип post-group (+доп: Groups)</td>
 <td>гость</td>
@@ -428,22 +422,6 @@
 
 Другие плагины:
 
-<h4>uLogin</h4>
-
-<table style="padding: 5px; border-spacing: 5px; margin: 10px; border: 1px solid rgb(229, 229, 229);">
-<thead><tr>
-<th>slug</th>
-<th>действие</th>
-<th>привилегия</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>logged_in_ulogin</td>
-<td>вошел на сайт и через какую сеть</td>
-<td>гость</td>
-</tr>
-</tbody></table>
-
 
 <h4>Asgaros Forum</h4>
 
@@ -481,7 +459,7 @@
 <tr>
 <td>bip_add_dob</td>
 <td>установил день рождения</td>
-<td>автор</td>
+<td>залогиненный</td>
 </tr>
 <tr>
 <td>bip_change_dob</td>
@@ -569,7 +547,7 @@
 <tr>
 <td>add_group_notify</td>
 <td>подписался на уведомления о новых записях группы</td>
-<td>автор</td>
+<td>гость</td>
 </tr>
 <tr>
 <td>change_group_notify</td>
@@ -766,10 +744,6 @@
 <td>когда юзер вошел на сайт</td>
 </tr>
 <tr>
-<td>logged_in_ulogin</td>
-<td>когда юзер вошел через плагин u-login и через какую сеть</td>
-</tr>
-<tr>
 <td>add_comment</td>
 <td>добавлен комментарий</td>
 </tr><tr>
@@ -792,10 +766,6 @@
 <tr>
 <td>give_rating_forum-post</td>
 <td>рейтинг за сообщение на Prime Forum</td>
-</tr>
-<tr>
-<td>give_rating_forum-page</td>
-<td>рейтинг за сообщение на Asgaros Forum (дополнение Asgaros Forum + WP-Recall)</td>
 </tr>
 <tr>
 <td>give_rating_post-group</td>
@@ -868,6 +838,10 @@
 <td>frnd_del</td>
 <td>удалил из друзей (дополнение Friends Recall)</td>
 </tr>
+<tr>
+<td>add_group_notify</td>
+<td>подписался на уведомления о новых записях группы (Group New Post Notify)</td>
+</tr>
 </tbody></table>
 
 
@@ -925,6 +899,10 @@
 <td>sbt_add_subs</td>
 <td>оформил подписку на комментарии записей или форума (Subscription Two)</td>
 </tr>
+<tr>
+<td>bip_add_dob</td>
+<td>установил день рождения (Birthday in Profile)</td>
+</tr>
 </tbody></table>
 
 <h4>Автор видит: все что выше, плюс:</h4>
@@ -943,10 +921,6 @@
 <td>когда он удалил свой аватар (локальный, не граватар)</td>
 </tr>
 <tr>
-<td>add_group_notify</td>
-<td>подписался на уведомления о новых записях группы (Group New Post Notify)</td>
-</tr>
-<tr>
 <td>change_group_notify</td>
 <td>изменил тип уведомлений подписки (Group New Post Notify)</td>
 </tr>
@@ -957,10 +931,6 @@
 <tr>
 <td>sbt_del_subs</td>
 <td>удалил подписку на комментарии записей или форума (Subscription Two)</td>
-</tr>
-<tr>
-<td>bip_add_dob</td>
-<td>установил день рождения (Birthday in Profile)</td>
 </tr>
 <tr>
 <td>bkmrk_del</td>
@@ -1093,7 +1063,7 @@
 <code>[otfm_universe class="una_basic" number="-1" include_actions="add_comment,give_rating_comment"]</code>
 
 4. Выведем все рейтинги и стилизуем базовым стилем:  
-<code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post,give_rating_forum-page"]</code>
+<code>[otfm_universe class="una_basic" include_actions="give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post"]</code>
 
 5. Выведем активность входа текущего пользователя:
 <code>[otfm_universe include_actions="logged_in" include_users="current"]</code>
@@ -1103,7 +1073,7 @@
 <h2 style="text-align:center;color:#26901b;font-weight:bold;">Какие события включены в фильтр:</h2>
 <code>"Публикации"</code> - add_post,grcl_add_pic,vrm_add_video,splay_add  
 <code>"Комментарии"</code> - add_comment  
-<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_forum-page,give_rating_post-group,give_rating_products,give_rating_forum-post   
+<code>"Рейтинг"</code> - give_rating_comment,give_rating_notes,give_rating_post,give_rating_post-group,give_rating_products,give_rating_forum-post   
 <code>"Обновления"</code> - change_status,profile_update,create_group,user_in_group,pfm_add_topic,asgrs_add_topic,add_cover,add_avatar,add_group_avatar,group_change_exc,add_group_cover,cpp_add_city,cpp_change_city,bip_add_dob,bip_change_dob  
 <code>"Подписки"</code> - add_user_feed,sbt_add_subs,sbt_del_subs,add_group_notify,change_group_notify,del_group_notify  
 
@@ -1217,6 +1187,22 @@ function exs1_exclude_post_type( $exclude_post_types ) {
 
 
 == Changelog ==
+= 2021-03-09 =
+v1.2.0
+* добавлено новое апи получения всех действий с возможностью группировки по источнику
+* событие add_group_notify (подписался на уведомления группы) теперь видят все. Повышение мотивации подписаться
+* событие bip_add_dob (установил день рождения) теперь видят залогиненные. Полезно для уведомления друзей
+
+* разработчикам: регистрируя событие через фильтр <code>una_register_type</code> передавайте также в массиве:
+- 'source' источник для группировки (передавайте там slug аддона (или плагина), или имя, как в списке допов). Пример: 'source' => 'prime-forum'. Система сама уберёт тире и выставит регистр первых букв)
+'name' имя, отвечающее на вопрос "что?" (Пример: 'name' => 'Создана новая тема на форуме',)
+Визуально при выведении чекбоксов настроек: <a href="https://yadi.sk/i/S3zSls2eHLjPDg" target="_blank">скриншот</a>
+Все события что я добавил в этом дополнении получило имена ('name') и указание источника действия ('source')
+
+* убрана поддержка допа Asgaros Forum + WP-Recall
+* Universe Activity теперь учитывает включено ли базовое дополнение (например система рейтинга)
+
+
 = 2021-02-19 =
 v1.1.0
 * Улучшение для работы с Universe Activity Extended - плавающее окно даты встраивается в реколлбар
@@ -1355,7 +1341,7 @@ v0.52
 
 
 v0.51  
-* События logged_in и logged_in_ulogin будут видеть гости. Мотивация - залогиниться, когда видишь что и другие также делают.
+* Событие logged_in будут видеть гости. Мотивация - залогиниться, когда видишь что и другие также делают.
 * Поддержка дополнения <a href="https://codeseller.ru/products/fake-online/" target="_blank">Fake Online</a> совместно с <a href="https://codeseller.ru/products/bonus-on-login/" target="_blank">Bonus on Login</a>
 - боты как будто стремятся получить рейтинг "За логин" и поэтому каждый день логинятся на сайте.
 

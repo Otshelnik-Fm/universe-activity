@@ -32,6 +32,8 @@ class UNA_Get_DB {
             $include_non_ex = $access['include'];                               // разрешенные текущему юзеру
             $deduct         = explode( ",", $args['exclude_actions'] );                   // пришли в аргументе для исключения
             $deduct_cl      = array_map( 'trim', $deduct );                             // удалим из значений массива пробелы если есть
+            //
+            // может быть пусто: exclude_actions = доступным событиям пользователя - выводить нечего
             $include        = array_values( array_diff( $include_non_ex, $deduct_cl ) );   // вычтем их из массива и переиндексируем его
         }
 
@@ -53,6 +55,10 @@ class UNA_Get_DB {
         $posts_db_query = new UNA_Posts_Query(); // таблица записей
 
         $argum = $this->una_get_db_data( $args );
+
+        // exclude_actions = доступным событиям пользователя - выводить нечего
+        if ( empty( $argum['action__in'] ) )
+            return;
 
         $argum['number'] = $args['number'];
         if ( isset( $args['offset'] ) ) {
@@ -97,7 +103,7 @@ class UNA_Get_DB {
     private function una_include_exclude( $args ) {
         $type = una_register_type_callback();               // зарегистрированные типы
 
-        $priv = $this->una_current_user_privilege( $args );  // какие привелегии
+        $priv = $this->una_current_user_privilege( $args );  // какие привилегии
 
         foreach ( $type as $k => $v ) {
             // не указан доступ или пусто - значит всем разрешен. И если разрешения совпадают с текущим юзером - показываем
@@ -119,7 +125,7 @@ class UNA_Get_DB {
       author - автор кабинета (и админ)
       admin -  только админ
      */
-    // в зависимости от роли юзера - его привелегии к просмотру
+    // в зависимости от роли юзера - его привилегии к просмотру
     private function una_current_user_privilege( $args ) {
         $priv = array();
         global $user_ID;

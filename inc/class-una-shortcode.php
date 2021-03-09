@@ -127,6 +127,17 @@ class UNA_Shortcode {
         $get_data     = new UNA_Get_DB();
         $data_results = $get_data->una_get_results( $attrs );         // массив из БД
 
+        if ( ! $data_results ) {
+            $args = [
+                'class' => 'una_data_not_found',
+                'type'  => 'warning', // info,success,warning,error,simple
+                'icon'  => 'fa-calendar-o',
+                'text'  => 'Активности нет'
+            ];
+            return rcl_get_notice( $args );
+        }
+
+
         $datas = apply_filters( 'una_get_data_db', $data_results );    // фильтр массива полученных данных. Можно применять для дополнения массива своими данными
 
         $type = una_register_type_callback();                       // получим массив зарегистрированных экшенов и функций
@@ -277,14 +288,14 @@ class UNA_Shortcode {
             'href'   => $href_updates
             ] );
 
-        if ( rcl_exist_addon( 'feed' ) ) {
-            $out .= rcl_get_button( [
-                'label'  => 'Подписки',
-                'status' => $this->una_current_class( 'subscriptions' ),
-                'class'  => 'una_filter_subscriptions',
-                'href'   => $href_subscriptions
-                ] );
-        }
+        //if ( rcl_exist_addon( 'feed' ) ) {
+        $out .= rcl_get_button( [
+            'label'  => 'Подписки',
+            'status' => $this->una_current_class( 'subscriptions' ),
+            'class'  => 'una_filter_subscriptions',
+            'href'   => $href_subscriptions
+            ] );
+        // }
         $out .= '</div>';
 
         return $out;
@@ -296,15 +307,15 @@ class UNA_Shortcode {
         $get_filter = sanitize_key( $una_filter );
 
         if ( $get_filter == 'publications' ) {
-            $attrs['include_actions'] = apply_filters( 'una_filter_publications', array( 'add_post', ) );
+            $attrs['include_actions'] = apply_filters( 'una_filter_publications', [ 'add_post', ] );
         } else if ( $get_filter == 'comments' ) {
-            $attrs['include_actions'] = apply_filters( 'una_filter_comments', array( 'add_comment', ) );
+            $attrs['include_actions'] = apply_filters( 'una_filter_comments', [ 'add_comment', ] );
         } else if ( $get_filter == 'ratings' ) {
-            $attrs['include_actions'] = apply_filters( 'una_filter_ratings', array( 'give_rating_comment', 'give_rating_notes', 'give_rating_post', 'give_rating_forum-page', 'give_rating_post-group', 'give_rating_products', 'give_rating_forum-post', ) );
+            $attrs['include_actions'] = apply_filters( 'una_filter_ratings', [] );
         } else if ( $get_filter == 'updates' ) {
-            $attrs['include_actions'] = apply_filters( 'una_filter_updates', array( 'change_status', 'profile_update', 'create_group', 'user_in_group', 'pfm_add_topic', 'asgrs_add_topic', 'add_cover', 'add_avatar', ) );
+            $attrs['include_actions'] = apply_filters( 'una_filter_updates', [ 'change_status', 'profile_update', 'add_cover', 'add_avatar', ] );
         } else if ( $get_filter == 'subscriptions' ) {
-            $attrs['include_actions'] = apply_filters( 'una_filter_subscriptions', array( 'add_user_feed', ) );
+            $attrs['include_actions'] = apply_filters( 'una_filter_subscriptions', [] );
         }
 
         if ( ! empty( $get_filter ) ) {
